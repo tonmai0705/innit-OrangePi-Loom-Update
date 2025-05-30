@@ -12,7 +12,7 @@ echo "delete file is successfully..."
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
 mkdir stat_led
-cat << EOF > blink11.sh
+cat << EOF > $HOME/stat_led/blink11.sh
 
 #!/bin/bash
 # กำหนดหมายเลข GPIO pin
@@ -52,7 +52,7 @@ EOF
 
 chmod +x $HOME/stat_led/blink11.sh
 
-cat << EOF > blink.sh 
+cat << EOF > $HOME/stat_led/blink.sh 
 
 #!/bin/bash
 gpio_pin=12
@@ -101,7 +101,7 @@ EOF
 
 chmod +x $HOME/stat_led/blink.sh
 
-cat << EOF > modbus_err.sh
+cat << EOF > $HOME/stat_led/modbus_err.sh
 
 #!/bin/bash
 
