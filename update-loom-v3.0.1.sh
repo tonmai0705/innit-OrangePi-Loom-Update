@@ -11,6 +11,66 @@ echo "delete file is successfully..."
 
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
+
+cat << EOF > $HOME/.node-red/flows.json
+[
+    {
+        "id": "777823ab3e1fee97",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d05c7fa807349a45",
+        "type": "inject",
+        "z": "777823ab3e1fee97",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "7c55c29a095a1a23"
+            ]
+        ]
+    },
+    {
+        "id": "7c55c29a095a1a23",
+        "type": "debug",
+        "z": "777823ab3e1fee97",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 180,
+        "wires": []
+    }
+]
+EOF
+
 mkdir stat_led
 cat << EOF > $HOME/stat_led/blink11.sh
 
