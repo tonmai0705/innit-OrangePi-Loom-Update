@@ -7,7 +7,7 @@ echo "ปริ้นนนนนนนนนนนนนเด้อ"
 
 EOR
 echo "กำลัสร้างไฟล์  gitDLTest.sh is successfully"
-chmod +x gitDLtest.sh
+chmod +x /home/orangepi/gitDLtest.sh
 
 echo "กำลัสร้างไฟล์...gitDLTest2.sh"
 cat << EOR2 > gitDLTest2.sh
@@ -16,4 +16,4 @@ echo "ปริ้นนนนนนนนนนนนนเด้อ2"
 
 EOR2
 echo "กำลัสร้างไฟล์  gitDLTest2.sh is successfully"
-chmod +x gitDLtest2.sh
+chmod +x /home/orangepi/gitDLtest2.sh
