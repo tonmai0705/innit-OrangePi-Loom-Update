@@ -137,5 +137,7 @@ EOF
 
 chmod +x $HOME/stat_led/modbus_err.sh
 
-echo "stat_led is done..."
-
+echo "[ACK-IoT] ติดตั้ง flowfuse@dashboard 2.0 เรียบร้อย"
+echo "[ACK-IoT] ติดตั้ง led state เรียบร้อย"
+echo "[ACK-IoT] ติดตั้ง flows.json เรียบร้อย"
+echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว กรุณารีสตาร์ทอุปกรณ์..."
