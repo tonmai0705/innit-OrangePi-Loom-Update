@@ -1,16 +1,15 @@
 #!/bin/bash
 rm -rf $HOME/loom/
-echo "delete file data is done..."
+echo "ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
 rm $HOME/alarm_lemp.sh
-echo "delete file lemp is done..."
+echo "ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
 rm $HOME/.node-red/flows.json
-echo "delete flow.json is done..."
+echo "ลบไฟล์ flow.json ลบไฟล์..."
 echo " "
-echo "delete file is successfully..."
+echo "กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
 
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
-echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
 mkdir stat_led
 mkdir loom
 
@@ -3115,4 +3114,4 @@ echo "[ACK-IoT] ลบข้อมูล <Loom Config> เรียบร้อ�
 echo "[ACK-IoT] ติดตั้ง flowfuse@dashboard 2.0 เรียบร้อย..."
 echo "[ACK-IoT] ติดตั้ง led state เรียบร้อย..."
 echo "[ACK-IoT] ติดตั้ง flows.json เรียบร้อย..."
-echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว กรุณารีสตาร์ทอุปกรณ์..."
+echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
