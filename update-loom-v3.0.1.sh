@@ -12,6 +12,28 @@ echo "delete file is successfully..."
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
 
+cat << EOF > $HOME/loom/comfig.txt
+    {
+    "state": {
+        "datestamp": " ",
+        "ip": " "
+    },
+    "values": {
+        "maintake": {
+            "main": {
+                "min": 0,
+                "max": 0
+            },
+            "take": {
+                "min": 0,
+                "max": 0
+            }
+        },
+        "meter": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "working": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    }
+}
+EOF
 cat << EOF > $HOME/.node-red/flows.json
 [
     {
