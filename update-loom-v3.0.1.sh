@@ -14,7 +14,7 @@ echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
 mkdir stat_led
 mkdir loom
 
-cat << 'EOF' > $HOME/loom/comfig.txt
+cat << 'EOF' > $HOME/loom/config.txt
     {
     "state": {
         "datestamp": " ",
