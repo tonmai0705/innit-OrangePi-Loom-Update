@@ -11,6 +11,8 @@ echo "delete file is successfully..."
 
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
+mkdir stat_led
+mkdir loom
 
 cat << 'EOF' > $HOME/loom/comfig.txt
     {
@@ -93,7 +95,6 @@ cat << 'EOF' > $HOME/.node-red/flows.json
 ]
 EOF
 
-mkdir stat_led
 cat << 'EOF' > $HOME/stat_led/blink11.sh
 
 #!/bin/bash
