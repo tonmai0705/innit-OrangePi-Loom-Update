@@ -12,7 +12,7 @@ echo "delete file is successfully..."
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 echo "ติดตั้ง Dashboard 2.0 เรียบร้อย!"
 
-cat << EOF > $HOME/loom/comfig.txt
+cat << 'EOF' > $HOME/loom/comfig.txt
     {
     "state": {
         "datestamp": " ",
@@ -34,7 +34,7 @@ cat << EOF > $HOME/loom/comfig.txt
     }
 }
 EOF
-cat << EOF > $HOME/.node-red/flows.json
+cat << 'EOF' > $HOME/.node-red/flows.json
 [
     {
         "id": "777823ab3e1fee97",
@@ -94,7 +94,7 @@ cat << EOF > $HOME/.node-red/flows.json
 EOF
 
 mkdir stat_led
-cat << EOF > $HOME/stat_led/blink11.sh
+cat << 'EOF' > $HOME/stat_led/blink11.sh
 
 #!/bin/bash
 # กำหนดหมายเลข GPIO pin
@@ -134,7 +134,7 @@ EOF
 
 chmod +x $HOME/stat_led/blink11.sh
 
-cat << EOF > $HOME/stat_led/blink.sh 
+cat << 'EOF' > $HOME/stat_led/blink.sh 
 
 #!/bin/bash
 gpio_pin=12
@@ -183,7 +183,7 @@ EOF
 
 chmod +x $HOME/stat_led/blink.sh
 
-cat << EOF > $HOME/stat_led/modbus_err.sh
+cat << 'EOF' > $HOME/stat_led/modbus_err.sh
 
 #!/bin/bash
 
