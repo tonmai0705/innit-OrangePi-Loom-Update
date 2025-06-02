@@ -1,5 +1,5 @@
 #!/bin/bash
-cat << 'EOF > $HOME/updateandreboot/reb.sh
+cat << 'EOF' > $HOME/updateandreboot/reb.sh
 #!/bin/bash
 
 # เวลานับถอยหลัง (วินาที)
