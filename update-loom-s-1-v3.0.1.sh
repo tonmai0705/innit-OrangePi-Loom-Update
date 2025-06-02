@@ -1,4 +1,5 @@
 #!/bin/bash
+
 rm -rf $HOME/loom/
 echo "ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
