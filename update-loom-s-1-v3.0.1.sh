@@ -1,25 +1,18 @@
 #!/bin/bash
+rm -rf $HOME/loom/
+echo "ลบไฟล์ข้อมูลสำเร็จ..."
+rm $HOME/connected_lemp.sh
+rm $HOME/alarm_lemp.sh
+echo "ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
+rm $HOME/.node-red/flows.json
+echo "ลบไฟล์ flow.json ลบไฟล์..."
+echo " "
+echo "กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
+
+npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
+mkdir stat_led
+mkdir loom
 mkdir updateandreboot
-cat << 'EOF' > $HOME/updateandreboot/reb.sh
-#!/bin/bash
-
-# เวลานับถอยหลัง (วินาที)
-countdown=10
-
-echo "ระบบจะทำการรีบูตในอีก $countdown วินาที..."
-
-# นับถอยหลัง
-while [ $countdown -gt 0 ]; do
-    echo "$countdown..."
-    sleep 1
-    countdown=$((countdown - 1))
-done
-
-echo "กำลังรีบูตเครื่อง..."
-reboot -h
-EOF
-
-chmod +x $HOME/updateandreboot/reb.sh
 
 cat << 'EOF' > $HOME/updateandreboot/upd.sh
 #!/bin/bash
@@ -40,23 +33,7 @@ sleep 0.3
 
 done
 EOF
-
 chmod +x $HOME/updateandreboot/upd.sh
-
-./$HOME/updateandreboot/upd.sh &
-rm -rf $HOME/loom/
-echo "ลบไฟล์ข้อมูลสำเร็จ..."
-rm $HOME/connected_lemp.sh
-rm $HOME/alarm_lemp.sh
-echo "ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
-rm $HOME/.node-red/flows.json
-echo "ลบไฟล์ flow.json ลบไฟล์..."
-echo " "
-echo "กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
-
-npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
-mkdir stat_led
-mkdir loom
 
 cat << 'EOF' > $HOME/loom/config.txt
     {
