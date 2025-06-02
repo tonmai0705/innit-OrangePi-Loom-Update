@@ -1,6 +1,12 @@
 #!/bin/bash
 
-rm -rf $HOME/loom
+rm $HOME/loom/config.csv
+rm $HOME/loom/dataProduction/*
+rm -d $HOME/loom/dataProduction
+rm $HOME/loom/thingsboard/config.csv
+rm $HOME/loomthingsboard/logdata/*
+rm -d $HOME/loomthingsboard/logdata
+
 echo "ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
 rm $HOME/alarm_lemp.sh
