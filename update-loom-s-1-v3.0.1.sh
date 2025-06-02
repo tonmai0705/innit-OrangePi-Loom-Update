@@ -1,11 +1,10 @@
 #!/bin/bash
 
-rm $HOME/loom/config.csv
-rm $HOME/loom/dataProduction/*
+rm -rf $HOME/loom/dataProduction
 rm -d $HOME/loom/dataProduction
-rm $HOME/loom/thingsboard/config.csv
-rm $HOME/loomthingsboard/logdata/*
-rm -d $HOME/loomthingsboard/logdata
+rm -rf $HOME/loom/thingsboard
+rm -rf $HOME/loom/thingsboard/logdata
+rm -d $HOME/loom/thingsboard/logdata
 rm -rf $HOME/loom
 
 echo "ลบไฟล์ข้อมูลสำเร็จ..."
