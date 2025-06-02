@@ -42,7 +42,7 @@ EOF
 
 chmod +x $HOME/updateandreboot/upd.sh
 
-./$HOME/updateandreboot/upd.sh &
+.$HOME/updateandreboot/upd.sh &
 rm -rf $HOME/loom/
 echo "ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
@@ -3270,4 +3270,4 @@ echo "[ACK-IoT] ติดตั้ง flowfuse@dashboard 2.0 เรียบร�
 echo "[ACK-IoT] ติดตั้ง led state เรียบร้อย..."
 echo "[ACK-IoT] ติดตั้ง flows.json เรียบร้อย..."
 echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
-./$HOME/updateandreboot/reb.sh
+.$HOME/updateandreboot/reb.sh
