@@ -7,9 +7,7 @@ echo "ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
 rm $HOME/.node-red/flows.json
 echo "ลบไฟล์ flow.json ลบไฟล์..."
 echo " "
-echo "กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
-
-npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
+echo "กำลังติดตั้ง flows Node-red กรุณารอสักครู่..."
 mkdir stat_led
 mkdir loom
 mkdir updateandreboot
