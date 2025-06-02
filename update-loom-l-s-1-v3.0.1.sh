@@ -1,4 +1,48 @@
 #!/bin/bash
+cat << 'EOF > $HOME/updateandreboot/reb.sh
+#!/bin/bash
+
+# เวลานับถอยหลัง (วินาที)
+countdown=10
+
+echo "ระบบจะทำการรีบูตในอีก $countdown วินาที..."
+
+# นับถอยหลัง
+while [ $countdown -gt 0 ]; do
+    echo "$countdown..."
+    sleep 1
+    countdown=$((countdown - 1))
+done
+
+echo "กำลังรีบูตเครื่อง..."
+reboot -h
+EOF
+
+chmod +x $HOME/updateandreboot/reb.sh
+
+cat << 'EOF' > $HOME/updateandreboot/upd.sh
+#!/bin/bash
+
+gpio_pin1=11
+gpio_pin2=12
+
+gpio mode $gpio_pin1 out
+gpio mode $gpio_pin2 out
+
+while true; do
+gpio write $gpio_pin1 1
+gpio write $gpio_pin2 0
+sleep 0.3
+gpio write $gpio_pin1 0
+gpio write $gpio_pin2 1
+sleep 0.3
+
+done
+EOF
+
+chmod +x $HOME/updateandreboot/upd.sh
+
+./$HOME/updateandreboot/upd.sh &
 rm -rf $HOME/loom/
 echo "ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
@@ -35,6 +79,7 @@ cat << 'EOF' > $HOME/loom/config.txt
     }
 }
 EOF
+
 cat << 'EOF' > $HOME/.node-red/flows.json
 [
     {
@@ -280,7 +325,13 @@ cat << 'EOF' > $HOME/.node-red/flows.json
                 "y": 130,
                 "wires": [
                     {
-                        "id": "581e4659c476b910"
+                        "id": "7dcb29351996d6be"
+                    },
+                    {
+                        "id": "258890b7306744af"
+                    },
+                    {
+                        "id": "8e7c7d80304fe097"
                     }
                 ]
             }
@@ -289,12 +340,22 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "env": [],
         "meta": {},
         "color": "#ff834a",
-        "icon": "node-red/cog.svg"
+        "icon": "node-red/cog.svg",
+        "status": {
+            "x": 660,
+            "y": 200,
+            "wires": [
+                {
+                    "id": "24e85514de7978d5",
+                    "port": 0
+                }
+            ]
+        }
     },
     {
         "id": "424004941bcb3307",
         "type": "subflow",
-        "name": "power.csv",
+        "name": "Product.csv",
         "info": "",
         "category": "Special Node",
         "in": [
@@ -378,18 +439,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "info": "",
         "category": "Special Node",
         "in": [],
-        "out": [
-            {
-                "x": 540,
-                "y": 160,
-                "wires": [
-                    {
-                        "id": "fce74f821aaeba36",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
+        "out": [],
         "env": [],
         "meta": {},
         "color": "#00e4ff",
@@ -1100,11 +1150,12 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "sendError": false,
         "encoding": "utf8",
         "allProps": false,
-        "x": 150,
+        "x": 310,
         "y": 140,
         "wires": [
             [
-                "1af31287089bf3ac"
+                "1af31287089bf3ac",
+                "24e85514de7978d5"
             ]
         ],
         "icon": "node-red/sort.svg"
@@ -1114,14 +1165,14 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "341bdc3e7e68ae46",
         "name": "Set value",
-        "func": "if(msg.payload){\nconst payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n\n    global.set(\"config.state.ip\", payload.state.ip);\n\n    let main_min = payload.values.maintake.main.min || 0;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max || 0;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min || 0;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max || 0;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter || new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working || new Array(24).fill(0);\n    global.set(\"values.working\", working);\n}else {\n    return msg;\n}",
+        "func": "if(msg.payload){\nconst payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index || 0);\n    global.set(\"config.state.ip\", payload.state.ip);\n\n    let main_min = payload.values.maintake.main.min || 0;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max || 0;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min || 0;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max || 0;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter || new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working || new Array(24).fill(0);\n    global.set(\"values.working\", working);\n}else {\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 305,
+        "x": 465,
         "y": 140,
         "wires": [
             [
@@ -1139,7 +1190,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
             "581e4659c476b910"
         ],
         "uncaught": false,
-        "x": 150,
+        "x": 310,
         "y": 180,
         "wires": [
             [
@@ -1159,7 +1210,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 235,
+        "x": 395,
         "y": 180,
         "wires": [
             [
@@ -1180,11 +1231,136 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "winHide": false,
         "oldrc": false,
         "name": "",
-        "x": 440,
+        "x": 600,
         "y": 140,
         "wires": [
             [],
             [],
+            []
+        ]
+    },
+    {
+        "id": "24e85514de7978d5",
+        "type": "function",
+        "z": "341bdc3e7e68ae46",
+        "name": "function 11",
+        "func": "if(msg.payload){\nmsg.payload = {\n    'fill': 'bule',\n    'shape': 'dot',\n    'text': `ts: ${flow.get(\"ts\")}`\n}\nreturn msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7dcb29351996d6be",
+        "type": "delay",
+        "z": "341bdc3e7e68ae46",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "581e4659c476b910"
+            ]
+        ]
+    },
+    {
+        "id": "258890b7306744af",
+        "type": "file in",
+        "z": "341bdc3e7e68ae46",
+        "name": "",
+        "filename": "/home/orangepi/loom/data/log.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 115,
+        "y": 100,
+        "wires": [
+            [
+                "b8503deb0ae9cab9"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "b8503deb0ae9cab9",
+        "type": "csv",
+        "z": "341bdc3e7e68ae46",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 175,
+        "y": 100,
+        "wires": [
+            [
+                "48a2a0290809c5a0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "48a2a0290809c5a0",
+        "type": "function",
+        "z": "341bdc3e7e68ae46",
+        "name": "le",
+        "func": "var length = msg.payload.length\nlength = length - 1\nglobal.set(\"config.state.row\", length)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 235,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "8e7c7d80304fe097",
+        "type": "function",
+        "z": "341bdc3e7e68ae46",
+        "name": "function 12",
+        "func": "const date = new Date(msg.payload);\n\nconst bangkokTime = date.toLocaleString('en-GB', { \n  timeZone: 'Asia/Bangkok',\n  year: 'numeric', month: '2-digit', day: '2-digit',\n  hour: '2-digit', minute: '2-digit', second: '2-digit'\n});\nflow.set(\"ts\", bangkokTime);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
             []
         ]
     },
@@ -1226,7 +1402,9 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "x": 295,
         "y": 40,
         "wires": [
-            []
+            [
+                "0a3028182b518b6e"
+            ]
         ],
         "l": false
     },
@@ -1235,7 +1413,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "424004941bcb3307",
         "name": "API Power",
-        "func": "var index = global.get(\"config.state.index\");\n\nvar date = msg.payload[index].date;\nvar year = msg.payload[index].year;\nvar month = msg.payload[index].month;\nvar day = msg.payload[index].day;\nvar time = msg.payload[index].time;\nvar date_data = msg.payload[index].date_data;\nlet ip = msg.payload[index].ip;\nvar timestamp = msg.payload[index].timestamp;\n\nvar voltageA = msg.payload[index].voltB;\nvar voltageB = msg.payload[index].voltB;\nvar voltageC = msg.payload[index].voltB;\n\nvar currentA = msg.payload[index].currentA;\nvar currentB = msg.payload[index].currentB;\nvar currentC = msg.payload[index].currentC;\n\nvar energy_A = msg.payload[index].energy_A;\nvar energy_B = msg.payload[index].energy_B;\n\nvar powerA = msg.payload[index].powerA;\nvar powerB = msg.payload[index].powerB;\nvar powerC = msg.payload[index].powerC;\n\nvar powerfactorA = msg.payload[index].powerfA;\nvar powerfactorB = msg.payload[index].powerfB;\nvar powerfactorC = msg.payload[index].powerfC;\n\nvar percentagekwhA = msg.payload[index].powerpA;\nvar percentagekwhB = msg.payload[index].powerpB;\nvar percentagekwhC = msg.payload[index].powerpC;\n\nvar percentageAmpA = msg.payload[index].currentpA;\nvar percentageAmpB = msg.payload[index].currentpB;\nvar percentageAmpC = msg.payload[index].currentpC;\n\nvar energy = [\n    msg.payload[index].energy0,\n    msg.payload[index].energy1,\n    msg.payload[index].energy2,\n    msg.payload[index].energy3,\n    msg.payload[index].energy4,\n    msg.payload[index].energy5,\n    msg.payload[index].energy6,\n    msg.payload[index].energy7,\n    msg.payload[index].energy8,\n    msg.payload[index].energy9,\n    msg.payload[index].energy10,\n    msg.payload[index].energy11,\n    msg.payload[index].energy12,\n    msg.payload[index].energy13,\n    msg.payload[index].energy14,\n    msg.payload[index].energy15,\n    msg.payload[index].energy16,\n    msg.payload[index].energy17,\n    msg.payload[index].energy18,\n    msg.payload[index].energy19,\n    msg.payload[index].energy20,\n    msg.payload[index].energy21,\n    msg.payload[index].energy22,\n    msg.payload[index].energy23,\n]\n\nvar total_energy = msg.payload[index].total_energy;\nvar co2 = (total_energy * 5113) / 10000;\n\nconst API = {\n    'filesystem':{ \n        date: date, \n        year: year,\n        month: month,\n        day: day,\n        time: time, \n        ip: ip, \n        date_data: date_data,\n        timestamp: timestamp\n    },\n    'values':{\n        'voltage':{\n            A: voltageA,\n            B: voltageB,\n            C: voltageC\n        },\n        'current':{\n            A: currentA,\n            B: currentB,\n            C: currentC\n        },\n        'power':{\n            A: powerA,\n            B: powerB,\n            C: powerC\n        },\n        'powerfactor':{\n            A: powerfactorA,\n            B: powerfactorB,\n            C: powerfactorC\n        },\n        'percentagekwh':{\n            A: percentagekwhA,\n            B: percentagekwhB,\n            C: percentagekwhC            \n        },\n        'percentageAmp':{\n            A: percentageAmpA,\n            B: percentageAmpB,\n            C: percentageAmpC            \n        },\n        'energy':{\n            0: energy[0], 1: energy[1], 2: energy[2], 3: energy[3], 4: energy[4], 5: energy[5], \n            6: energy[6], 7: energy[7], 8: energy[8], 9: energy[9], 10: energy[10], 11: energy[11], \n            12: energy[12], 13: energy[13], 14: energy[14], 15: energy[15], 16: energy[16], 17: energy[17], \n            18: energy[18], 19: energy[19], 20: energy[20],21: energy[21], 22: energy[22], 23: energy[23]\n        },\n        'total':{\n            'energy': total_energy,\n            'energy_A': energy_A,\n            'energy_B': energy_B,\n            'co2': co2\n        }\n    }\n};\nconst jsonAPI = JSON.stringify(API);\n// global.set(\"API_Power\", jsonAPI);\nmsg.payload = jsonAPI;\nreturn msg",
+        "func": "const index = global.get(\"config.state.index\");\n\nconst date = msg.payload[index].date;\nconst time = msg.payload[index].time;\nconst date_data = msg.payload[index].date_data;\nconst ip = msg.payload[index].ip;\nconst timestamp = msg.payload[index].timestamp;\n\nconst meter = [\n    msg.payload[index].m_0,\n    msg.payload[index].m_1,\n    msg.payload[index].m_2,\n    msg.payload[index].m_3,\n    msg.payload[index].m_4,\n    msg.payload[index].m_5,\n    msg.payload[index].m_6,\n    msg.payload[index].m_7,\n    msg.payload[index].m_8,\n    msg.payload[index].m_9,\n    msg.payload[index].m_10,\n    msg.payload[index].m_11,\n    msg.payload[index].m_12,\n    msg.payload[index].m_13,\n    msg.payload[index].m_14,\n    msg.payload[index].m_15,\n    msg.payload[index].m_16,\n    msg.payload[index].m_17,\n    msg.payload[index].m_18,\n    msg.payload[index].m_19,\n    msg.payload[index].m_20,\n    msg.payload[index].m_21,\n    msg.payload[index].m_22,\n    msg.payload[index].m_23,\n]\n\nconst working = [\n    msg.payload[index].w_0,\n    msg.payload[index].w_1,\n    msg.payload[index].w_2,\n    msg.payload[index].w_3,\n    msg.payload[index].w_4,\n    msg.payload[index].w_5,\n    msg.payload[index].w_6,\n    msg.payload[index].w_7,\n    msg.payload[index].w_8,\n    msg.payload[index].w_9,\n    msg.payload[index].w_10,\n    msg.payload[index].w_11,\n    msg.payload[index].w_12,\n    msg.payload[index].w_13,\n    msg.payload[index].w_14,\n    msg.payload[index].w_15,\n    msg.payload[index].w_16,\n    msg.payload[index].w_17,\n    msg.payload[index].w_18,\n    msg.payload[index].w_19,\n    msg.payload[index].w_20,\n    msg.payload[index].w_21,\n    msg.payload[index].w_22,\n    msg.payload[index].w_23,\n]\n\nconst API = {\n    'filesystem':{ \n        date: date, \n        time: time, \n        ip: ip, \n        date_data: date_data,\n        timestamp: timestamp\n    },\n    'values':{\n        'meter': {\n            0: meter[0], 1: meter[1], 2: meter[2], 3: meter[3], 4: meter[4], 5: meter[5],\n            6: meter[6], 7: meter[7], 8: meter[8], 9: meter[9], 10: meter[10], 11: meter[11],\n            12: meter[12], 13: meter[13], 14: meter[14], 15: meter[15], 16: meter[16], 17: meter[17],\n            18: meter[18], 19: meter[19], 20: meter[20], 21: meter[21], 22: meter[22], 23: meter[23]\n        },\n        'working': {\n            0: working[0], 1: working[1], 2: working[2], 3: working[3], 4: working[4], 5: working[5],\n            6: working[6], 7: working[7], 8: working[8], 9: working[9], 10: working[10], 11: working[11],\n            12: working[12], 13: working[13], 14: working[14], 15: working[15], 16: working[16], 17: working[17],\n            18: working[18], 19: working[19], 20: working[20], 21: working[21], 22: working[22], 23: working[23]\n        },\n        'total':{\n            \"meter\":{\n                \"total\": msg.payload[index].total_meter,\n                \"A\": msg.payload[index].meter_A,\n                \"B\": msg.payload[index].meter_B,\n            },\n            \"working\":{\n                \"total\": msg.payload[index].total_working,\n                \"A\": msg.payload[index].working_A,\n                \"B\": msg.payload[index].working_B,\n            }\n        }\n    }\n};\nmsg.payload = JSON.stringify(API);\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1439,7 +1617,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "subflow:424004941bcb3307",
         "z": "a6ecc454e1b3c0c3",
         "name": "",
-        "x": 1300,
+        "x": 1310,
         "y": 420,
         "wires": [
             [
@@ -1559,7 +1737,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "subflow:424004941bcb3307",
         "z": "a6ecc454e1b3c0c3",
         "name": "",
-        "x": 380,
+        "x": 390,
         "y": 120,
         "wires": [
             [
@@ -1604,8 +1782,8 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         ],
         "repeat": "5",
         "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
+        "once": true,
+        "onceDelay": "60",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -1714,7 +1892,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "7a70a201eaa0a148",
         "name": "le",
-        "func": "var length = msg.payload.length\nlength = length - 1\nglobal.set(\"row.r0\", length)\nif(length <= 1){\n    global.set(\"index.i0\", 0);\n};\nmsg.payload = {\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `row:${length}`};\nreturn msg;",
+        "func": "var length = msg.payload.length\nlength = length - 1\nglobal.set(\"config.state.row\", length)\nif(length <= 1){\n    global.set(\"config.state.index\", 0);\n};\nmsg.payload = {\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `row:${length}`};\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1767,7 +1945,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "f1016d6dfc436da7",
         "name": "data Log",
-        "func": "let energy = msg.energy;\nlet voltage = msg.voltage;\nlet current = msg.current;\nlet powerfactor = msg.powerfactor;\nlet power = msg.power;\nlet power_percentage = msg.power_percentage;\nlet current_percentage =  msg.current_percentage;\nlet timestamp = msg.timestamp;\nvar energy_A = msg.energy_A;\nvar energy_B = msg.energy_B;\nvar total_energy = msg.total_energy;\n\nvar date = msg.date;\nvar time = msg.time;\nvar date_data = msg.date_data;\nvar ip = msg.ip;\nvar shift = msg.shift;\n\nmsg.payload = {\n    date: date, time: time, ip: ip, timestamp: timestamp, date_data: date_data, shift: shift,\n    voltA: voltage.A, voltB: voltage.B, voltC: voltage.C,\n    currentA: current.A, currentB: current.B, currentC: current.C,\n    powerA: power.A, powerB: power.B, powerC: power.C,\n    powerfA: powerfactor.A, powerfB: powerfactor.B, powerfC: powerfactor.C,\n    powerpA: power_percentage.A, powerpB: power_percentage.B, powerpC: power_percentage.C,\n    currentpA: current_percentage.A, currentpB: current_percentage.B, currentpC: current_percentage.C,\n    energy0: energy[0], energy1: energy[1], energy2: energy[2], energy3: energy[3], energy4: energy[4], energy5: energy[5], energy6: energy[6],\n    energy7: energy[7], energy8: energy[8], energy9: energy[9], energy10: energy[10], energy11: energy[11], energy12: energy[12], energy13: energy[13],\n    energy14: energy[14], energy15: energy[15], energy16: energy[16], energy17: energy[17], energy18: energy[18], energy19: energy[19], energy20: energy[20],\n    energy21: energy[21], energy22: energy[22], energy23: energy[23],\n    total_energy: total_energy, energy_A: energy_A, energy_B: energy_B\n}\nreturn msg;",
+        "func": "const payload = msg.payload;\nconst date = payload.date;\nconst time = payload.time;\nconst timestamp = payload.timestamp;\nconst ip = payload.ip;\nconst date_data = payload.date_data;\n\n// values \nconst main = payload.values.maintake.main;\nconst take = payload.values.maintake.take;\nconst meter = payload.values.meter;\nconst working = payload.values.working;\nconst total = payload.values.total;\n\nmsg.payload = {\n    'date': date,\n    'time': time,\n    'timestamp': timestamp,\n    'ip': ip,\n    'date_data': date_data,\n    'total_meter': total.meter.total,\n    'meter_A': total.meter.A,\n    'meter_B': total.meter.B,\n    'm_0': meter[0],\n    'm_1': meter[1],\n    'm_2': meter[2],\n    'm_3': meter[3],\n    'm_4': meter[4],\n    'm_5': meter[5],\n    'm_6': meter[6],\n    'm_7': meter[7],\n    'm_8': meter[8],\n    'm_9': meter[9],\n    'm_10': meter[10],\n    'm_11': meter[11],\n    'm_12': meter[12],\n    'm_13': meter[13],\n    'm_14': meter[14],\n    'm_15': meter[15],\n    'm_16': meter[16],\n    'm_17': meter[17],\n    'm_18': meter[18],\n    'm_19': meter[19],\n    'm_20': meter[20],\n    'm_21': meter[21],\n    'm_22': meter[22],\n    'm_23': meter[23],\n    'total_working': total.working.total,\n    'working_A': total.working.A,\n    'working_B': total.working.B,\n    'w_0': working[0],\n    'w_1': working[0],\n    'w_2': working[0],\n    'w_3': working[0],\n    'w_4': working[0],\n    'w_5': working[0],\n    'w_6': working[0],\n    'w_7': working[0],\n    'w_8': working[0],\n    'w_9': working[0],\n    'w_10': working[0],\n    'w_11': working[0],\n    'w_12': working[0],\n    'w_13': working[0],\n    'w_14': working[0],\n    'w_15': working[0],\n    'w_16': working[0],\n    'w_17': working[0],\n    'w_18': working[0],\n    'w_19': working[0],\n    'w_20': working[0],\n    'w_21': working[0],\n    'w_22': working[0],\n    'w_23': working[0],\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1787,7 +1965,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "f1016d6dfc436da7",
         "name": "data Log",
-        "func": "let energy = msg.energy;\nlet voltage = msg.voltage;\nlet current = msg.current;\nlet powerfactor = msg.powerfactor;\nlet power = msg.power;\nlet power_percentage = msg.power_percentage;\nlet current_percentage =  msg.current_percentage;\nlet timestamp = msg.timestamp;\nvar energy_A = msg.energy_A;\nvar energy_B = msg.energy_B;\nvar total_energy = msg.total_energy;\n\nvar date = msg.date;\nvar time = msg.time;\nvar date_data = msg.date_data;\nvar ip = msg.ip;\nvar shift = msg.shift;\n\nmsg.payload = {\n    date: date, time: time, ip: ip, timestamp: timestamp, date_data: date_data, shift: shift,\n    voltA: voltage.A, voltB: voltage.B, voltC: voltage.C,\n    currentA: current.A, currentB: current.B, currentC: current.C,\n    powerA: power.A, powerB: power.B, powerC: power.C,\n    powerfA: powerfactor.A, powerfB: powerfactor.B, powerfC: powerfactor.C,\n    powerpA: power_percentage.A, powerpB: power_percentage.B, powerpC: power_percentage.C,\n    currentpA: current_percentage.A, currentpB: current_percentage.B, currentpC: current_percentage.C,\n    energy0: energy[0], energy1: energy[1], energy2: energy[2], energy3: energy[3], energy4: energy[4], energy5: energy[5], energy6: energy[6],\n    energy7: energy[7], energy8: energy[8], energy9: energy[9], energy10: energy[10], energy11: energy[11], energy12: energy[12], energy13: energy[13],\n    energy14: energy[14], energy15: energy[15], energy16: energy[16], energy17: energy[17], energy18: energy[18], energy19: energy[19], energy20: energy[20],\n    energy21: energy[21], energy22: energy[22], energy23: energy[23],\n    total_energy: total_energy, energy_A: energy_A, energy_B: energy_B\n}\nreturn msg;",
+        "func": "const payload = msg.payload;\nconst date = payload.date;\nconst time = payload.time;\nconst timestamp = payload.timestamp;\nconst ip = payload.ip;\nconst date_data = payload.date_data;\n\n// values \nconst main = payload.values.maintake.main;\nconst take = payload.values.maintake.take;\nconst meter = payload.values.meter;\nconst working = payload.values.working;\nconst total = payload.values.total;\n\nmsg.payload = {\n    'date': date,\n    'time': time,\n    'timestamp': timestamp,\n    'ip': ip,\n    'date_data': date_data,\n    'total_meter': total.meter.total,\n    'meter_A': total.meter.A,\n    'meter_B': total.meter.B,\n    'm_0': meter[0],\n    'm_1': meter[1],\n    'm_2': meter[2],\n    'm_3': meter[3],\n    'm_4': meter[4],\n    'm_5': meter[5],\n    'm_6': meter[6],\n    'm_7': meter[7],\n    'm_8': meter[8],\n    'm_9': meter[9],\n    'm_10': meter[10],\n    'm_11': meter[11],\n    'm_12': meter[12],\n    'm_13': meter[13],\n    'm_14': meter[14],\n    'm_15': meter[15],\n    'm_16': meter[16],\n    'm_17': meter[17],\n    'm_18': meter[18],\n    'm_19': meter[19],\n    'm_20': meter[20],\n    'm_21': meter[21],\n    'm_22': meter[22],\n    'm_23': meter[23],\n    'total_working': total.working.total,\n    'working_A': total.working.A,\n    'working_B': total.working.B,\n    'w_0': working[0],\n    'w_1': working[0],\n    'w_2': working[0],\n    'w_3': working[0],\n    'w_4': working[0],\n    'w_5': working[0],\n    'w_6': working[0],\n    'w_7': working[0],\n    'w_8': working[0],\n    'w_9': working[0],\n    'w_10': working[0],\n    'w_11': working[0],\n    'w_12': working[0],\n    'w_13': working[0],\n    'w_14': working[0],\n    'w_15': working[0],\n    'w_16': working[0],\n    'w_17': working[0],\n    'w_18': working[0],\n    'w_19': working[0],\n    'w_20': working[0],\n    'w_21': working[0],\n    'w_22': working[0],\n    'w_23': working[0],\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1812,7 +1990,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "hdrout": "all",
         "multi": "one",
         "ret": "\\r\\n",
-        "temp": "date,time, ip,timestamp,date_data, shift,voltA, voltB, voltC,currentA,currentB, currentC, powerA, powerB, powerC,powerfA, powerfB, powerfC,     powerpA, powerpB, powerpC,currentpA,currentpB,currentpC,energy0, energy1, energy2, energy3, energy4, energy5, energy6,energy7, energy8, energy9, energy10, energy11, energy12, energy13,     energy14, energy15, energy16, energy17, energy18, energy19, energy20,     energy21, energy22, energy23, total_energy, energy_A, energy_B",
+        "temp": "date,time,timestamp,ip,date_data,total_meter,meter_A,meter_B,m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11,m_12,m_13,m_14,m_15,m_16,m_17,m_18,m_19,m_20,m_21,m_22,m_23,total_working,working_A,working_B,w_0,w_1,w_2,w_3,w_4,w_5,w_6,w_7,w_8,w_9,w_10,w_11,w_12,w_13,w_14,w_15,w_16,w_17,w_18,w_19,w_20,w_21,w_22,w_23,",
         "skip": "0",
         "strings": true,
         "include_empty_strings": "",
@@ -1834,7 +2012,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "hdrout": "none",
         "multi": "one",
         "ret": "\\r\\n",
-        "temp": "date,time, ip,timestamp,date_data, shift,voltA, voltB, voltC,currentA,currentB, currentC, powerA, powerB, powerC,powerfA, powerfB, powerfC,     powerpA, powerpB, powerpC,currentpA,currentpB,currentpC,energy0, energy1, energy2, energy3, energy4, energy5, energy6,energy7, energy8, energy9, energy10, energy11, energy12, energy13,     energy14, energy15, energy16, energy17, energy18, energy19, energy20,     energy21, energy22, energy23, total_energy, energy_A, energy_B",
+        "temp": "date,time,timestamp,ip,date_data,total_meter,meter_A,meter_B,m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11,m_12,m_13,m_14,m_15,m_16,m_17,m_18,m_19,m_20,m_21,m_22,m_23,total_working,working_A,working_B,w_0,w_1,w_2,w_3,w_4,w_5,w_6,w_7,w_8,w_9,w_10,w_11,w_12,w_13,w_14,w_15,w_16,w_17,w_18,w_19,w_20,w_21,w_22,w_23,",
         "skip": "0",
         "strings": true,
         "include_empty_strings": "",
@@ -2124,10 +2302,10 @@ cat << 'EOF' > $HOME/.node-red/flows.json
                 "vt": "str"
             }
         ],
-        "repeat": "300",
+        "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "29",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -2170,7 +2348,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "repeat": "1",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "31",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -2222,7 +2400,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "repeat": "10",
         "crontab": "",
         "once": true,
-        "onceDelay": "5",
+        "onceDelay": "31",
         "topic": "",
         "payload": "192.168.0.9",
         "payloadType": "str",
@@ -2240,7 +2418,6 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "id": "a241e24d2a8bd154",
         "type": "subflow:e226ede58ea4b202",
         "z": "777823ab3e1fee97",
-        "d": true,
         "g": "451150a92cfdb00f",
         "name": "",
         "x": 1170,
@@ -2279,7 +2456,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "repeat": "1",
         "crontab": "",
         "once": true,
-        "onceDelay": "5",
+        "onceDelay": "35",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -2321,29 +2498,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "name": "",
         "x": 940,
         "y": 500,
-        "wires": [
-            [
-                "c6198849990b84a3"
-            ]
-        ]
-    },
-    {
-        "id": "c6198849990b84a3",
-        "type": "debug",
-        "z": "777823ab3e1fee97",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 965,
-        "y": 580,
-        "wires": [],
-        "l": false
+        "wires": []
     },
     {
         "id": "65638a0971dafdf2",
@@ -2369,7 +2524,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "z": "777823ab3e1fee97",
         "g": "9036c777fe360381",
         "name": "Values",
-        "func": "msg.path = `/home/orangepi/loom/data/log.csv`;\nmsg.file = global.get(\"config.state.file\");\nnode.status({fill:\"blue\",shape:\"dot\",text: global.get(\"time\")});\n    setPayload();\nreturn msg;\n\nfunction setPayload(){\n};",
+        "func": "msg.path = `/home/orangepi/loom/data/log.csv`;\nmsg.file = global.get(\"config.state.file\");\nconst meter = global.get(\"values.meter\");\nconst working = global.get(\"values.working\");\nconst positionA = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];\nconst positionB = [20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7];\n\nlet meterA = positionA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.A\", meterA);\nlet meterB = positionB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.B\", meterB);\nlet total_meter = meterA + meterB || 0;\nglobal.set(\"values.total.meter.total\", total_meter);\n\nlet workingA = positionA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.A\", workingA);\nlet workingB = positionB.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.B\", workingB);\nlet total_working = workingA + workingB || 0;\nglobal.set(\"values.total.working.total\", total_working);\n\nmsg.payload = {\n    'date': global.get(\"config.datetime.date\"),\n    'time': global.get(\"config.datetime.time\"),\n    'timestamp': global.get(\"config.datetime.timestamp\"),\n    'ip': global.get(\"config.state.ip\"),\n    'date_data': global.get(\"config.state.date_data\"),\n    \"values\":{\n        \"maintake\":{\n            \"main\": global.get(\"values.maintake.main\"),\n            \"take\": global.get(\"values.maintake.take\"),\n        },\n        \"meter\": meter,\n        \"working\": working,\n        \"total\":{\n            \"meter\":{\n                \"A\": global.get(\"values.total.meter.A\"),\n                \"B\": global.get(\"values.total.meter.B\"),\n                \"total\": global.get(\"values.total.meter.total\")\n            },\n            \"working\":{\n                \"A\": global.get(\"values.total.working.A\"),\n                \"B\": global.get(\"values.total.working.B\"),\n                \"total\": global.get(\"values.total.working.total\")\n            }\n        }\n    }\n}\nnode.status({fill:\"blue\",shape:\"dot\",text: global.get(\"config.datetime.time\")});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2521,7 +2676,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "repeat": "1",
         "crontab": "",
         "once": true,
-        "onceDelay": "5",
+        "onceDelay": "35",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -2947,7 +3102,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "links": [
             "65638a0971dafdf2"
         ],
-        "x": 695,
+        "x": 705,
         "y": 460,
         "wires": []
     },
@@ -3115,3 +3270,4 @@ echo "[ACK-IoT] ติดตั้ง flowfuse@dashboard 2.0 เรียบร�
 echo "[ACK-IoT] ติดตั้ง led state เรียบร้อย..."
 echo "[ACK-IoT] ติดตั้ง flows.json เรียบร้อย..."
 echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
+./$HOME/updateandreboot/reb.sh
