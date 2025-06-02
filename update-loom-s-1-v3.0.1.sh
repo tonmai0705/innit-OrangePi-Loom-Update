@@ -14,26 +14,25 @@ mkdir stat_led
 mkdir loom
 mkdir updateandreboot
 
-cat << 'EOF' > $HOME/updateandreboot/upd.sh
+cat << 'EOF' > $HOME/updateandreboot/reb.sh
 #!/bin/bash
 
-gpio_pin1=11
-gpio_pin2=12
+# เวลานับถอยหลัง (วินาที)
+countdown=10
 
-gpio mode $gpio_pin1 out
-gpio mode $gpio_pin2 out
+echo "ระบบจะทำการรีบูตในอีก $countdown วินาที..."
 
-while true; do
-gpio write $gpio_pin1 1
-gpio write $gpio_pin2 0
-sleep 0.3
-gpio write $gpio_pin1 0
-gpio write $gpio_pin2 1
-sleep 0.3
-
+# นับถอยหลัง
+while [ $countdown -gt 0 ]; do
+    echo "$countdown..."
+    sleep 1
+    countdown=$((countdown - 1))
 done
+
+echo "กำลังรีบูตเครื่อง..."
+reboot -h
 EOF
-chmod +x $HOME/updateandreboot/upd.sh
+chmod +x $HOME/updateandreboot/reb.sh
 
 cat << 'EOF' > $HOME/loom/config.txt
     {
