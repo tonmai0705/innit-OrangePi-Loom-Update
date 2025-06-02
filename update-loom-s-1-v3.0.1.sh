@@ -6,6 +6,7 @@ rm -d $HOME/loom/dataProduction
 rm $HOME/loom/thingsboard/config.csv
 rm $HOME/loomthingsboard/logdata/*
 rm -d $HOME/loomthingsboard/logdata
+rm -rf $HOME/loom
 
 echo "ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
@@ -39,7 +40,7 @@ reboot -h
 EOF
 chmod +x $HOME/updateandreboot/reb.sh
 
-cat << 'EOF' > $HOME/loom/config.txt
+cat << EOF > $HOME/loom/config.txt
     {
     "state": {
         "datestamp": " ",
