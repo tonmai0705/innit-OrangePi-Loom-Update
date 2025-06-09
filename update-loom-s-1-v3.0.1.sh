@@ -14,11 +14,11 @@ echo "ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
 rm $HOME/.node-red/flows.json
 echo "ลบไฟล์ flow.json ลบไฟล์..."
 echo " "
-echo "กำลังติดตั้ง flows Node-red กรุณารอสักครู่..."
 mkdir stat_led
 mkdir loom
 mkdir updateandreboot
-
+echo "กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
+npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 cat << 'EOF' > $HOME/updateandreboot/reb.sh
 #!/bin/bash
 
@@ -3263,5 +3263,6 @@ chmod +x $HOME/stat_led/modbus_err.sh
 echo "[ACK-IoT] ลบข้อมูล <Loom Config> เรียบร้อย..."
 echo "[ACK-IoT] ติดตั้ง led state เรียบร้อย..."
 echo "[ACK-IoT] ติดตั้ง flows.json เรียบร้อย..."
+echo "[ACK-IoT] ติดตั้ง @flowfuse/Dashboard 2.0 เรียบร้อย..."
 echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
 bash $HOME/updateandreboot/reb.sh
