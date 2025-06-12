@@ -8,17 +8,17 @@ rm -rf $HOME/loom/thingsboard/logdata
 rm -d $HOME/loom/thingsboard/logdata
 rm -rf $HOME/loom
 
-echo "ลบไฟล์ข้อมูลสำเร็จ..."
+echo " [ACK-IoT Orange Pi Update Version] ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
 rm $HOME/alarm_lemp.sh
-echo "ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
+echo " [ACK-IoT Orange Pi Update Version] ลบไฟล์ alarm_lemp.sh ลบไฟล์..."
 rm $HOME/.node-red/flows.json
-echo "ลบไฟล์ flow.json ลบไฟล์..."
+echo " [ACK-IoT Orange Pi Update Version] ลบไฟล์ flow.json ลบไฟล์..."
 echo " "
 mkdir stat_led
 mkdir loom
 mkdir updateandreboot
-echo "กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
+echo " [ACK-IoT Orange Pi Update Version] กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 cat << 'EOF' > $HOME/updateandreboot/reb.sh
 #!/bin/bash
@@ -26,16 +26,16 @@ cat << 'EOF' > $HOME/updateandreboot/reb.sh
 # เวลานับถอยหลัง (วินาที)
 countdown=10
 
-echo "ระบบจะทำการรีบูตในอีก $countdown วินาที..."
+echo " [ACK-IoT Orange Pi Update Version] ระบบจะทำการรีบูตในอีก $countdown วินาที..."
 
 # นับถอยหลัง
 while [ $countdown -gt 0 ]; do
-    echo "$countdown..."
+    echo " [ACK-IoT Orange Pi Update Version] OPI. Reboot In $countdown Second"
     sleep 1
     countdown=$((countdown - 1))
 done
 
-echo "กำลังรีบูตเครื่อง..."
+echo " [ACK-IoT Orange Pi Update Version] OPI Reboot!"
 reboot -h
 EOF
 chmod +x $HOME/updateandreboot/reb.sh
@@ -3664,9 +3664,9 @@ EOF
 
 chmod +x $HOME/stat_led/modbus_err.sh
 
-echo "[ACK-IoT] ลบข้อมูล <Loom Config> เรียบร้อย..."
-echo "[ACK-IoT] ติดตั้ง led state เรียบร้อย..."
-echo "[ACK-IoT] ติดตั้ง flows.json เรียบร้อย..."
-echo "[ACK-IoT] ติดตั้ง @flowfuse/Dashboard 2.0 เรียบร้อย..."
-echo "[ACK-IoT] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
+echo " [ACK-IoT Orange Pi Update Version] ลบข้อมูล <Loom Config> เรียบร้อย..."
+echo " [ACK-IoT Orange Pi Update Version] ติดตั้ง led state เรียบร้อย..."
+echo " [ACK-IoT Orange Pi Update Version] ติดตั้ง flows.json เรียบร้อย..."
+echo " [ACK-IoT Orange Pi Update Version] ติดตั้ง @flowfuse/Dashboard 2.0 เรียบร้อย..."
+echo " [ACK-IoT Orange Pi Update Version] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
 bash $HOME/updateandreboot/reb.sh
