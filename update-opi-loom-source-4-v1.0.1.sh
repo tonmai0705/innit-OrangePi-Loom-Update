@@ -231,7 +231,17 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "env": [],
         "meta": {},
         "color": "#ff834a",
-        "icon": "node-red/cog.svg"
+        "icon": "node-red/cog.svg",
+        "status": {
+            "x": 760,
+            "y": 60,
+            "wires": [
+                {
+                    "id": "4fa647803c42f119",
+                    "port": 0
+                }
+            ]
+        }
     },
     {
         "id": "b7d6774c49a75902",
@@ -1210,7 +1220,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "file",
         "z": "aa3c99c011a59edd",
         "name": "config",
-        "filename": "/home/orangepi/loom/config.txt",
+        "filename": "/home/orangepi/loom/config.txt.tmp",
         "filenameType": "str",
         "appendNewline": false,
         "createDir": true,
@@ -1219,7 +1229,9 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "x": 310,
         "y": 40,
         "wires": [
-            []
+            [
+                "529efc0a45b6c9d8"
+            ]
         ],
         "icon": "node-red/redis.svg"
     },
@@ -1241,6 +1253,46 @@ cat << 'EOF' > $HOME/.node-red/flows.json
             [
                 "861f956f24a820d1"
             ]
+        ]
+    },
+    {
+        "id": "529efc0a45b6c9d8",
+        "type": "exec",
+        "z": "aa3c99c011a59edd",
+        "command": "mv /home/orangepi/loom/config.txt.tmp /home/orangepi/loom/config.txt",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "move .tmp",
+        "x": 470,
+        "y": 60,
+        "wires": [
+            [
+                "4fa647803c42f119"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4fa647803c42f119",
+        "type": "function",
+        "z": "aa3c99c011a59edd",
+        "name": "function 689",
+        "func": "msg.payload = {\n    'fill': 'blue',\n    'shape': 'dot',\n    'text': msg.filename \n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 60,
+        "wires": [
+            []
         ]
     },
     {
@@ -1820,7 +1872,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "method": "POST",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://192.168.0.9:1880/api/product/device-opi-datasource-4",
+        "url": "http://192.168.0.9:1880/api/product/device-opi-datasource-6",
         "tls": "",
         "persist": false,
         "proxy": "",
