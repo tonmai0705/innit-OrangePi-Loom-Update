@@ -231,7 +231,17 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "env": [],
         "meta": {},
         "color": "#ff834a",
-        "icon": "node-red/cog.svg"
+        "icon": "node-red/cog.svg",
+        "status": {
+            "x": 780,
+            "y": 60,
+            "wires": [
+                {
+                    "id": "4fa647803c42f119",
+                    "port": 0
+                }
+            ]
+        }
     },
     {
         "id": "b7d6774c49a75902",
@@ -569,18 +579,20 @@ cat << 'EOF' > $HOME/.node-red/flows.json
             "a241e24d2a8bd154",
             "e02e37f582fc0ef1",
             "495deecff0bc5f79",
-            "09e65fc5a9cf3984",
             "bc26e53c6604a53c",
             "72949a75b63686fd",
             "792452b6dfad242c",
             "2e091e726e419728",
             "7d876bfc55befcf6",
-            "fe159939e00a876e"
+            "fe159939e00a876e",
+            "c974acb909bd6616",
+            "8f882b3c1846c4d2",
+            "09e65fc5a9cf3984"
         ],
         "x": 774,
         "y": 39,
         "w": 422,
-        "h": 422
+        "h": 429.5
     },
     {
         "id": "9036c777fe360381",
@@ -1210,7 +1222,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "file",
         "z": "aa3c99c011a59edd",
         "name": "config",
-        "filename": "/home/orangepi/loom/config.json",
+        "filename": "/home/orangepi/loom/config.txt.tmp",
         "filenameType": "str",
         "appendNewline": false,
         "createDir": true,
@@ -1219,7 +1231,9 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "x": 310,
         "y": 40,
         "wires": [
-            []
+            [
+                "529efc0a45b6c9d8"
+            ]
         ],
         "icon": "node-red/redis.svg"
     },
@@ -1241,6 +1255,46 @@ cat << 'EOF' > $HOME/.node-red/flows.json
             [
                 "861f956f24a820d1"
             ]
+        ]
+    },
+    {
+        "id": "529efc0a45b6c9d8",
+        "type": "exec",
+        "z": "aa3c99c011a59edd",
+        "command": "mv /home/orangepi/loom/config.txt.tmp /home/orangepi/loom/config.txt",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "move .tmp",
+        "x": 470,
+        "y": 60,
+        "wires": [
+            [
+                "4fa647803c42f119"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4fa647803c42f119",
+        "type": "function",
+        "z": "aa3c99c011a59edd",
+        "name": "function 689",
+        "func": "msg.payload = {\n    'fill': 'blue',\n    'shape': 'dot',\n    'text': msg.filename \n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 60,
+        "wires": [
+            []
         ]
     },
     {
@@ -1310,7 +1364,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "file in",
         "z": "341bdc3e7e68ae46",
         "name": "Read",
-        "filename": "/home/orangepi/loom/config.json",
+        "filename": "/home/orangepi/loom/config.txt",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
@@ -1321,8 +1375,8 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "y": 140,
         "wires": [
             [
-                "24e85514de7978d5",
-                "d35ff2067f5a3d48"
+                "1af31287089bf3ac",
+                "24e85514de7978d5"
             ]
         ],
         "icon": "node-red/sort.svg"
@@ -1332,17 +1386,19 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "341bdc3e7e68ae46",
         "name": "Set value",
-        "func": "if(msg.payload){\nconst payload = msg.payload;\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index || 0);\n    global.set(\"config.state.changehour\", payload.state.changehour || 0);\n\n    let main_min = payload.values.maintake.main.min || 0;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max || 0;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min || 0;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max || 0;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter || new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working || new Array(24).fill(0);\n    global.set(\"values.working\", working);\n}else {\n    return msg;\n}",
+        "func": "if(msg.payload){\nconst payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index || 0);\n    global.set(\"config.state.changehour\", payload.state.changehour || 0);\n\n    let main_min = payload.values.maintake.main.min || 0;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max || 0;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min || 0;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max || 0;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter || new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working || new Array(24).fill(0);\n    global.set(\"values.working\", working);\n}else {\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 545,
+        "x": 465,
         "y": 140,
         "wires": [
-            []
+            [
+                "4f5103e809c9d332"
+            ]
         ],
         "l": false
     },
@@ -1396,7 +1452,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "winHide": false,
         "oldrc": false,
         "name": "",
-        "x": 680,
+        "x": 600,
         "y": 140,
         "wires": [
             [],
@@ -1528,23 +1584,6 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "wires": [
             []
         ]
-    },
-    {
-        "id": "d35ff2067f5a3d48",
-        "type": "json",
-        "z": "341bdc3e7e68ae46",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 435,
-        "y": 140,
-        "wires": [
-            [
-                "1af31287089bf3ac"
-            ]
-        ],
-        "l": false
     },
     {
         "id": "3925be8bad2bdf74",
@@ -1708,7 +1747,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "77aa6425a6e4878c",
         "name": "function 3",
-        "func": "let index = global.get(\"config.state.index\");\nlet row = global.get(\"config.state.row\");\nif(row > 1000 && index == row){\n    msg.remove = `rm /home/orangepi/loom/data/log.csv`;\n     global.set(\"config.state.index\", 0);\n    return msg;\n}",
+        "func": "let index = global.get(\"config.state.index\");\nlet row = global.get(\"config.state.row\");\nif(row > 1000 && index == row){\n    msg.remove = `rm /home/orangepi/loom/data/log.csv`;\n    global.set(\"config.state.index\", 0);\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1879,7 +1918,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "a6ecc454e1b3c0c3",
         "name": "function 15",
-        "func": "const code = msg.statusCode;\nif(code === 200){\n    var index = global.get(\"config.state.index\") || 0;\n    index = index + 1;\n    global.set(\"config.state.index\", index);\n    msg.payload = {\n        fill: \"blue\",\n        shape: \"dot\",\n        text: `http:[Time:${global.get(\"config.datetime.time\")} State: ${code}] row:${global.get(\"config.state.row\")} index:${global.get(\"config.state.index\")}`\n    };\n}else{\n    msg.payload = {\n        fill: \"red\",\n        shape: \"dot\",\n        text: `http:[Time:${global.get(\"config.datetime.time\")} State: ${code}] row:${global.get(\"config.state.row\")} index:${global.get(\"config.state.index\")}`\n    };\n}\nreturn msg",
+        "func": "const code = msg.statusCode;\nif(code === 200){\n    var index = global.get(\"config.state.index\") || 0;\n    index = index + 1;\n    global.set(\"config.state.index\", index);\n}\nmsg.payload = {\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `http:[Time:${global.get(\"config.datetime.time\")} State: ${code}] row:${global.get(\"config.state.row\")} index:${global.get(\"config.state.index\")}`\n    };\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2251,6 +2290,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "csv",
         "z": "78457dab5d6c0503",
         "name": "",
+        "spec": "",
         "sep": ",",
         "hdrin": false,
         "hdrout": "once",
@@ -2555,6 +2595,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "csv",
         "z": "9f979da7e8a5400d",
         "name": "",
+        "spec": "",
         "sep": ",",
         "hdrin": "",
         "hdrout": "none",
@@ -2800,16 +2841,6 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         ],
         "icon": "font-awesome/fa-clock-o",
         "l": false
-    },
-    {
-        "id": "09e65fc5a9cf3984",
-        "type": "subflow:aa3c99c011a59edd",
-        "z": "777823ab3e1fee97",
-        "g": "451150a92cfdb00f",
-        "name": "",
-        "x": 1060,
-        "y": 300,
-        "wires": []
     },
     {
         "id": "bc26e53c6604a53c",
@@ -3549,6 +3580,69 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "name": "",
         "x": 940,
         "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c974acb909bd6616",
+        "type": "inject",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1055,
+        "y": 420,
+        "wires": [
+            [
+                "8f882b3c1846c4d2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8f882b3c1846c4d2",
+        "type": "exec",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "command": "reboot",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 1105,
+        "y": 420,
+        "wires": [
+            [],
+            [],
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "09e65fc5a9cf3984",
+        "type": "subflow:aa3c99c011a59edd",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "name": "",
+        "x": 1060,
+        "y": 300,
         "wires": []
     }
 ]
