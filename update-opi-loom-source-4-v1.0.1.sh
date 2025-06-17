@@ -233,7 +233,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "color": "#ff834a",
         "icon": "node-red/cog.svg",
         "status": {
-            "x": 760,
+            "x": 780,
             "y": 60,
             "wires": [
                 {
@@ -579,18 +579,20 @@ cat << 'EOF' > $HOME/.node-red/flows.json
             "a241e24d2a8bd154",
             "e02e37f582fc0ef1",
             "495deecff0bc5f79",
-            "09e65fc5a9cf3984",
             "bc26e53c6604a53c",
             "72949a75b63686fd",
             "792452b6dfad242c",
             "2e091e726e419728",
             "7d876bfc55befcf6",
-            "fe159939e00a876e"
+            "fe159939e00a876e",
+            "c974acb909bd6616",
+            "8f882b3c1846c4d2",
+            "09e65fc5a9cf3984"
         ],
         "x": 774,
         "y": 39,
         "w": 422,
-        "h": 422
+        "h": 429.5
     },
     {
         "id": "9036c777fe360381",
@@ -1394,7 +1396,9 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "x": 465,
         "y": 140,
         "wires": [
-            []
+            [
+                "4f5103e809c9d332"
+            ]
         ],
         "l": false
     },
@@ -1743,7 +1747,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "type": "function",
         "z": "77aa6425a6e4878c",
         "name": "function 3",
-        "func": "let index = global.get(\"config.state.index\");\nlet row = global.get(\"config.state.row\");\nif(row > 1000 && index == row){\n    msg.remove = `rm /home/orangepi/loom/data/log.csv`;\n    return msg;\n}",
+        "func": "let index = global.get(\"config.state.index\");\nlet row = global.get(\"config.state.row\");\nif(row > 1000 && index == row){\n    msg.remove = `rm /home/orangepi/loom/data/log.csv`;\n    global.set(\"config.state.index\", 0);\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1872,7 +1876,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "method": "POST",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "http://192.168.0.9:1880/api/product/device-opi-datasource-6",
+        "url": "http://192.168.0.9:1880/api/product/device-opi-datasource-4",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -2839,16 +2843,6 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "l": false
     },
     {
-        "id": "09e65fc5a9cf3984",
-        "type": "subflow:aa3c99c011a59edd",
-        "z": "777823ab3e1fee97",
-        "g": "451150a92cfdb00f",
-        "name": "",
-        "x": 1060,
-        "y": 300,
-        "wires": []
-    },
-    {
         "id": "bc26e53c6604a53c",
         "type": "subflow:341bdc3e7e68ae46",
         "z": "777823ab3e1fee97",
@@ -3586,6 +3580,69 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "name": "",
         "x": 940,
         "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c974acb909bd6616",
+        "type": "inject",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1055,
+        "y": 420,
+        "wires": [
+            [
+                "8f882b3c1846c4d2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8f882b3c1846c4d2",
+        "type": "exec",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "command": "reboot",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 1105,
+        "y": 420,
+        "wires": [
+            [],
+            [],
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "09e65fc5a9cf3984",
+        "type": "subflow:aa3c99c011a59edd",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "name": "",
+        "x": 1060,
+        "y": 300,
         "wires": []
     }
 ]
