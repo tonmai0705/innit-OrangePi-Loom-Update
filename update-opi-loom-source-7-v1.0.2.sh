@@ -1,4 +1,18 @@
 #!/bin/bash
+
+cat << 'EOF' > $HOME/loom/scriptConfig.sh
+#!/bin/bash
+
+if [ -f $HOME/loom/config.txt.tmp ]; then
+    sync
+    mv $HOME/loom/config.txt.tmp $HOME/loom/config.txt
+else
+    echo "File not found: config.txt.tmp"
+fi
+EOF
+
+chmod +x $HOME/loom/scriptConfig.sh
+
 rm $HOME/.node-red/flows.json
 cat << 'EOF' > $HOME/.node-red/flows.json
 [
@@ -1275,7 +1289,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "id": "529efc0a45b6c9d8",
         "type": "exec",
         "z": "aa3c99c011a59edd",
-        "command": "mv /home/orangepi/loom/config.txt.tmp /home/orangepi/loom/config.txt",
+        "command": ". $HOME/loom/scriptConfig.sh",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
