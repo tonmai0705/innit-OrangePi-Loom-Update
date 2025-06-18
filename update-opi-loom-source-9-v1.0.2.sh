@@ -1905,7 +1905,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "ret": "txt",
         "paytoqs": "ignore",
         "url": "http://192.168.0.9:1880/api/product/device-opi-datasource-9",
-        "tls": ""
+        "tls": "",
         "persist": false,
         "proxy": "",
         "insecureHTTPParser": false,
