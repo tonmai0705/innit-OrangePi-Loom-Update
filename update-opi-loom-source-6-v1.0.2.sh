@@ -4018,3 +4018,4 @@ cat << 'EOF' > $HOME/.node-red/flows.json
 EOF
 node-red-restart
 echo "[ACK-IoT Update Version] update is successful..."
+reboot
