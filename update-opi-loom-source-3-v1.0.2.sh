@@ -549,7 +549,8 @@ cat << 'EOF' > $HOME/.node-red/flows.json
             "7d876bfc55befcf6",
             "fe159939e00a876e",
             "c974acb909bd6616",
-            "8f882b3c1846c4d2"
+            "8f882b3c1846c4d2",
+            "b57537dcf374507c"
         ],
         "x": 774,
         "y": 39,
@@ -2965,7 +2966,7 @@ cat << 'EOF' > $HOME/.node-red/flows.json
                 "vt": "str"
             }
         ],
-        "repeat": "5",
+        "repeat": "",
         "crontab": "",
         "once": true,
         "onceDelay": "5",
@@ -2976,7 +2977,6 @@ cat << 'EOF' > $HOME/.node-red/flows.json
         "y": 80,
         "wires": [
             [
-                "9827f5270df78aba",
                 "bc26e53c6604a53c"
             ]
         ],
@@ -3966,6 +3966,38 @@ cat << 'EOF' > $HOME/.node-red/flows.json
                 "7051805b6fc3e4c5"
             ]
         ],
+        "l": false
+    },
+    {
+        "id": "b57537dcf374507c",
+        "type": "inject",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 835,
+        "y": 120,
+        "wires": [
+            [
+                "9827f5270df78aba"
+            ]
+        ],
+        "icon": "node-red/cog.svg",
         "l": false
     }
 ]
