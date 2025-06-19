@@ -40,7 +40,7 @@ reboot -h
 EOF
 chmod +x $HOME/updateandreboot/reb.sh
 
-cat << EOF > $HOME/loom/config.json
+cat << EOF > $HOME/loom/config.txt
 {"state": {"datestamp": " ","ip": " "},"values": {"maintake": {"main": {"min": 0,"max": 0},"take": {"min": 0,"max": 0}},"meter": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
 EOF
 
