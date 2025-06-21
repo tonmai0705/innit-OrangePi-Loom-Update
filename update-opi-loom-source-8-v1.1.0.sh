@@ -7,7 +7,18 @@ rm -rf $HOME/loom/thingsboard//*
 rm -rf $HOME/loom/thingsboard/logdata//*
 rm -d $HOME/loom/thingsboard/logdata
 rm -rf $HOME/loom
+cat << 'EOF' > $HOME/loom/scriptConfig.sh
+#!/bin/bash
 
+if [ -f $HOME/loom/config.txt.tmp ]; then
+    sync
+    mv $HOME/loom/config.txt.tmp $HOME/loom/config.txt
+else
+    echo "File not found: config.txt.tmp"
+fi
+EOF
+
+chmod +x $HOME/loom/scriptConfig.sh
 echo " [ACK-IoT Orange Pi Update Version] ลบไฟล์ข้อมูลสำเร็จ..."
 rm $HOME/connected_lemp.sh
 rm $HOME/alarm_lemp.sh
