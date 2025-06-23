@@ -3,8 +3,8 @@ sudo apt update && sudo apt -y upgrade
 
 rm -rf $HOME/loom/dataProduction/*
 rm -d $HOME/loom/dataProduction
-rm -rf $HOME/loom/thingsboard//*
-rm -rf $HOME/loom/thingsboard/logdata//*
+rm -rf $HOME/loom/thingsboard/*
+rm -rf $HOME/loom/thingsboard/logdata/*
 rm -d $HOME/loom/thingsboard/logdata
 rm -rf $HOME/loom
 cat << 'EOF' > $HOME/loom/scriptConfig.sh
