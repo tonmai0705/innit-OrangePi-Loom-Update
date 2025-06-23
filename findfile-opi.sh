@@ -18,3 +18,6 @@ if [ -d "$user/loo1m" ]; then
 else
 echo "ไม่พบไดเลกทอรี่ loo1m"
 fi
+         
+source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
+        echo $source
