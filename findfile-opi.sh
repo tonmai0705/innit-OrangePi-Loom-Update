@@ -19,14 +19,14 @@ else
         if [ ! -f "$user/loom/config.txt" ]; then
                 cat << EOF > $user/loom/config.txt
                 {"state": {"datestamp": " ","ip": " "},"values": {"maintake": {"main": {"min": 0,"max": 0},"take": {"min": 0,"max": 0}},"meter": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
-                EOF
+EOF
                 echo "Config.txt is created"
         fi
         if [ ! -f "$user/loom/source.txt" ]; then
                 source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
                 cat << EOF > $user/loom/source.txt
                 $source
-                EOF
+EOF
         fi
 fi
 if [ ! -d "$user/stat_led" ]; then
@@ -67,7 +67,7 @@ if [ ! -d "$user/stat_led" ]; then
                     echo "Invalid parameter. Use 0 to stop blinking or 1 to start blinking."
                     exit 1
                 fi
-                EOF
+EOF
                 chmod +x $user/stat_led/blink11.sh
         fi
         if [ ! -f "$user/stat_led/blink.sh" ];then
@@ -114,7 +114,7 @@ if [ ! -d "$user/stat_led" ]; then
                         exit 1
                         ;;
                 esac
-                EOF
+EOF
                 chmod +x $user/stat_led/blink.sh
         fi
         if [ ! -f "$user/stat_led/modbus_err.sh" ]; then
@@ -146,7 +146,7 @@ if [ ! -d "$user/stat_led" ]; then
                         kill "$pid"
                     fi
                 done
-                EOF
+EOF
                 chmod +x $user/stat_led/modbus_err.sh
         fi
         echo " [ACK-IoT Orange Pi Update Version] ติดตั้ง led state เรียบร้อย..."
