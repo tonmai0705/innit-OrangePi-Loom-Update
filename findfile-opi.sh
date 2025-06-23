@@ -787,8 +787,7 @@ cat << 'EOF' > $user/.node-red/flows.json
             "707e34c1a544e5d1",
             "b83a6608cf3531d8",
             "792452b6dfad242c",
-            "72949a75b63686fd",
-            "cf243b8829ce2d7e"
+            "72949a75b63686fd"
         ],
         "x": 44,
         "y": 39,
@@ -1785,7 +1784,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "341bdc3e7e68ae46",
         "name": "le",
-        "func": "var source = msg.payload\nglobal.set(\"source\", source)",
+        "func": "var source = Number(msg.payload)\nglobal.set(\"source\", source)",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2087,7 +2086,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "http request",
         "z": "a6ecc454e1b3c0c3",
         "name": "",
-        "method": "POST",
+        "method": "use",
         "ret": "txt",
         "paytoqs": "ignore",
         "url": "",
@@ -2111,7 +2110,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "a6ecc454e1b3c0c3",
         "name": "function 14",
-        "func": "delete msg.tocloud;\ndelete msg.columns;\nmsg.url = `http://192.168.0.9:1880/api/product/device-opi-datasource-${global.get(\"source\")}`\nreturn msg;",
+        "func": "delete msg.tocloud;\ndelete msg.columns;\nmsg.url = `http://192.168.0.9:1880/api/product/device-opi-datasource-${global.get(\"source\")}`\nmsg.method = \"POST\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3279,7 +3278,6 @@ cat << 'EOF' > $user/.node-red/flows.json
         "id": "a241e24d2a8bd154",
         "type": "subflow:e226ede58ea4b202",
         "z": "777823ab3e1fee97",
-        "d": true,
         "g": "451150a92cfdb00f",
         "name": "",
         "x": 1080,
@@ -4198,85 +4196,6 @@ cat << 'EOF' > $user/.node-red/flows.json
         ],
         "icon": "node-red/cog.svg",
         "l": false
-    },
-    {
-        "id": "cf243b8829ce2d7e",
-        "type": "inject",
-        "z": "777823ab3e1fee97",
-        "g": "6be6c492a2953951",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 685,
-        "y": 540,
-        "wires": [
-            [
-                "09e65fc5a9cf3984"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "6d88bd98fec9ac84",
-        "type": "inject",
-        "z": "777823ab3e1fee97",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 505,
-        "y": 700,
-        "wires": [
-            [
-                "1ca9375a2a5409ca"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "1ca9375a2a5409ca",
-        "type": "function",
-        "z": "777823ab3e1fee97",
-        "name": "function 690",
-        "func": "global.set(\"config.state.index\",199)\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 630,
-        "y": 700,
-        "wires": [
-            []
-        ]
     }
 ]
 EOF
