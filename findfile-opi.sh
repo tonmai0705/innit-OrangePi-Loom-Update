@@ -22,14 +22,16 @@ else
 EOF
                 echo "Config.txt is created"
         fi
-        if [ ! -f "$user/loom/source.txt" ]; then
-                source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
-                cat << EOF > $user/loom/source.txt
-                $source
-EOF
-                echo "Source:$source"
-        fi
 fi
+
+if [ ! -f "$user/loom/source.txt" ]; then
+        source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
+        cat << EOF > $user/loom/source.txt
+        $source
+EOF
+        echo "Source:$source"
+fi
+
 if [ ! -d "$user/stat_led" ]; then
         mkdir $user/stat_led
         if [ ! -f "$user/stat_led/blink11.sh" ]; then
