@@ -1,5 +1,5 @@
 #!/bin/bash
-user=$HOME
+user="$HOME"
 
 if [ -f "user/loom/config.txt" ]; then
         echo "พบไฟล์"
