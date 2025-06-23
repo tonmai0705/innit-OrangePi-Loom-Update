@@ -1,6 +1,9 @@
 #!/bin/bash
 user=$HOME
 
+source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
+        echo "Source: $source"
+        
 if [ -f "$user/loom/config.txt" ]; then
         echo "พบไฟล์"
 else
@@ -18,6 +21,6 @@ if [ -d "$user/loo1m" ]; then
 else
 echo "ไม่พบไดเลกทอรี่ loo1m"
 fi
-         
-source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
-        echo $source
+cat << EOF > $user/loom/source.txt
+$source
+EOF
