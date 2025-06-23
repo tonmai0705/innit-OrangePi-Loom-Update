@@ -4299,7 +4299,7 @@ if [ ! -f "$user/updateandreboot/reb.sh" ]; then
         
         echo " [ACK-IoT Orange Pi Update Version] OPI Reboot!"
         reboot -h
-        EOF
+EOF
         chmod +x $user/updateandreboot/reb.sh
 
 fi
