@@ -27,6 +27,7 @@ EOF
                 cat << EOF > $user/loom/source.txt
                 $source
 EOF
+                echo "Source:$source"
         fi
 fi
 if [ ! -d "$user/stat_led" ]; then
