@@ -16,12 +16,13 @@ if [ -d "$user/loom" ]; then
         fi
 else
         mkdir $user/loom
-        if [ ! -f "$user/loom/config.txt" ]; then
-                cat << EOF > $user/loom/config.txt
-                {"state": {"datestamp": " ","ip": " "},"values": {"maintake": {"main": {"min": 0,"max": 0},"take": {"min": 0,"max": 0}},"meter": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
+fi
+
+if [ ! -f "$user/loom/config.txt" ]; then
+        cat << EOF > $user/loom/config.txt
+        {"state": {"datestamp": " ","ip": " "},"values": {"maintake": {"main": {"min": 0,"max": 0},"take": {"min": 0,"max": 0}},"meter": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
 EOF
-                echo "Config.txt is created"
-        fi
+        echo "Config.txt is created"
 fi
 
 if [ ! -f "$user/loom/source.txt" ]; then
@@ -29,7 +30,7 @@ if [ ! -f "$user/loom/source.txt" ]; then
         cat << EOF > $user/loom/source.txt
         $source
 EOF
-        echo "Source:$source"
+        echo "Log Source: $source"
 fi
 
 if [ ! -d "$user/stat_led" ]; then
