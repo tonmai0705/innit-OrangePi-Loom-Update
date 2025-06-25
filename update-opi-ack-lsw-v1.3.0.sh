@@ -17,6 +17,24 @@ if [ -d "$user/loom" ]; then
 else
         mkdir $user/loom
 fi
+cat << EOF > $user/loom/scriptConfig.sh
+        #!/bin/bash
+        user="$HOME"
+        tmpFile="$user/loom/config.txt.tmp"
+        finalFile="$user/loom/config.txt"
+        backupFile="$user/loom/config.txt.bak"
+        if [ -f "$tmpFile" ]; then
+                if [ -f "$finalFile" ]; then
+                        cp "$finalFile" "$backupFile"
+                        sync
+                fi
+        sync
+        mv "$tmpFile" "$finalFile"
+        else
+        echo "Not Found"
+        fi
+EOF
+chmod +x $user/loom/scriptConfig.sh
 
 if [ ! -f "$user/loom/config.txt" ]; then
         cat << EOF > $user/loom/config.txt
