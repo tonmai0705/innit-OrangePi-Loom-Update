@@ -36,17 +36,14 @@ fi
 EOF
 chmod +x $user/loom/scriptConfig.sh
 
-if [ ! -f "$user/loom/config.txt" ]; then
-        cat << EOF > $user/loom/config.txt
-        {"state":{"datestamp":"-","changehour":-,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
+cat << EOF > $user/loom/config.txt
+{"state":{"datestamp":"-","changehour":-,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
 EOF
-        echo "Config.txt is created"
-fi
 
 if [ ! -f "$user/loom/source.txt" ]; then
-        source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
-        cat << EOF > $user/loom/source.txt
-        $source
+source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
+cat << EOF > $user/loom/source.txt
+$source
 EOF
         echo "Log Source: $source"
 fi
