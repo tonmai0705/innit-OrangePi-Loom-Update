@@ -36,9 +36,11 @@ fi
 EOF
 chmod +x $user/loom/scriptConfig.sh
 
+if [ ! -f "$user/loom/config.txt" ]; then
 cat << EOF > $user/loom/config.txt
-{"state":{"datestamp":"-","changehour":-,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
+{"state":{"datestamp":"-","changehour":-,"upt":{"nla":0,"ota":0,"totalA":0,"nlb":0,"otb":0,"totalB":0,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
 EOF
+fi
 
 if [ ! -f "$user/loom/source.txt" ]; then
 source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
@@ -318,7 +320,7 @@ cat << 'EOF' > $user/.node-red/flows.json
     {
         "id": "e226ede58ea4b202",
         "type": "subflow",
-        "name": "Modbus Reboot",
+        "name": "Modbus & Alarm",
         "info": "",
         "category": "Special Node",
         "in": [],
@@ -721,6 +723,29 @@ cat << 'EOF' > $user/.node-red/flows.json
         "icon": "font-awesome/fa-send"
     },
     {
+        "id": "c9bf91fd5c385f43",
+        "type": "subflow",
+        "name": "state upTime",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#fcba03",
+        "icon": "font-awesome/fa-clock-o",
+        "status": {
+            "x": 380,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "d6a67c89385322a2",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
         "id": "451150a92cfdb00f",
         "type": "group",
         "z": "777823ab3e1fee97",
@@ -827,7 +852,8 @@ cat << 'EOF' > $user/.node-red/flows.json
             "707e34c1a544e5d1",
             "b83a6608cf3531d8",
             "792452b6dfad242c",
-            "72949a75b63686fd"
+            "72949a75b63686fd",
+            "ac29116d0411fcab"
         ],
         "x": 44,
         "y": 39,
@@ -1182,7 +1208,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "a67f25631bef1988",
         "name": "function 1",
-        "func": "var date = new Date(msg.payload);\nlet previousDate = new Date(date); \n    previousDate.setDate(previousDate.getDate() - 1).toString().padStart(2, 0);\nvar year = date.getFullYear(); \nvar month = (date.getMonth() + 1).toString().padStart(2, '0');\nvar day = date.getDate().toString().padStart(2, '0');\nvar hours = date.getHours().toString().padStart(2, '0');\nvar minutes = date.getMinutes().toString().padStart(2, '0');\nvar seconds = date.getSeconds().toString().padStart(2, '0');\nvar dateMian = `${year}/${month}/${day}`;\nvar time = `${hours}:${minutes}:${seconds}`;\nvar datestamp = global.get(\"config.state.datestamp\");\nlet hoursNum = Number(hours);\n    globalSet();\n////////////////////////////// end function set date ///////////////////////////////////////\nif (hoursNum >= 8 && hoursNum <= 23) {\n    let dateset = filename(date);\n    var datenow = dateNow(date);\n    global.set(\"config.state.date_data\", dateset);\n} else {\n    let dateset = filename(previousDate);\n    var datenow = dateNow(previousDate);\n    global.set(\"config.state.date_data\", dateset);\n}\n\nif (datestamp) {\n    if (datenow != datestamp) {\n        resetValues();\n        // global.set(\"report\", true);\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    } else {\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    }\n} else {\n    global.set(\"config.state.datestamp\", datenow);\n}\n    global.set(\"config.state.datenow\", datenow);\n    msg.payload = {\n        fill: \"green\",\n        shape: \"ring\",\n        text: `DATESTAMP:${datestamp} DATE${day}/${month}/${year} TIME:${time}`\n    };\n    return msg;\n\nfunction filename(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}\n\nfunction resetValues(){\n    var meter = new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    var working = new Array(24).fill(0);\n    global.set(\"values.working\", working);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.take.min\", 0);\n    global.set(\"values.maintake.take.max\", 0);\n}\n\nfunction globalSet(){\n    global.set(\"config.datetime.date\", dateMian);\n    global.set(\"config.datetime.day\", day);\n    global.set(\"config.datetime.month\", month);\n    global.set(\"config.datetime.year\", year);\n    global.set(\"config.datetime.time\", time);\n    global.set(\"config.datetime.hour\", hours);\n    global.set(\"config.datetime.minute\", minutes);\n    global.set(\"config.datetime.second\", seconds);\n}\n\nfunction dateNow(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}",
+        "func": "var date = new Date(msg.payload);\nlet previousDate = new Date(date); \n    previousDate.setDate(previousDate.getDate() - 1).toString().padStart(2, 0);\nvar year = date.getFullYear(); \nvar month = (date.getMonth() + 1).toString().padStart(2, '0');\nvar day = date.getDate().toString().padStart(2, '0');\nvar hours = date.getHours().toString().padStart(2, '0');\nvar minutes = date.getMinutes().toString().padStart(2, '0');\nvar seconds = date.getSeconds().toString().padStart(2, '0');\nvar dateMian = `${year}/${month}/${day}`;\nvar time = `${hours}:${minutes}:${seconds}`;\nvar datestamp = global.get(\"config.state.datestamp\");\nlet hoursNum = Number(hours);\n    globalSet();\n////////////////////////////// end function set date ///////////////////////////////////////\nif (hoursNum >= 8 && hoursNum <= 23) {\n    let dateset = filename(date);\n    var datenow = dateNow(date);\n    global.set(\"config.state.date_data\", dateset);\n} else {\n    let dateset = filename(previousDate);\n    var datenow = dateNow(previousDate);\n    global.set(\"config.state.date_data\", dateset);\n}\n\nif (datestamp) {\n    if (datenow != datestamp) {\n        resetValues();\n        // global.set(\"report\", true);\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    } else {\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    }\n} else {\n    global.set(\"config.state.datestamp\", datenow);\n}\n    global.set(\"config.state.datenow\", datenow);\n    msg.payload = {\n        fill: \"green\",\n        shape: \"ring\",\n        text: `DATESTAMP:${datestamp} DATE${day}/${month}/${year} TIME:${time}`\n    };\n    return msg;\n\nfunction filename(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}\n\nfunction resetValues(){\n    var meter = new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    var working = new Array(24).fill(0);\n    global.set(\"values.working\", working);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.take.min\", 0);\n    global.set(\"values.maintake.take.max\", 0);\n    global.set(\"config.state.upt.nla\", 0);\n    global.set(\"config.state.upt.ota\", 0);\n    global.set(\"config.state.upt.totalA\", 0);\n    global.set(\"config.state.upt.nlb\", 0);\n    global.set(\"config.state.upt.otb\", 0);\n    global.set(\"config.state.upt.totalB\", 0);\n}\n\nfunction globalSet(){\n    global.set(\"config.datetime.date\", dateMian);\n    global.set(\"config.datetime.day\", day);\n    global.set(\"config.datetime.month\", month);\n    global.set(\"config.datetime.year\", year);\n    global.set(\"config.datetime.time\", time);\n    global.set(\"config.datetime.hour\", hours);\n    global.set(\"config.datetime.minute\", minutes);\n    global.set(\"config.datetime.second\", seconds);\n}\n\nfunction dateNow(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1489,7 +1515,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "aa3c99c011a59edd",
         "name": "fig value",
-        "func": "msg.payload = {\n    \"state\": {\n        \"datestamp\": global.get(\"config.state.datestamp\"),\n        \"hourstamp\": global.get(\"config.state.hourstamp\"),\n        \"changehour\": global.get(\"config.state.changehour\"),\n        \"index\": global.get(\"config.state.index\"),\n        \"ip\": global.get(\"config.state.ip\"),\n        \"version\": global.get(\"version\") || \"-\"\n    },\n    \"values\": {\n        \"maintake\": {\n            \"main\": {\n                \"min\": global.get(\"values.maintake.main.min\"),\n                \"max\": global.get(\"values.maintake.main.max\")\n            },\n            \"take\": {\n                \"min\": global.get(\"values.maintake.take.min\"),\n                \"max\": global.get(\"values.maintake.take.max\")\n            }\n        },\n        \"meter\": global.get(\"values.meter\"),\n        \"working\": global.get(\"values.working\")\n    }\n}\nreturn msg;",
+        "func": "msg.payload = {\n    \"state\": {\n        \"datestamp\": global.get(\"config.state.datestamp\"),\n        \"hourstamp\": global.get(\"config.state.hourstamp\"),\n        \"changehour\": global.get(\"config.state.changehour\"),\n        \"upt\":{\n            \"nla\": global.get(\"config.state.upt.nla\") || 0,\n            \"ota\": global.get(\"config.state.upt.ota\") || 0,\n            \"totalA\": global.get(\"config.state.upt.totalA\") || 0,\n            \"nlb\": global.get(\"config.state.upt.nlb\") || 0,\n            \"otb\": global.get(\"config.state.upt.otb\") || 0,\n            \"totalB\": global.get(\"config.state.upt.totalB\") || 0,\n            \"total\": global.get(\"config.state.upt.total\") || 0,\n        },\n        \"index\": global.get(\"config.state.index\"),\n        \"ip\": global.get(\"config.state.ip\"),\n        \"version\": global.get(\"version\") || \"-\"\n    },\n    \"values\": {\n        \"maintake\": {\n            \"main\": {\n                \"min\": global.get(\"values.maintake.main.min\"),\n                \"max\": global.get(\"values.maintake.main.max\")\n            },\n            \"take\": {\n                \"min\": global.get(\"values.maintake.take.min\"),\n                \"max\": global.get(\"values.maintake.take.max\")\n            }\n        },\n        \"meter\": global.get(\"values.meter\"),\n        \"working\": global.get(\"values.working\")\n    }\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1633,7 +1659,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "341bdc3e7e68ae46",
         "name": "Set value",
-        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour );\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working;\n    global.set(\"values.working\", working);",
+        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour);\n    global.set(\"config.state.upt.total\", payload.state.upt.total);\n    global.set(\"config.state.upt.nla\", payload.state.upt.nla);\n    global.set(\"config.state.upt.ota\", payload.state.upt.ota);\n    global.set(\"config.state.upt.totalA\", payload.state.upt.totalA);\n    global.set(\"config.state.upt.nlb\", payload.state.upt.nlb);\n    global.set(\"config.state.upt.otb\", payload.state.upt.otb);\n    global.set(\"config.state.upt.totalB\", payload.state.upt.totalB);\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working;\n    global.set(\"values.working\", working);\n    ",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1670,7 +1696,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "341bdc3e7e68ae46",
         "name": "function 10",
-        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour );\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working;\n    global.set(\"values.working\", working);\n    return msg;",
+        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour);\n    global.set(\"config.state.upt.total\", payload.state.upt.total);\n    global.set(\"config.state.upt.nla\", payload.state.upt.nla);\n    global.set(\"config.state.upt.ota\", payload.state.upt.ota);\n    global.set(\"config.state.upt.totalA\", payload.state.upt.totalA);\n    global.set(\"config.state.upt.nlb\", payload.state.upt.nlb);\n    global.set(\"config.state.upt.otb\", payload.state.upt.otb);\n    global.set(\"config.state.upt.totalB\", payload.state.upt.totalB);\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter);\n    let working = payload.values.working;\n    global.set(\"values.working\", working);\n    return msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2506,7 +2532,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "f1016d6dfc436da7",
         "name": "data Log",
-        "func": "const payload = msg.payload;\nconst date = payload.date;\nconst time = payload.time;\nconst timestamp = payload.timestamp;\nconst ip = payload.ip;\nconst date_data = payload.date_data;\n\n// values \nconst main = payload.values.maintake.main;\nconst take = payload.values.maintake.take;\nconst meter = payload.values.meter;\nconst working = payload.values.working;\nconst total = payload.values.total;\n\nmsg.payload = {\n    'date': date,\n    'time': time,\n    'timestamp': timestamp,\n    'ip': ip,\n    'date_data': date_data,\n    'total_meter': total.meter.total,\n    'meterNLA': total.meter.NLA,\n    'meterNLB': total.meter.NLB,\n    'meterOTA': total.meter.OTA,\n    'meterOTB': total.meter.OTB,\n    'm_0': meter[0],\n    'm_1': meter[1],\n    'm_2': meter[2],\n    'm_3': meter[3],\n    'm_4': meter[4],\n    'm_5': meter[5],\n    'm_6': meter[6],\n    'm_7': meter[7],\n    'm_8': meter[8],\n    'm_9': meter[9],\n    'm_10': meter[10],\n    'm_11': meter[11],\n    'm_12': meter[12],\n    'm_13': meter[13],\n    'm_14': meter[14],\n    'm_15': meter[15],\n    'm_16': meter[16],\n    'm_17': meter[17],\n    'm_18': meter[18],\n    'm_19': meter[19],\n    'm_20': meter[20],\n    'm_21': meter[21],\n    'm_22': meter[22],\n    'm_23': meter[23],\n    'total_working': total.working.total,\n    'workingNLA': total.working.NLA,\n    'workingNLB': total.working.NLB,\n    'workingOTA': total.working.OTA,\n    'workingOTB': total.working.OTB,\n    'w_0': working[0],\n    'w_1': working[1],\n    'w_2': working[2],\n    'w_3': working[3],\n    'w_4': working[4],\n    'w_5': working[5],\n    'w_6': working[6],\n    'w_7': working[7],\n    'w_8': working[8],\n    'w_9': working[9],\n    'w_10': working[10],\n    'w_11': working[11],\n    'w_12': working[12],\n    'w_13': working[13],\n    'w_14': working[14],\n    'w_15': working[15],\n    'w_16': working[16],\n    'w_17': working[17],\n    'w_18': working[18],\n    'w_19': working[19],\n    'w_20': working[20],\n    'w_21': working[21],\n    'w_22': working[22],\n    'w_23': working[23],\n    'main_now': main.now,\n    'main_min': main.min,\n    'main_max': main.max,\n    'take_now': take.now,\n    'take_min': take.min,\n    'take_max': take.max,\n}\nreturn msg;",
+        "func": "const payload = msg.payload;\nconst date = payload.date;\nconst time = payload.time;\nconst timestamp = payload.timestamp;\nconst ip = payload.ip;\nconst date_data = payload.date_data;\nconst upt = payload.upt;\n\n// values \nconst main = payload.values.maintake.main;\nconst take = payload.values.maintake.take;\nconst meter = payload.values.meter;\nconst working = payload.values.working;\nconst total = payload.values.total;\n\nmsg.payload = {\n    'date': date,\n    'time': time,\n    'timestamp': timestamp,\n    'ip': ip,\n    'date_data': date_data,\n    'total_meter': total.meter.total,\n    'total_meterA': total.meter.totalA,\n    'total_meterB': total.meter.totalB,\n    'meterNLA': total.meter.nla,\n    'meterNLB': total.meter.nlb,\n    'meterOTA': total.meter.ota,\n    'meterOTB': total.meter.otb,\n    'm_0': meter[0],\n    'm_1': meter[1],\n    'm_2': meter[2],\n    'm_3': meter[3],\n    'm_4': meter[4],\n    'm_5': meter[5],\n    'm_6': meter[6],\n    'm_7': meter[7],\n    'm_8': meter[8],\n    'm_9': meter[9],\n    'm_10': meter[10],\n    'm_11': meter[11],\n    'm_12': meter[12],\n    'm_13': meter[13],\n    'm_14': meter[14],\n    'm_15': meter[15],\n    'm_16': meter[16],\n    'm_17': meter[17],\n    'm_18': meter[18],\n    'm_19': meter[19],\n    'm_20': meter[20],\n    'm_21': meter[21],\n    'm_22': meter[22],\n    'm_23': meter[23],\n    'total_working': total.working.total,\n    'total_workingA': total.working.totalA,\n    'total_workingB': total.working.totalB,\n    'workingNLA': total.working.nla,\n    'workingNLB': total.working.nlb,\n    'workingOTA': total.working.ota,\n    'workingOTB': total.working.otb,\n    'w_0': working[0],\n    'w_1': working[1],\n    'w_2': working[2],\n    'w_3': working[3],\n    'w_4': working[4],\n    'w_5': working[5],\n    'w_6': working[6],\n    'w_7': working[7],\n    'w_8': working[8],\n    'w_9': working[9],\n    'w_10': working[10],\n    'w_11': working[11],\n    'w_12': working[12],\n    'w_13': working[13],\n    'w_14': working[14],\n    'w_15': working[15],\n    'w_16': working[16],\n    'w_17': working[17],\n    'w_18': working[18],\n    'w_19': working[19],\n    'w_20': working[20],\n    'w_21': working[21],\n    'w_22': working[22],\n    'w_23': working[23],\n    'main_now': main.now,\n    'main_min': main.min,\n    'main_max': main.max,\n    'take_now': take.now,\n    'take_min': take.min,\n    'take_max': take.max,\n    'upTimetotal': upt.total,\n    'upTimetotalA': upt.totalA,\n    'upTimetotalB': upt.totalB,\n    'upTimenla': upt.nla,\n    'upTimeota': upt.ota,\n    'upTimenlb': upt.nlb,\n    'upTimeotb': upt.otb,\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2526,7 +2552,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "f1016d6dfc436da7",
         "name": "data Log",
-        "func": "const payload = msg.payload;\nconst date = payload.date;\nconst time = payload.time;\nconst timestamp = payload.timestamp;\nconst ip = payload.ip;\nconst date_data = payload.date_data;\n\n// values \nconst main = payload.values.maintake.main;\nconst take = payload.values.maintake.take;\nconst meter = payload.values.meter;\nconst working = payload.values.working;\nconst total = payload.values.total;\n\nmsg.payload = {\n    'date': date,\n    'time': time,\n    'timestamp': timestamp,\n    'ip': ip,\n    'date_data': date_data,\n    'total_meter': total.meter.total,\n    'meterNLA': total.meter.NLA,\n    'meterNLB': total.meter.NLB,\n    'meterOTA': total.meter.OTA,\n    'meterOTB': total.meter.OTB,\n    'm_0': meter[0],\n    'm_1': meter[1],\n    'm_2': meter[2],\n    'm_3': meter[3],\n    'm_4': meter[4],\n    'm_5': meter[5],\n    'm_6': meter[6],\n    'm_7': meter[7],\n    'm_8': meter[8],\n    'm_9': meter[9],\n    'm_10': meter[10],\n    'm_11': meter[11],\n    'm_12': meter[12],\n    'm_13': meter[13],\n    'm_14': meter[14],\n    'm_15': meter[15],\n    'm_16': meter[16],\n    'm_17': meter[17],\n    'm_18': meter[18],\n    'm_19': meter[19],\n    'm_20': meter[20],\n    'm_21': meter[21],\n    'm_22': meter[22],\n    'm_23': meter[23],\n    'total_working': total.working.total,\n    'workingNLA': total.working.NLA,\n    'workingNLB': total.working.NLB,\n    'workingOTA': total.working.OTA,\n    'workingOTB': total.working.OTB,\n    'w_0': working[0],\n    'w_1': working[1],\n    'w_2': working[2],\n    'w_3': working[3],\n    'w_4': working[4],\n    'w_5': working[5],\n    'w_6': working[6],\n    'w_7': working[7],\n    'w_8': working[8],\n    'w_9': working[9],\n    'w_10': working[10],\n    'w_11': working[11],\n    'w_12': working[12],\n    'w_13': working[13],\n    'w_14': working[14],\n    'w_15': working[15],\n    'w_16': working[16],\n    'w_17': working[17],\n    'w_18': working[18],\n    'w_19': working[19],\n    'w_20': working[20],\n    'w_21': working[21],\n    'w_22': working[22],\n    'w_23': working[23],\n    'main_now': main.now,\n    'main_min': main.min,\n    'main_max': main.max,\n    'take_now': take.now,\n    'take_min': take.min,\n    'take_max': take.max,\n}\nreturn msg;",
+        "func": "const payload = msg.payload;\nconst date = payload.date;\nconst time = payload.time;\nconst timestamp = payload.timestamp;\nconst ip = payload.ip;\nconst date_data = payload.date_data;\nconst upt = payload.upt;\n\n// values \nconst main = payload.values.maintake.main;\nconst take = payload.values.maintake.take;\nconst meter = payload.values.meter;\nconst working = payload.values.working;\nconst total = payload.values.total;\n\nmsg.payload = {\n    'date': date,\n    'time': time,\n    'timestamp': timestamp,\n    'ip': ip,\n    'date_data': date_data,\n    'total_meter': total.meter.total,\n    'total_meterA': total.meter.totalA,\n    'total_meterB': total.meter.totalB,\n    'meterNLA': total.meter.nla,\n    'meterNLB': total.meter.nlb,\n    'meterOTA': total.meter.ota,\n    'meterOTB': total.meter.otb,\n    'm_0': meter[0],\n    'm_1': meter[1],\n    'm_2': meter[2],\n    'm_3': meter[3],\n    'm_4': meter[4],\n    'm_5': meter[5],\n    'm_6': meter[6],\n    'm_7': meter[7],\n    'm_8': meter[8],\n    'm_9': meter[9],\n    'm_10': meter[10],\n    'm_11': meter[11],\n    'm_12': meter[12],\n    'm_13': meter[13],\n    'm_14': meter[14],\n    'm_15': meter[15],\n    'm_16': meter[16],\n    'm_17': meter[17],\n    'm_18': meter[18],\n    'm_19': meter[19],\n    'm_20': meter[20],\n    'm_21': meter[21],\n    'm_22': meter[22],\n    'm_23': meter[23],\n    'total_working': total.working.total,\n    'total_workingA': total.working.totalA,\n    'total_workingB': total.working.totalB,\n    'workingNLA': total.working.nla,\n    'workingNLB': total.working.nlb,\n    'workingOTA': total.working.ota,\n    'workingOTB': total.working.otb,\n    'w_0': working[0],\n    'w_1': working[1],\n    'w_2': working[2],\n    'w_3': working[3],\n    'w_4': working[4],\n    'w_5': working[5],\n    'w_6': working[6],\n    'w_7': working[7],\n    'w_8': working[8],\n    'w_9': working[9],\n    'w_10': working[10],\n    'w_11': working[11],\n    'w_12': working[12],\n    'w_13': working[13],\n    'w_14': working[14],\n    'w_15': working[15],\n    'w_16': working[16],\n    'w_17': working[17],\n    'w_18': working[18],\n    'w_19': working[19],\n    'w_20': working[20],\n    'w_21': working[21],\n    'w_22': working[22],\n    'w_23': working[23],\n    'main_now': main.now,\n    'main_min': main.min,\n    'main_max': main.max,\n    'take_now': take.now,\n    'take_min': take.min,\n    'take_max': take.max,\n    'upTimetotal': upt.total,\n    'upTimetotalA': upt.totalA,\n    'upTimetotalB': upt.totalB,\n    'upTimenla': upt.nla,\n    'upTimeota': upt.ota,\n    'upTimenlb': upt.nlb,\n    'upTimeotb': upt.otb,\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2551,7 +2577,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "hdrout": "all",
         "multi": "one",
         "ret": "\\r\\n",
-        "temp": "date,time,timestamp,ip,date_data,total_meter,meterNLA,meterOTA,meterNLB,meterOTB,m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11,m_12,m_13,m_14,m_15,m_16,m_17,m_18,m_19,m_20,m_21,m_22,m_23,total_working,workingNLA,workingOTA,workingNLB,workingOTB,w_0,w_1,w_2,w_3,w_4,w_5,w_6,w_7,w_8,w_9,w_10,w_11,w_12,w_13,w_14,w_15,w_16,w_17,w_18,w_19,w_20,w_21,w_22,w_23,main_now,main_min,main_max,take_now,take_min,take_max",
+        "temp": "date,time,timestamp,ip,date_data,total_meter,meterNLA,meterOTA,total_meterA,meterNLB,meterOTB,total_meterB,m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11,m_12,m_13,m_14,m_15,m_16,m_17,m_18,m_19,m_20,m_21,m_22,m_23,total_working,workingNLA,workingOTA,total_workingA,workingNLB,workingOTB,total_workingB,w_0,w_1,w_2,w_3,w_4,w_5,w_6,w_7,w_8,w_9,w_10,w_11,w_12,w_13,w_14,w_15,w_16,w_17,w_18,w_19,w_20,w_21,w_22,w_23,main_now,main_min,main_max,take_now,take_min,take_max,upTimetotal,upTimetotalA,upTimetotalB,upTimenla,upTimeota,upTimenlb,upTimeotb",
         "skip": "0",
         "strings": true,
         "include_empty_strings": "",
@@ -2573,7 +2599,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "hdrout": "none",
         "multi": "one",
         "ret": "\\r\\n",
-        "temp": "date,time,timestamp,ip,date_data,total_meter,meterNLA,meterOTA,meterNLB,meterOTB,m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11,m_12,m_13,m_14,m_15,m_16,m_17,m_18,m_19,m_20,m_21,m_22,m_23,total_working,workingNLA,workingOTA,workingNLB,workingOTB,w_0,w_1,w_2,w_3,w_4,w_5,w_6,w_7,w_8,w_9,w_10,w_11,w_12,w_13,w_14,w_15,w_16,w_17,w_18,w_19,w_20,w_21,w_22,w_23,main_now,main_min,main_max,take_now,take_min,take_max",
+        "temp": "date,time,timestamp,ip,date_data,total_meter,meterNLA,meterOTA,total_meterA,meterNLB,meterOTB,total_meterB,m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11,m_12,m_13,m_14,m_15,m_16,m_17,m_18,m_19,m_20,m_21,m_22,m_23,total_working,workingNLA,workingOTA,total_workingA,workingNLB,workingOTB,total_workingB,w_0,w_1,w_2,w_3,w_4,w_5,w_6,w_7,w_8,w_9,w_10,w_11,w_12,w_13,w_14,w_15,w_16,w_17,w_18,w_19,w_20,w_21,w_22,w_23,main_now,main_min,main_max,take_now,take_min,take_max,upTimetotal,upTimetotalA,upTimetotalB,upTimenla,upTimeota,upTimenlb,upTimeotb",
         "skip": "0",
         "strings": true,
         "include_empty_strings": "",
@@ -3308,6 +3334,54 @@ cat << 'EOF' > $user/.node-red/flows.json
         ]
     },
     {
+        "id": "4d414fcfa4d1f563",
+        "type": "inject",
+        "z": "c9bf91fd5c385f43",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "6",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "d6a67c89385322a2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d6a67c89385322a2",
+        "type": "function",
+        "z": "c9bf91fd5c385f43",
+        "name": "UPTIME",
+        "func": "let upTimenla = global.get(\"config.state.upt.nla\") || 0;\nlet upTimeota = global.get(\"config.state.upt.ota\") || 0;\nlet upTimetotalA = global.get(\"config.state.upt.totalA\") || 0;\nlet upTimenlb = global.get(\"config.state.upt.nlb\") || 0;\nlet upTimeotb = global.get(\"config.state.upt.otb\") || 0;\nlet upTimetotalB = global.get(\"config.state.upt.totalB\") || 0;\n\nlet upTimetotal = global.get(\"config.state.upt.total\") || 0;\nconst sec = 1;\nvar secNow;\nlet hour = global.get(\"config.datetime.hour\");\n    hour = Number(hour);\n    if(hour >= 8 && hour <= 17){\n        global.set(\"config.state.upt.nla\", upTimenla + sec);\n        secNow = upTimenla;\n    }else if(hour >= 18 && hour <= 19){\n        global.set(\"config.state.upt.ota\", upTimeota + sec);\n        secNow = upTimeota;\n    }else if(hour >= 20 && hour <= 5){\n        global.set(\"config.state.upt.nlb\", upTimenlb + sec); \n        secNow = upTimenlb;\n    }else if(hour >= 6 && hour <= 7){\n        global.set(\"config.state.upt.otb\", upTimeotb + sec);\n        secNow = upTimeotb;\n    }\n    upTimetotalA = upTimenla + upTimeota;\n        global.set(\"config.state.upt.totalA\", upTimetotalA);\n    upTimetotalB = upTimenlb + upTimeotb;\n        global.set(\"config.state.upt.totalB\", upTimetotalB);\n    upTimetotal = upTimetotalA + upTimetotalB;\n        global.set(\"config.state.upt.total\", upTimetotal);\nmsg.payload = {\n    'fill': 'yellow',\n    'shape': 'dot',\n    'text': `Second: ${secNow} | nla: ${setTime(upTimenla)} | ota: ${setTime(upTimeota)} | nlb: ${setTime(upTimenlb)} | otb: ${setTime(upTimeotb)} | total: ${setTime(upTimetotal)}`\n};\nreturn msg;\n\nfunction setTime(second){\n    let hours = Math.floor(second / 3600)\n    let minutes = Math.floor((second % 3600) / 60)\n    let seconds = Math.floor((second % 60) / 1)\n    let format = hours + ':' + minutes + ':' + seconds\n    return format;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "9827f5270df78aba",
         "type": "subflow:df4a94479416f0c4",
         "z": "777823ab3e1fee97",
@@ -3447,7 +3521,6 @@ cat << 'EOF' > $user/.node-red/flows.json
         "id": "a241e24d2a8bd154",
         "type": "subflow:e226ede58ea4b202",
         "z": "777823ab3e1fee97",
-        "d": true,
         "g": "451150a92cfdb00f",
         "name": "",
         "x": 1080,
@@ -3488,7 +3561,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "z": "777823ab3e1fee97",
         "g": "9036c777fe360381",
         "name": "Values",
-        "func": "msg.path = `/home/orangepi/loom/data/log.csv`;\nmsg.file = global.get(\"config.state.file\");\nconst meter = global.get(\"values.meter\");\nconst working = global.get(\"values.working\");\n\nconst positionNLA = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];\nconst positionOTA = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];\nconst positionNLB = [20, 21, 22, 23, 0, 1, 2, 3, 4, 5];\nconst positionOTB = [20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7];\n\n\nlet meterNLA = positionNLA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.NLA\", meterNLA);\nlet meterOTA = positionOTA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.OTA\", meterOTA);\n\nlet meterNLB = positionNLB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.NLB\", meterNLB);\nlet meterOTB = positionOTB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.OTB\", meterOTB);\n\nlet total_meter = meterOTA + meterOTB || 0;\nglobal.set(\"values.total.meter.total\", total_meter);\n\nlet workingNLA = positionNLA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.NLA\", workingNLA);\nlet workingOTA = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.OTA\", workingOTA);\n\nlet workingNLB = positionNLB.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.NLB\", workingNLB);\nlet workingOTB = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.OTB\", workingOTB);\n\nlet total_working = workingOTA + workingOTB || 0;\nglobal.set(\"values.total.working.total\", total_working);\n\nmsg.payload = {\n    'date': global.get(\"config.datetime.date\") || 0,\n    'time': global.get(\"config.datetime.time\") || 0,\n    'timestamp': global.get(\"config.datetime.timestamp\") || 0,\n    'ip': global.get(\"config.state.ip\"),\n    'date_data': global.get(\"config.state.date_data\") || 0,\n    \"values\":{\n        \"maintake\":{\n            \"main\": global.get(\"values.maintake.main\") || 0,\n            \"take\": global.get(\"values.maintake.take\") || 0,\n        },\n        \"meter\": meter  || 0,\n        \"working\": working || 0,\n        \"total\":{\n            \"meter\":{\n                \"NLA\": global.get(\"values.total.meter.NLA\") || 0,\n                \"NLB\": global.get(\"values.total.meter.NLB\") || 0,\n                \"OTA\": global.get(\"values.total.meter.OTA\") || 0,\n                \"OTB\": global.get(\"values.total.meter.OTB\") || 0,\n                \"total\": global.get(\"values.total.meter.total\") || 0\n            },\n            \"working\":{\n                \"NLA\": global.get(\"values.total.working.NLA\") || 0,\n                \"NLB\": global.get(\"values.total.working.NLB\") || 0,\n                \"OTA\": global.get(\"values.total.working.OTA\") || 0,\n                \"OTB\": global.get(\"values.total.working.OTB\") || 0,\n                \"total\": global.get(\"values.total.working.total\") || 0\n            }\n        }\n    }\n}\nnode.status({fill:\"blue\",shape:\"dot\",text: global.get(\"config.datetime.time\")});\nreturn msg;",
+        "func": "msg.path = `/home/orangepi/loom/data/log.csv`;\nmsg.file = global.get(\"config.state.file\");\nconst meter = global.get(\"values.meter\");\nconst working = global.get(\"values.working\");\n\nconst positionNLA = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];\nconst positionOTA = [18, 19];\nconst positionNLB = [20, 21, 22, 23, 0, 1, 2, 3, 4, 5];\nconst positionOTB = [6, 7];\n\n\nlet meterNLA = positionNLA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.nla\", meterNLA);\nlet meterOTA = positionOTA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.ota\", meterOTA);\nlet totalA = meterNLA + meterOTA;\nglobal.set(\"values.total.meter.totalA\", totalA);\n\nlet meterNLB = positionNLB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.nlb\", meterNLB);\nlet meterOTB = positionOTB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.otb\", meterOTB);\nlet totalB = meterNLB + meterOTB;\nglobal.set(\"values.total.meter.totalB\", totalB);\n\nlet total_meter = totalA + totalB || 0;\nglobal.set(\"values.total.meter.total\", total_meter);\n\nlet workingNLA = positionNLA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.nla\", workingNLA);\nlet workingOTA = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.ota\", workingOTA);\nlet totalwA = workingNLA + workingOTA;\nglobal.set(\"values.total.working.totalA\", totalwA);\n\nlet workingNLB = positionNLB.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.nlb\", workingNLB);\nlet workingOTB = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.otb\", workingOTB);\nlet totalwB = workingNLB + workingOTB;\nglobal.set(\"values.total.working.totalB\", totalwB);\n\nlet total_working = totalwA + totalwB || 0;\nglobal.set(\"values.total.working.total\", total_working);\n\nmsg.payload = {\n    'date': global.get(\"config.datetime.date\") || 0,\n    'time': global.get(\"config.datetime.time\") || 0,\n    'timestamp': global.get(\"config.datetime.timestamp\") || 0,\n    'ip': global.get(\"config.state.ip\"),\n    'date_data': global.get(\"config.state.date_data\") || 0,\n    'upt': {\n        'total': global.get(\"config.state.upt.total\"),\n        'totalA': global.get(\"config.state.upt.totalA\"),\n        'totalB': global.get(\"config.state.upt.totalB\"),\n        'nla': global.get(\"config.state.upt.nla\"),\n        'ota': global.get(\"config.state.upt.ota\"),\n        'nlb': global.get(\"config.state.upt.nlb\"),\n        'otb': global.get(\"config.state.upt.otb\"),\n    },\n    \"values\":{\n        \"maintake\":{\n            \"main\": global.get(\"values.maintake.main\") || 0,\n            \"take\": global.get(\"values.maintake.take\") || 0,\n        },\n        \"meter\": meter  || 0,\n        \"working\": working || 0,\n        \"total\":{\n            \"meter\":{\n                \"nla\": global.get(\"values.total.meter.nla\") || 0,\n                \"nlb\": global.get(\"values.total.meter.nlb\") || 0,\n                \"ota\": global.get(\"values.total.meter.ota\") || 0,\n                \"otb\": global.get(\"values.total.meter.otb\") || 0,\n                \"totala\": global.get(\"values.total.meter.totalA\") || 0,\n                \"totalb\": global.get(\"values.total.meter.totalB\") || 0,\n                \"total\": global.get(\"values.total.meter.total\") || 0,\n            },\n            \"working\":{\n                \"nla\": global.get(\"values.total.working.nla\") || 0,\n                \"nlb\": global.get(\"values.total.working.nlb\") || 0,\n                \"ota\": global.get(\"values.total.working.ota\") || 0,\n                \"otb\": global.get(\"values.total.working.otb\") || 0,\n                \"totala\": global.get(\"values.total.working.totalA\") || 0,\n                \"totalb\": global.get(\"values.total.working.totalB\") || 0,\n                \"total\": global.get(\"values.total.working.total\") || 0,\n            }\n        }\n    }\n}\nnode.status({fill:\"blue\",shape:\"dot\",text: global.get(\"config.datetime.time\")});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4399,6 +4472,16 @@ cat << 'EOF' > $user/.node-red/flows.json
         ],
         "icon": "node-red/trigger.svg",
         "l": false
+    },
+    {
+        "id": "ac29116d0411fcab",
+        "type": "subflow:c9bf91fd5c385f43",
+        "z": "777823ab3e1fee97",
+        "g": "6be6c492a2953951",
+        "name": "",
+        "x": 150,
+        "y": 540,
+        "wires": []
     }
 ]
 EOF
