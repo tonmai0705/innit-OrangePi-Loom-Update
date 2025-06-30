@@ -36,11 +36,11 @@ fi
 EOF
 chmod +x $user/loom/scriptConfig.sh
 
-if [ ! -f "$user/loom/config.txt" ]; then
+#if [ ! -f "$user/loom/config.txt" ]; then
 cat << 'EOF' > $user/loom/config.txt
 {"state":{"datestamp":"-","changehour":-,"upt":{"nla":0,"ota":0,"totalA":0,"nlb":0,"otb":0,"totalB":0,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
 EOF
-fi
+#fi
 
 if [ -f "$user/loom/data/log.csv" ]; then
 rm $user/loom/data/log.csv
