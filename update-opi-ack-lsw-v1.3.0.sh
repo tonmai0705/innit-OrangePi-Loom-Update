@@ -2278,7 +2278,8 @@ cat << 'EOF' > $user/.node-red/flows.json
         "y": 120,
         "wires": [
             [
-                "2cfa0e1ee1913505"
+                "2cfa0e1ee1913505",
+                "67854f70e118416c"
             ]
         ],
         "l": false
@@ -2383,6 +2384,145 @@ cat << 'EOF' > $user/.node-red/flows.json
         "wires": [
             [
                 "1cb42bbca3762b28"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4f891f3db959c16b",
+        "type": "http request",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "PC Office",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 640,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc79ff833f6c7a57",
+        "type": "function",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "PC Office",
+        "func": "msg.url = `http://192.168.1.105:1880/api/product/device-opi-datasource-${global.get(\"source\")}`\nmsg.method = \"POST\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 535,
+        "y": 180,
+        "wires": [
+            [
+                "4f891f3db959c16b",
+                "220b8e3652de1e40"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "a7375655513b6318",
+        "type": "http request",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "PC Cloud",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 640,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9cbf9c116349360",
+        "type": "function",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "function 24",
+        "func": "msg.url = `http://147.50.230.159:1880/api/product/device-opi-datasource-${global.get(\"source\")}`\nmsg.method = \"POST\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 535,
+        "y": 240,
+        "wires": [
+            [
+                "a7375655513b6318"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "67854f70e118416c",
+        "type": "delay",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 475,
+        "y": 180,
+        "wires": [
+            [
+                "bc79ff833f6c7a57"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "220b8e3652de1e40",
+        "type": "delay",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 475,
+        "y": 240,
+        "wires": [
+            [
+                "c9cbf9c116349360"
             ]
         ],
         "l": false
