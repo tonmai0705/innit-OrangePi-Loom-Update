@@ -1,5 +1,7 @@
 #!/bin/bash
 sudo apt update && sudo apt -y upgrade
+echo " [ACK-IoT Orange Pi Update Version] กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
+npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 user=$HOME
 #2025-06-30|11:27AM
 if [ -d "$user/loom" ]; then
@@ -4655,8 +4657,6 @@ EOF
         chmod +x $user/updateandreboot/reb.sh
 
 fi
-echo " [ACK-IoT Orange Pi Update Version] กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
-npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
 
 echo " [ACK-IoT Orange Pi Update Version] ติดตั้ง @flowfuse/Dashboard 2.0 เรียบร้อย..."
 echo " [ACK-IoT Orange Pi Update Version] Orange Pi พร้อมทำงานแล้ว การอัพเดทเสร็จสำบูรณ์ กรุณารีสตาร์ทอุปกรณ์..."
