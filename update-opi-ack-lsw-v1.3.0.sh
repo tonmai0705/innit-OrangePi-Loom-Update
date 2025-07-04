@@ -752,6 +752,28 @@ cat << 'EOF' > $user/.node-red/flows.json
         }
     },
     {
+        "id": "062d9ee6cb5e367f",
+        "type": "subflow",
+        "name": "Sensor Check",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#87A980",
+        "status": {
+            "x": 370,
+            "y": 160,
+            "wires": [
+                {
+                    "id": "2a334b79d30a7edf",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
         "id": "451150a92cfdb00f",
         "type": "group",
         "z": "777823ab3e1fee97",
@@ -859,7 +881,8 @@ cat << 'EOF' > $user/.node-red/flows.json
             "b83a6608cf3531d8",
             "792452b6dfad242c",
             "72949a75b63686fd",
-            "ac29116d0411fcab"
+            "ac29116d0411fcab",
+            "fd6dded7e0aa82a2"
         ],
         "x": 44,
         "y": 39,
@@ -997,7 +1020,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "page": "20308079d89423ea",
         "width": "12",
         "height": 1,
-        "order": 1,
+        "order": 3,
         "showTitle": false,
         "className": "",
         "visible": "true",
@@ -1005,48 +1028,82 @@ cat << 'EOF' > $user/.node-red/flows.json
         "groupType": "default"
     },
     {
-        "id": "8e7f6254db5cbf83",
-        "type": "ui-spacer",
-        "group": "6da9956de8144acb",
-        "name": "ui_template.label.spacer",
-        "tooltip": "",
+        "id": "c8b6450989c369f5",
+        "type": "ui-group",
+        "name": "DateSelect",
+        "page": "20308079d89423ea",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "72adefdf7b5e4ced",
+        "type": "ui-group",
+        "name": "Cmd Update",
+        "page": "20308079d89423ea",
+        "width": 6,
+        "height": 1,
         "order": 2,
-        "width": 1,
-        "height": 1,
-        "className": ""
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
     },
     {
-        "id": "25265703d0dddb92",
-        "type": "ui-spacer",
-        "group": "6da9956de8144acb",
-        "name": "ui_template.label.spacer",
-        "tooltip": "",
-        "order": 5,
-        "width": 1,
-        "height": 1,
-        "className": ""
+        "id": "93ca67d43751815a",
+        "type": "ui-page",
+        "name": "Data Source",
+        "ui": "d6f3a7fd07525d85",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "93042030270d6867",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
     },
     {
-        "id": "13c0ebd3120ddbc4",
-        "type": "ui-spacer",
-        "group": "6da9956de8144acb",
-        "name": "ui_template.label.spacer",
-        "tooltip": "",
-        "order": 6,
-        "width": 1,
+        "id": "4d19f97e8673be96",
+        "type": "ui-group",
+        "name": "1",
+        "page": "93ca67d43751815a",
+        "width": 6,
         "height": 1,
-        "className": ""
-    },
-    {
-        "id": "43d0cf70856e7817",
-        "type": "ui-spacer",
-        "group": "6da9956de8144acb",
-        "name": "ui_template.label.spacer",
-        "tooltip": "",
-        "order": 8,
-        "width": 1,
-        "height": 1,
-        "className": ""
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
     },
     {
         "id": "5198508231fcf8a8",
@@ -2006,7 +2063,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "424004941bcb3307",
         "name": "API Power",
-        "func": "const index = global.get(\"config.state.index\");\n\nconst date = msg.payload[index].date;\nconst time = msg.payload[index].time;\nconst date_data = msg.payload[index].date_data;\nconst ip = msg.payload[index].ip;\nconst timestamp = msg.payload[index].timestamp;\n\nconst meter = [\n    msg.payload[index].m_0,\n    msg.payload[index].m_1,\n    msg.payload[index].m_2,\n    msg.payload[index].m_3,\n    msg.payload[index].m_4,\n    msg.payload[index].m_5,\n    msg.payload[index].m_6,\n    msg.payload[index].m_7,\n    msg.payload[index].m_8,\n    msg.payload[index].m_9,\n    msg.payload[index].m_10,\n    msg.payload[index].m_11,\n    msg.payload[index].m_12,\n    msg.payload[index].m_13,\n    msg.payload[index].m_14,\n    msg.payload[index].m_15,\n    msg.payload[index].m_16,\n    msg.payload[index].m_17,\n    msg.payload[index].m_18,\n    msg.payload[index].m_19,\n    msg.payload[index].m_20,\n    msg.payload[index].m_21,\n    msg.payload[index].m_22,\n    msg.payload[index].m_23,\n]\n\nconst working = [\n    msg.payload[index].w_0,\n    msg.payload[index].w_1,\n    msg.payload[index].w_2,\n    msg.payload[index].w_3,\n    msg.payload[index].w_4,\n    msg.payload[index].w_5,\n    msg.payload[index].w_6,\n    msg.payload[index].w_7,\n    msg.payload[index].w_8,\n    msg.payload[index].w_9,\n    msg.payload[index].w_10,\n    msg.payload[index].w_11,\n    msg.payload[index].w_12,\n    msg.payload[index].w_13,\n    msg.payload[index].w_14,\n    msg.payload[index].w_15,\n    msg.payload[index].w_16,\n    msg.payload[index].w_17,\n    msg.payload[index].w_18,\n    msg.payload[index].w_19,\n    msg.payload[index].w_20,\n    msg.payload[index].w_21,\n    msg.payload[index].w_22,\n    msg.payload[index].w_23,\n]\n\nconst API = {\n    'filesystem':{ \n        date: date, \n        time: time, \n        ip: ip, \n        date_data: date_data,\n        timestamp: timestamp,\n        'upTime': {\n            'total': global.get(\"config.state.upt.total\"),\n            'totalA': global.get(\"config.state.upt.totalA\"),\n            'totalB': global.get(\"config.state.upt.totalB\"),\n            'nla': global.get(\"config.state.upt.nla\"),\n            'ota': global.get(\"config.state.upt.ota\"),\n            'nlb': global.get(\"config.state.upt.nlb\"),\n            'otb': global.get(\"config.state.upt.otb\"),\n        }\n    },\n    'values':{\n        'meter': {\n            0: meter[0], 1: meter[1], 2: meter[2], 3: meter[3], 4: meter[4], 5: meter[5],\n            6: meter[6], 7: meter[7], 8: meter[8], 9: meter[9], 10: meter[10], 11: meter[11],\n            12: meter[12], 13: meter[13], 14: meter[14], 15: meter[15], 16: meter[16], 17: meter[17],\n            18: meter[18], 19: meter[19], 20: meter[20], 21: meter[21], 22: meter[22], 23: meter[23]\n        },\n        'working': {\n            0: working[0], 1: working[1], 2: working[2], 3: working[3], 4: working[4], 5: working[5],\n            6: working[6], 7: working[7], 8: working[8], 9: working[9], 10: working[10], 11: working[11],\n            12: working[12], 13: working[13], 14: working[14], 15: working[15], 16: working[16], 17: working[17],\n            18: working[18], 19: working[19], 20: working[20], 21: working[21], 22: working[22], 23: working[23]\n        },\n        'total':{\n            \"meter\":{\n                \"total\": msg.payload[index].total_meter,\n                \"totalA\": msg.payload[index].total_meterA,\n                \"totalB\": msg.payload[index].total_meterB,\n                \"NLA\": msg.payload[index].meterNLA,\n                \"NLB\": msg.payload[index].meterNLB,\n                \"OTA\": msg.payload[index].meterOTA,\n                \"OTB\": msg.payload[index].meterOTB,\n            },\n            \"working\":{\n                \"total\": msg.payload[index].total_working,\n                \"totalA\": msg.payload[index].total_workingA,\n                \"totalB\": msg.payload[index].total_workingB,\n                \"NLA\": msg.payload[index].workingNLA,\n                \"NLB\": msg.payload[index].workingNLB,\n                \"OTA\": msg.payload[index].workingOTA,\n                \"OTB\": msg.payload[index].workingOTB,\n            }\n        },\n        'maintake':{\n            'main':{\n                'now': msg.payload[index].main_now,\n                'min': msg.payload[index].main_min,\n                'max': msg.payload[index].main_max\n            },\n            'take':{\n                'now': msg.payload[index].take_now,\n                'min': msg.payload[index].take_min,\n                'max': msg.payload[index].take_max\n            }\n        }\n    }\n};\nmsg.payload = JSON.stringify(API);\nreturn msg",
+        "func": "const index = global.get(\"config.state.index\") || 0;\n\nconst date = msg.payload[index].date;\nconst time = msg.payload[index].time;\nconst date_data = msg.payload[index].date_data;\nconst ip = msg.payload[index].ip;\nconst timestamp = msg.payload[index].timestamp;\n\nconst meter = [\n    msg.payload[index].m_0,\n    msg.payload[index].m_1,\n    msg.payload[index].m_2,\n    msg.payload[index].m_3,\n    msg.payload[index].m_4,\n    msg.payload[index].m_5,\n    msg.payload[index].m_6,\n    msg.payload[index].m_7,\n    msg.payload[index].m_8,\n    msg.payload[index].m_9,\n    msg.payload[index].m_10,\n    msg.payload[index].m_11,\n    msg.payload[index].m_12,\n    msg.payload[index].m_13,\n    msg.payload[index].m_14,\n    msg.payload[index].m_15,\n    msg.payload[index].m_16,\n    msg.payload[index].m_17,\n    msg.payload[index].m_18,\n    msg.payload[index].m_19,\n    msg.payload[index].m_20,\n    msg.payload[index].m_21,\n    msg.payload[index].m_22,\n    msg.payload[index].m_23,\n]\n\nconst working = [\n    msg.payload[index].w_0,\n    msg.payload[index].w_1,\n    msg.payload[index].w_2,\n    msg.payload[index].w_3,\n    msg.payload[index].w_4,\n    msg.payload[index].w_5,\n    msg.payload[index].w_6,\n    msg.payload[index].w_7,\n    msg.payload[index].w_8,\n    msg.payload[index].w_9,\n    msg.payload[index].w_10,\n    msg.payload[index].w_11,\n    msg.payload[index].w_12,\n    msg.payload[index].w_13,\n    msg.payload[index].w_14,\n    msg.payload[index].w_15,\n    msg.payload[index].w_16,\n    msg.payload[index].w_17,\n    msg.payload[index].w_18,\n    msg.payload[index].w_19,\n    msg.payload[index].w_20,\n    msg.payload[index].w_21,\n    msg.payload[index].w_22,\n    msg.payload[index].w_23,\n]\n\nconst API = {\n    'filesystem':{ \n        date: date, \n        time: time, \n        ip: ip, \n        date_data: date_data,\n        timestamp: timestamp,\n        'upTime': {\n            'total': global.get(\"config.state.upt.total\"),\n            'totalA': global.get(\"config.state.upt.totalA\"),\n            'totalB': global.get(\"config.state.upt.totalB\"),\n            'nla': global.get(\"config.state.upt.nla\"),\n            'ota': global.get(\"config.state.upt.ota\"),\n            'nlb': global.get(\"config.state.upt.nlb\"),\n            'otb': global.get(\"config.state.upt.otb\"),\n        }\n    },\n    'values':{\n        'meter': {\n            0: meter[0], 1: meter[1], 2: meter[2], 3: meter[3], 4: meter[4], 5: meter[5],\n            6: meter[6], 7: meter[7], 8: meter[8], 9: meter[9], 10: meter[10], 11: meter[11],\n            12: meter[12], 13: meter[13], 14: meter[14], 15: meter[15], 16: meter[16], 17: meter[17],\n            18: meter[18], 19: meter[19], 20: meter[20], 21: meter[21], 22: meter[22], 23: meter[23]\n        },\n        'working': {\n            0: working[0], 1: working[1], 2: working[2], 3: working[3], 4: working[4], 5: working[5],\n            6: working[6], 7: working[7], 8: working[8], 9: working[9], 10: working[10], 11: working[11],\n            12: working[12], 13: working[13], 14: working[14], 15: working[15], 16: working[16], 17: working[17],\n            18: working[18], 19: working[19], 20: working[20], 21: working[21], 22: working[22], 23: working[23]\n        },\n        'total':{\n            \"meter\":{\n                \"total\": msg.payload[index].total_meter,\n                \"totalA\": msg.payload[index].total_meterA,\n                \"totalB\": msg.payload[index].total_meterB,\n                \"NLA\": msg.payload[index].meterNLA,\n                \"NLB\": msg.payload[index].meterNLB,\n                \"OTA\": msg.payload[index].meterOTA,\n                \"OTB\": msg.payload[index].meterOTB,\n            },\n            \"working\":{\n                \"total\": msg.payload[index].total_working,\n                \"totalA\": msg.payload[index].total_workingA,\n                \"totalB\": msg.payload[index].total_workingB,\n                \"NLA\": msg.payload[index].workingNLA,\n                \"NLB\": msg.payload[index].workingNLB,\n                \"OTA\": msg.payload[index].workingOTA,\n                \"OTB\": msg.payload[index].workingOTB,\n            }\n        },\n        'maintake':{\n            'main':{\n                'now': msg.payload[index].main_now,\n                'min': msg.payload[index].main_min,\n                'max': msg.payload[index].main_max\n            },\n            'take':{\n                'now': msg.payload[index].take_now,\n                'min': msg.payload[index].take_min,\n                'max': msg.payload[index].take_max\n            }\n        }\n    }\n};\nmsg.payload = JSON.stringify(API);\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2345,7 +2402,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "function",
         "z": "a6ecc454e1b3c0c3",
         "name": "Path",
-        "func": "var connected = global.get(\"config.state.connected\");\nvar row = global.get(\"config.state.row\");\nvar index = global.get(\"config.state.index\");\nmsg.path = \"/home/orangepi/loom/data/log.csv\";\nif (connected && (index < row)){\n    return msg;\n}",
+        "func": "var connected = global.get(\"config.state.connected\");\nvar row = global.get(\"config.state.row\");\nvar index = global.get(\"config.state.index\") || 0;\nmsg.path = \"/home/orangepi/loom/data/log.csv\";\nif (connected && (index < row)){\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2525,6 +2582,204 @@ cat << 'EOF' > $user/.node-red/flows.json
         "wires": [
             [
                 "c9cbf9c116349360"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "35f043d859b8937c",
+        "type": "ui-form",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "Source",
+        "group": "4d19f97e8673be96",
+        "label": "",
+        "order": 2,
+        "width": "4",
+        "height": 0,
+        "options": [
+            {
+                "label": "source",
+                "key": "source",
+                "type": "dropdown",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "source": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "",
+        "resetOnSubmit": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "passthru": false,
+        "dropdownOptions": [
+            {
+                "dropdown": "source",
+                "value": "1",
+                "label": "1"
+            },
+            {
+                "dropdown": "source",
+                "value": "2",
+                "label": "2"
+            },
+            {
+                "dropdown": "source",
+                "value": "3",
+                "label": "3"
+            },
+            {
+                "dropdown": "source",
+                "value": "4",
+                "label": "4"
+            },
+            {
+                "dropdown": "source",
+                "value": "5",
+                "label": "5"
+            },
+            {
+                "dropdown": "source",
+                "value": "6",
+                "label": "6"
+            },
+            {
+                "dropdown": "source",
+                "value": "7",
+                "label": "7"
+            },
+            {
+                "dropdown": "source",
+                "value": "8",
+                "label": "8"
+            },
+            {
+                "dropdown": "source",
+                "value": "9",
+                "label": "9"
+            }
+        ],
+        "x": 140,
+        "y": 440,
+        "wires": [
+            [
+                "388a61be8ad3f3fd"
+            ]
+        ]
+    },
+    {
+        "id": "6bda80ac4b036aac",
+        "type": "ui-text",
+        "z": "a6ecc454e1b3c0c3",
+        "group": "4d19f97e8673be96",
+        "order": 1,
+        "width": "2",
+        "height": "1",
+        "name": "Source",
+        "label": "Source : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a4dab5d4091589a0",
+        "type": "function",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "function 26",
+        "func": "msg.payload = global.get(\"source\") || \"-\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "6bda80ac4b036aac"
+            ]
+        ]
+    },
+    {
+        "id": "07a96f5ffd797c28",
+        "type": "inject",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "60",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 445,
+        "y": 400,
+        "wires": [
+            [
+                "a4dab5d4091589a0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "388a61be8ad3f3fd",
+        "type": "function",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "function 28",
+        "func": "msg.payload = msg.payload.source;\nvar source = Number(msg.payload)\nglobal.set(\"source\", source)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 440,
+        "wires": [
+            [
+                "51dc1c2d2107552d"
+            ]
+        ]
+    },
+    {
+        "id": "51dc1c2d2107552d",
+        "type": "file",
+        "z": "a6ecc454e1b3c0c3",
+        "name": "",
+        "filename": "/home/orangepi/loom/source.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 435,
+        "y": 440,
+        "wires": [
+            [
+                "a4dab5d4091589a0"
             ]
         ],
         "l": false
@@ -2973,9 +3228,9 @@ cat << 'EOF' > $user/.node-red/flows.json
         "type": "ui-form",
         "z": "9f979da7e8a5400d",
         "name": "Date Set",
-        "group": "6da9956de8144acb",
+        "group": "c8b6450989c369f5",
         "label": "Date Set",
-        "order": 7,
+        "order": 1,
         "width": "2",
         "height": "6",
         "options": [
@@ -3042,7 +3297,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "group": "6da9956de8144acb",
         "name": "Log",
         "label": "Log",
-        "order": 9,
+        "order": 1,
         "width": 0,
         "height": 0,
         "maxrows": 0,
@@ -3186,10 +3441,10 @@ cat << 'EOF' > $user/.node-red/flows.json
         "id": "a5a92509c611eeaa",
         "type": "ui-text-input",
         "z": "9f979da7e8a5400d",
-        "group": "6da9956de8144acb",
+        "group": "72adefdf7b5e4ced",
         "name": "",
         "label": "Version Update",
-        "order": 3,
+        "order": 2,
         "width": "2",
         "height": 0,
         "topic": "topic",
@@ -3219,10 +3474,10 @@ cat << 'EOF' > $user/.node-red/flows.json
         "id": "20096dec95d8ca8b",
         "type": "ui-button",
         "z": "9f979da7e8a5400d",
-        "group": "6da9956de8144acb",
+        "group": "72adefdf7b5e4ced",
         "name": "",
         "label": "Update",
-        "order": 4,
+        "order": 3,
         "width": "6",
         "height": 0,
         "emulateClick": false,
@@ -3319,7 +3574,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "id": "e7bae9c9943d4e7f",
         "type": "ui-text",
         "z": "9f979da7e8a5400d",
-        "group": "6da9956de8144acb",
+        "group": "72adefdf7b5e4ced",
         "order": 1,
         "width": "3",
         "height": 0,
@@ -3525,6 +3780,252 @@ cat << 'EOF' > $user/.node-red/flows.json
         "y": 80,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "b876448f3a68636e",
+        "type": "inject",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "40",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 145,
+        "y": 100,
+        "wires": [
+            [
+                "d254c4f3ec67d313",
+                "fa505a146959395d",
+                "2a334b79d30a7edf"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d254c4f3ec67d313",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "take up check",
+        "func": "const main = global.get(\"values.maintake.main.now\");\nlet alarmMain = flow.get(\"alarmMain\") || false;\nconst hour = global.get(\"config.datetime.hour\");\nconst otw = context.get(\"otw\") || \"-\" // otw: one time working\nalarmMain = hour == otw ? true : false;\nif(main > 0 && !alarmMain){\n    context.set(\"otw\", hour);\n    return msg; \n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 80,
+        "wires": [
+            [
+                "cafeef43fd6b7fd0"
+            ]
+        ]
+    },
+    {
+        "id": "938ff7e5f30f5df6",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "function 23",
+        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nconst main = global.get(\"values.maintake.main.now\");\nif (main > 0 && takeUp == 0) {\n    msg.payload = `${global.get(\"config.state.ip\")} 🔩 > [takeUp: ${takeUp} main: ${main}] เซ็นเซอร์ Take up อาจมีปัญหา...`;\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 80,
+        "wires": [
+            [
+                "3a4ac4dbcb8962f9"
+            ]
+        ]
+    },
+    {
+        "id": "cafeef43fd6b7fd0",
+        "type": "delay",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 375,
+        "y": 80,
+        "wires": [
+            [
+                "938ff7e5f30f5df6"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "fa505a146959395d",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "main check",
+        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nlet alarmTake = flow.get(\"alarmTake\") || false;\nconst hour = global.get(\"config.datetime.hour\");\nconst otw = context.get(\"otw\") || \"-\" // otw: one time working\nalarmTake = hour == otw ? true : false;\nif(takeUp > 0 && !alarmTake){\n    context.set(\"otw\", hour);\n    return msg; \n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "2cf3a1fca4c05388"
+            ]
+        ]
+    },
+    {
+        "id": "c69c76cd5d3d874f",
+        "type": "subflow:1406c468fdce7358",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "x": 680,
+        "y": 120,
+        "wires": [
+            [
+                "1eec8d095382c328"
+            ]
+        ]
+    },
+    {
+        "id": "1eec8d095382c328",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "function 25",
+        "func": "const httpCode = msg.statusCode;\n\nif(httpCode == 200){\n    flow.set(\"alarmTake\", true);    \n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 805,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "3a4ac4dbcb8962f9",
+        "type": "subflow:1406c468fdce7358",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "029c5ec1b4cd0fb6"
+            ]
+        ]
+    },
+    {
+        "id": "029c5ec1b4cd0fb6",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "function 27",
+        "func": "const httpCode = msg.statusCode;\n\nif(httpCode == 200){\n    flow.set(\"alarmMain\", true);    \n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 805,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "2a334b79d30a7edf",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "Status",
+        "func": "msg.payload ={\n    'fill': 'green',\n    'shape': 'dot',\n    'text': `${global.get(\"config.datetime.time\")}: Last Time Check`\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2cf3a1fca4c05388",
+        "type": "delay",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 375,
+        "y": 120,
+        "wires": [
+            [
+                "20ce10615defa2e5"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "20ce10615defa2e5",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "main check",
+        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nconst main = global.get(\"values.maintake.main.now\");\n\nif(takeUp > 0 && main == 0){\n    msg.payload = `${global.get(\"config.state.ip\")} 🔩 > [takeUp: ${takeUp} main: ${main}] เซ็นเซอร์ Main อาจมีปัญหา...`;\n    return msg; \n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "c69c76cd5d3d874f"
+            ]
         ]
     },
     {
@@ -4627,6 +5128,16 @@ cat << 'EOF' > $user/.node-red/flows.json
         "name": "",
         "x": 150,
         "y": 520,
+        "wires": []
+    },
+    {
+        "id": "fd6dded7e0aa82a2",
+        "type": "subflow:062d9ee6cb5e367f",
+        "z": "777823ab3e1fee97",
+        "g": "6be6c492a2953951",
+        "name": "",
+        "x": 150,
+        "y": 460,
         "wires": []
     }
 ]
