@@ -44,9 +44,7 @@ chmod +x $user/loom/scriptConfig.sh
 #EOF
 #fi
 
-if [ -f "$user/loom/data/log.csv" ]; then
 rm $user/loom/data/log.csv
-fi
 
 if [ ! -f "$user/loom/source.txt" ]; then
 source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
