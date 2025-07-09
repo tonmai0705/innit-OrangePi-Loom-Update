@@ -1,9 +1,9 @@
 #!/bin/bash
-user = $HOME
+user=$HOME
 
 rm $user/.node-red/flows.json
 
-cat << 'EOF' > "$user/.node-red/flows.json"
+cat << 'EOF' > $user/.node-red/flows.json
 
 
 
