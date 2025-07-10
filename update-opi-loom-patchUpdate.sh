@@ -2,12 +2,14 @@
 user=$HOME
 
 mkdir $user/setting
-
 cat << 'EOF' > $user/setting/update.json
 {
-"version": 1.3.1
+"version":1.3.1,
+"majorUpd":20250710,
+"minorUpd":20250710,
 }
 EOF
+# install jq for read json file in linux
 
 cat << 'EOF' > crontab -e 
 
