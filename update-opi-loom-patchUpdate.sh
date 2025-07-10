@@ -12,7 +12,7 @@ sudo apt-get install jq
 mkdir $user/setting
 cat << 'EOF' > $user/setting/update.json
 {
-"version":1.3.1,
+"version":"1.3.1",
 "majorUpd":20250710,
 "minorUpd":20250710,
 }
