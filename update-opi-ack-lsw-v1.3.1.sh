@@ -1,19 +1,16 @@
 #!/bin/bash
 sudo apt update && sudo apt -y upgrade
-echo " [ACK-IoT Orange Pi Update Version] กำลังติดตั้ง Dashboard 2.0 และติดตั้ง flows Node-red กรุณารอสักครู่..."
 npm install @flowfuse/node-red-dashboard --prefix ~/.node-red
+
 user=$HOME
-#2025-07-8|15:04AM
+
 if [ -d "$user/loom" ]; then
         if [ -d "$user/loom/dataProduction" ]; then
-                rm -rf $user/loom/dataProduction/*
-                rm -d $user/loom/dataProduction
+                rm -r $user/loom/dataProduction/
                 echo " [ACK-IoT Orange Pi Update Version] ลบข้อมูล <dataProduction> เรียบร้อย..."
         fi
         if [ -d "$user/loom/thingsboard" ]; then
-                rm -rf $user/loom/thingsboard/logdata/*
-                rm -d $user/loom/thingsboard/logdata
-                rm -d $user/loom/thngsboard
+                rm -r $user/loom/thingsboard
                 echo " [ACK-IoT Orange Pi Update Version] ลบข้อมูล <thngsboard> เรียบร้อย..."
         fi
 else
