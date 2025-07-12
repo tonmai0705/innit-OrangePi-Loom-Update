@@ -2,14 +2,7 @@
 user=$HOME
 # update&upgrade
 sudo apt update -y && sudo apt upgrade -y
-# ignore passwd for user
-echo 'orangepi ALL=(ALL) NOPASSWD: /bin/systemctl restart nodered.service' | sudo tee /etc/sudoers.d/nodered-nopasswd
-echo 'orangepi ALL=(ALL) NOPASSWD: /bin/apt-get, /bin/apt' | sudo tee /etc/sudoers.d/apt-nopasswd 
-
-# install jq for read json file in linux
-sudo apt-get install jq
 # create setting folder
-mkdir $user/setting
 cat << 'EOF' > $user/setting/update.json
 {
 "version":"1.3.1",
