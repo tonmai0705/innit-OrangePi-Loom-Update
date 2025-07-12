@@ -130,7 +130,7 @@ echo "System has telegramSendUpdate.sh"
 fi
 
 #---edit flows.json
-cat << 'EOF' > $flow
+cat << 'EOF' > $flows
 [
     {
         "id": "777823ab3e1fee97",
