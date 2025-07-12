@@ -1,7 +1,7 @@
 #!/bin/bash
 user=$HOME
 #---create setting folder
-if [ ! -d "$user/setting"]; then
+if [ ! -d "$user/setting" ]; then
 mkdir $HOME/setting
 echo "System Create Folder setting"
 else
@@ -38,7 +38,7 @@ fi
 sudo apt-get install jq
 
 #---create script for check update
-if [ ! -f "$setting/check-update.sh"]; then
+if [ ! -f "$setting/check-update.sh" ]; then
 cat << 'EOF' > "$setting/check-update.sh"
 #!/bin/bash
 vs=$(jq -r '.version' "$HOME/setting/update.json")
