@@ -130,8 +130,16 @@ echo "System has telegramSendUpdate.sh"
 fi
 
 #---edit flows.json
-cat << 'EOF' > $flows
+cat << 'EOF' > $flow
 [
+    {
+        "id": "777823ab3e1fee97",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
     {
         "id": "062d9ee6cb5e367f",
         "type": "subflow",
@@ -153,6 +161,899 @@ cat << 'EOF' > $flows
                 }
             ]
         }
+    },
+    {
+        "id": "c9bf91fd5c385f43",
+        "type": "subflow",
+        "name": "state upTime",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#fcba03",
+        "icon": "font-awesome/fa-clock-o",
+        "status": {
+            "x": 380,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "d6a67c89385322a2",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "aa3c99c011a59edd",
+        "type": "subflow",
+        "name": "conf.Set",
+        "info": "input\r\n - Data config to config.txt file",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "67264d9b0e343db6"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#ff834a",
+        "icon": "node-red/cog.svg",
+        "status": {
+            "x": 760,
+            "y": 60,
+            "wires": [
+                {
+                    "id": "4fa647803c42f119",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "b7d6774c49a75902",
+        "type": "subflow",
+        "name": "File",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "9ac210c7c0b99891"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 320,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "5730377ef1841b85",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#FFFFFF",
+        "icon": "node-red/file.svg",
+        "status": {
+            "x": 480,
+            "y": 120,
+            "wires": [
+                {
+                    "id": "0d197ce9478787bb",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "9f979da7e8a5400d",
+        "type": "subflow",
+        "name": "Dashboard",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#ff3636",
+        "icon": "node-red-contrib-chartjs/pie_chart.png"
+    },
+    {
+        "id": "424004941bcb3307",
+        "type": "subflow",
+        "name": "Product.csv",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "3925be8bad2bdf74"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 560,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "0a3028182b518b6e",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#00c500",
+        "icon": "node-red-contrib-filesystem/fs-mkdir.svg"
+    },
+    {
+        "id": "a007640620fd4d52",
+        "type": "subflow",
+        "name": "Commu",
+        "info": "Input\r\n- msg.",
+        "category": "Lamp",
+        "in": [
+            {
+                "x": 40,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "6f98bf351570cfd0"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#6C00FF",
+        "icon": "node-red/light.svg"
+    },
+    {
+        "id": "77aa6425a6e4878c",
+        "type": "subflow",
+        "name": "Delete",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "9112ab91340ace88"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#1d84ff",
+        "icon": "font-awesome/fa-close"
+    },
+    {
+        "id": "a6ecc454e1b3c0c3",
+        "type": "subflow",
+        "name": "API",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#00e4ff",
+        "icon": "font-awesome/fa-cloud-upload",
+        "status": {
+            "x": 980,
+            "y": 120,
+            "wires": [
+                {
+                    "id": "043a074eaca99487",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "78457dab5d6c0503",
+        "type": "subflow",
+        "name": "Device Log",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 60,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "18936721347779ca"
+                    },
+                    {
+                        "id": "5bd37418f0f1f7c3"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#a1a5ff",
+        "icon": "node-red/alert.svg",
+        "status": {
+            "x": 360,
+            "y": 180,
+            "wires": [
+                {
+                    "id": "656d5fdf90f37195",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "7a70a201eaa0a148",
+        "type": "subflow",
+        "name": "Count",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "329b2dc06d31e4a6"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#fca903",
+        "icon": "font-awesome/fa-plus-circle",
+        "status": {
+            "x": 420,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "6bf085a9f0b65ea1",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "f1016d6dfc436da7",
+        "type": "subflow",
+        "name": "Power.csv",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "ef469af3a6dd75f8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 380,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "562f9af20391c406",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 380,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "580c9972ff966756",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#f3dd00",
+        "icon": "font-awesome/fa-inbox"
+    },
+    {
+        "id": "341bdc3e7e68ae46",
+        "type": "subflow",
+        "name": "conf.Get",
+        "info": "input\r\n - msg.\r\noutput\r\n - msg.payload (config.txt)",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 50,
+                "y": 130,
+                "wires": [
+                    {
+                        "id": "7dcb29351996d6be"
+                    },
+                    {
+                        "id": "258890b7306744af"
+                    },
+                    {
+                        "id": "8e7c7d80304fe097"
+                    },
+                    {
+                        "id": "d6c523303ab0a091"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#ff834a",
+        "icon": "node-red/cog.svg",
+        "status": {
+            "x": 640,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "24e85514de7978d5",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "1406c468fdce7358",
+        "type": "subflow",
+        "name": "Telegram http",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "62597ed5138d084d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 480,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "fbda616582fab4cb",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#03befc",
+        "icon": "font-awesome/fa-send"
+    },
+    {
+        "id": "e226ede58ea4b202",
+        "type": "subflow",
+        "name": "Modbus & Alarm",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#6229ff",
+        "icon": "node-red/alert.svg",
+        "status": {
+            "x": 380,
+            "y": 220,
+            "wires": [
+                {
+                    "id": "c5418b2844d316d7",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "13f006802899e0be",
+        "type": "subflow",
+        "name": "Ping",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "633e9c4b40e42584"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 560,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "c7fcb9a183a78340",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#ffb900",
+        "icon": "font-awesome/fa-chain",
+        "status": {
+            "x": 560,
+            "y": 140,
+            "wires": [
+                {
+                    "id": "346948538b2e924a",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "31057fe0b0d4c1ec",
+        "type": "subflow",
+        "name": "Blink",
+        "info": "input\r\n - msg.",
+        "category": "Lamp",
+        "in": [
+            {
+                "x": 40,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "db6fc316f972fc7a"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#ef42f5",
+        "icon": "font-awesome/fa-lightbulb-o"
+    },
+    {
+        "id": "a67f25631bef1988",
+        "type": "subflow",
+        "name": "Global",
+        "info": "",
+        "category": "Special node",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "59eb51568d8158c9"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#046a3b",
+        "icon": "font-awesome/fa-globe",
+        "status": {
+            "x": 360,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "23bad38c2d77961c",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "df4a94479416f0c4",
+        "type": "subflow",
+        "name": "Get IP",
+        "info": "",
+        "category": "Special node",
+        "in": [
+            {
+                "x": 80,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "5198508231fcf8a8"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#ff6100",
+        "icon": "node-red/white-globe.svg",
+        "status": {
+            "x": 480,
+            "y": 60,
+            "wires": [
+                {
+                    "id": "f3b472b4726bfeec",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "451150a92cfdb00f",
+        "type": "group",
+        "z": "777823ab3e1fee97",
+        "name": "System",
+        "style": {
+            "stroke": "#ff0000",
+            "fill": "#000000",
+            "fill-opacity": "0.89",
+            "label": true,
+            "label-position": "n",
+            "color": "#ffC000"
+        },
+        "nodes": [
+            "9827f5270df78aba",
+            "8d2314a673078d68",
+            "cb4e9770746b4c2d",
+            "641e370bc218b3e1",
+            "54b953cb7c4b2af9",
+            "e6290a07b12de109",
+            "b0abde57f8695277",
+            "a241e24d2a8bd154",
+            "bc26e53c6604a53c",
+            "2e091e726e419728",
+            "7d876bfc55befcf6",
+            "fe159939e00a876e",
+            "c974acb909bd6616",
+            "8f882b3c1846c4d2",
+            "b57537dcf374507c",
+            "09e65fc5a9cf3984",
+            "b64538e02f4df6e9"
+        ],
+        "x": 774,
+        "y": 39,
+        "w": 412,
+        "h": 402
+    },
+    {
+        "id": "9036c777fe360381",
+        "type": "group",
+        "z": "777823ab3e1fee97",
+        "name": "Server Log",
+        "style": {
+            "label": true,
+            "label-position": "n",
+            "color": "#92d04f",
+            "stroke": "#ffff3f",
+            "fill": "#000000",
+            "fill-opacity": "1"
+        },
+        "nodes": [
+            "65638a0971dafdf2",
+            "bca7972e18afe768",
+            "e814c362277b941f",
+            "f5baaac8574c3c63",
+            "e02e37f582fc0ef1",
+            "7051805b6fc3e4c5",
+            "a68e65d6bd73a95c",
+            "54d61fbff53a0240"
+        ],
+        "x": 774,
+        "y": 459,
+        "w": 412,
+        "h": 122
+    },
+    {
+        "id": "6be6c492a2953951",
+        "type": "group",
+        "z": "777823ab3e1fee97",
+        "name": "Modbus",
+        "style": {
+            "stroke": "#ff0000",
+            "fill": "#000000",
+            "fill-opacity": "0.86",
+            "label": true,
+            "label-position": "n",
+            "color": "#ffC000"
+        },
+        "nodes": [
+            "165854dba9786ef4",
+            "8cb095c264d1728b",
+            "d53e6b2f26983416",
+            "020abe7539ad09c4",
+            "0a51b58526c3eac5",
+            "1a7e9f67f1527628",
+            "87858dfa873e16c3",
+            "2b0bc6d5e24e124c",
+            "0eb02406f8dff0ba",
+            "8f9c36612b955b2f",
+            "ed51c14eaa7633a7",
+            "51f8481c029f9f8d",
+            "4a4b0af55f35b68b",
+            "6640ba01536a2946",
+            "d1b4a59f01f7a3ac",
+            "2eb5bec75f01e20f",
+            "f6a699b11f2d2677",
+            "d233508a056c55a0",
+            "f4bb43f8de8fb162",
+            "3e759bafa1177ed1",
+            "195dabaf8bf83f47",
+            "2b24aa05aa5379ed",
+            "f2925150b152ddfd",
+            "a31df86427795839",
+            "72694dc1ac5df943",
+            "707e34c1a544e5d1",
+            "b83a6608cf3531d8",
+            "792452b6dfad242c",
+            "72949a75b63686fd",
+            "ac29116d0411fcab",
+            "fd6dded7e0aa82a2"
+        ],
+        "x": 44,
+        "y": 39,
+        "w": 702,
+        "h": 542
+    },
+    {
+        "id": "2e091e726e419728",
+        "type": "group",
+        "z": "777823ab3e1fee97",
+        "g": "451150a92cfdb00f",
+        "name": "API",
+        "style": {
+            "label": true,
+            "label-position": "n",
+            "color": "#0070c0",
+            "stroke": "#ff0000",
+            "fill": "#000000",
+            "fill-opacity": "1"
+        },
+        "nodes": [],
+        "x": 1050,
+        "y": 270,
+        "w": 40,
+        "h": 40
+    },
+    {
+        "id": "c8b6450989c369f5",
+        "type": "ui-group",
+        "name": "DateSelect",
+        "page": "20308079d89423ea",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6da9956de8144acb",
+        "type": "ui-group",
+        "name": "Homepage",
+        "page": "20308079d89423ea",
+        "width": "12",
+        "height": 1,
+        "order": 3,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "72adefdf7b5e4ced",
+        "type": "ui-group",
+        "name": "Cmd Update",
+        "page": "20308079d89423ea",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "20308079d89423ea",
+        "type": "ui-page",
+        "name": "Home",
+        "ui": "d6f3a7fd07525d85",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "93042030270d6867",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "4d19f97e8673be96",
+        "type": "ui-group",
+        "name": "1",
+        "page": "93ca67d43751815a",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "93ca67d43751815a",
+        "type": "ui-page",
+        "name": "Data Source",
+        "ui": "d6f3a7fd07525d85",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "93042030270d6867",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "d6f3a7fd07525d85",
+        "type": "ui-base",
+        "name": "myDashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "93042030270d6867",
+        "type": "ui-theme",
+        "name": "ui_template.themes.defaultTheme",
+        "colors": {
+            "surface": "#2e2e2e",
+            "primary": "#0094ce",
+            "bgPage": "#2e2e2e",
+            "groupBg": "#2e2e2e",
+            "groupOutline": "#2e2e2e"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "291667434678740d",
+        "type": "modbus-client",
+        "name": "",
+        "clienttype": "serial",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
     },
     {
         "id": "b876448f3a68636e",
@@ -401,29 +1302,6 @@ cat << 'EOF' > $flows
         ]
     },
     {
-        "id": "c9bf91fd5c385f43",
-        "type": "subflow",
-        "name": "state upTime",
-        "info": "",
-        "category": "Special Node",
-        "in": [],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#fcba03",
-        "icon": "font-awesome/fa-clock-o",
-        "status": {
-            "x": 380,
-            "y": 80,
-            "wires": [
-                {
-                    "id": "d6a67c89385322a2",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
         "id": "4d414fcfa4d1f563",
         "type": "inject",
         "z": "c9bf91fd5c385f43",
@@ -470,39 +1348,6 @@ cat << 'EOF' > $flows
         "wires": [
             []
         ]
-    },
-    {
-        "id": "aa3c99c011a59edd",
-        "type": "subflow",
-        "name": "conf.Set",
-        "info": "input\r\n - Data config to config.txt file",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 50,
-                "y": 30,
-                "wires": [
-                    {
-                        "id": "67264d9b0e343db6"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ff834a",
-        "icon": "node-red/cog.svg",
-        "status": {
-            "x": 760,
-            "y": 60,
-            "wires": [
-                {
-                    "id": "4fa647803c42f119",
-                    "port": 0
-                }
-            ]
-        }
     },
     {
         "id": "861f956f24a820d1",
@@ -585,50 +1430,6 @@ cat << 'EOF' > $flows
         ]
     },
     {
-        "id": "b7d6774c49a75902",
-        "type": "subflow",
-        "name": "File",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "9ac210c7c0b99891"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 320,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "5730377ef1841b85",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#FFFFFF",
-        "icon": "node-red/file.svg",
-        "status": {
-            "x": 480,
-            "y": 120,
-            "wires": [
-                {
-                    "id": "0d197ce9478787bb",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
         "id": "5730377ef1841b85",
         "type": "function",
         "z": "b7d6774c49a75902",
@@ -689,19 +1490,6 @@ cat << 'EOF' > $flows
         "wires": [
             []
         ]
-    },
-    {
-        "id": "9f979da7e8a5400d",
-        "type": "subflow",
-        "name": "Dashboard",
-        "info": "",
-        "category": "Special Node",
-        "in": [],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ff3636",
-        "icon": "node-red-contrib-chartjs/pie_chart.png"
     },
     {
         "id": "ae3d5428e72f795e",
@@ -1173,118 +1961,6 @@ cat << 'EOF' > $flows
         ]
     },
     {
-        "id": "c8b6450989c369f5",
-        "type": "ui-group",
-        "name": "DateSelect",
-        "page": "20308079d89423ea",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "6da9956de8144acb",
-        "type": "ui-group",
-        "name": "Homepage",
-        "page": "20308079d89423ea",
-        "width": "12",
-        "height": 1,
-        "order": 3,
-        "showTitle": false,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "72adefdf7b5e4ced",
-        "type": "ui-group",
-        "name": "Cmd Update",
-        "page": "20308079d89423ea",
-        "width": 6,
-        "height": 1,
-        "order": 2,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "20308079d89423ea",
-        "type": "ui-page",
-        "name": "Home",
-        "ui": "d6f3a7fd07525d85",
-        "path": "/page1",
-        "icon": "home",
-        "layout": "grid",
-        "theme": "93042030270d6867",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": "0",
-                "cols": "3"
-            },
-            {
-                "name": "Tablet",
-                "px": "576",
-                "cols": "6"
-            },
-            {
-                "name": "Small Desktop",
-                "px": "768",
-                "cols": "9"
-            },
-            {
-                "name": "Desktop",
-                "px": "1024",
-                "cols": "12"
-            }
-        ],
-        "order": 1,
-        "className": "",
-        "visible": true,
-        "disabled": false
-    },
-    {
-        "id": "424004941bcb3307",
-        "type": "subflow",
-        "name": "Product.csv",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 50,
-                "y": 30,
-                "wires": [
-                    {
-                        "id": "3925be8bad2bdf74"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 560,
-                "y": 40,
-                "wires": [
-                    {
-                        "id": "0a3028182b518b6e",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#00c500",
-        "icon": "node-red-contrib-filesystem/fs-mkdir.svg"
-    },
-    {
         "id": "3925be8bad2bdf74",
         "type": "file in",
         "z": "424004941bcb3307",
@@ -1382,29 +2058,6 @@ cat << 'EOF' > $flows
         ]
     },
     {
-        "id": "a007640620fd4d52",
-        "type": "subflow",
-        "name": "Commu",
-        "info": "Input\r\n- msg.",
-        "category": "Lamp",
-        "in": [
-            {
-                "x": 40,
-                "y": 40,
-                "wires": [
-                    {
-                        "id": "6f98bf351570cfd0"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#6C00FF",
-        "icon": "node-red/light.svg"
-    },
-    {
         "id": "4a84a0a8603ab232",
         "type": "exec",
         "z": "a007640620fd4d52",
@@ -1443,29 +2096,6 @@ cat << 'EOF' > $flows
                 "4a84a0a8603ab232"
             ]
         ]
-    },
-    {
-        "id": "77aa6425a6e4878c",
-        "type": "subflow",
-        "name": "Delete",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "9112ab91340ace88"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#1d84ff",
-        "icon": "font-awesome/fa-close"
     },
     {
         "id": "79406b7c65e62058",
@@ -1508,29 +2138,6 @@ cat << 'EOF' > $flows
         ],
         "icon": "font-awesome/fa-times-circle",
         "l": false
-    },
-    {
-        "id": "a6ecc454e1b3c0c3",
-        "type": "subflow",
-        "name": "API",
-        "info": "",
-        "category": "Special Node",
-        "in": [],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#00e4ff",
-        "icon": "font-awesome/fa-cloud-upload",
-        "status": {
-            "x": 980,
-            "y": 120,
-            "wires": [
-                {
-                    "id": "043a074eaca99487",
-                    "port": 0
-                }
-            ]
-        }
     },
     {
         "id": "933493d52353d337",
@@ -2124,131 +2731,6 @@ cat << 'EOF' > $flows
         "l": false
     },
     {
-        "id": "4d19f97e8673be96",
-        "type": "ui-group",
-        "name": "1",
-        "page": "93ca67d43751815a",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": false,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "93ca67d43751815a",
-        "type": "ui-page",
-        "name": "Data Source",
-        "ui": "d6f3a7fd07525d85",
-        "path": "/page2",
-        "icon": "home",
-        "layout": "grid",
-        "theme": "93042030270d6867",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": "0",
-                "cols": "3"
-            },
-            {
-                "name": "Tablet",
-                "px": "576",
-                "cols": "6"
-            },
-            {
-                "name": "Small Desktop",
-                "px": "768",
-                "cols": "9"
-            },
-            {
-                "name": "Desktop",
-                "px": "1024",
-                "cols": "12"
-            }
-        ],
-        "order": 2,
-        "className": "",
-        "visible": "true",
-        "disabled": "false"
-    },
-    {
-        "id": "d6f3a7fd07525d85",
-        "type": "ui-base",
-        "name": "myDashboard",
-        "path": "/dashboard",
-        "appIcon": "",
-        "includeClientData": true,
-        "acceptsClientConfig": [
-            "ui-notification",
-            "ui-control"
-        ],
-        "showPathInSidebar": false,
-        "headerContent": "page",
-        "navigationStyle": "default",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": 1,
-        "showDisconnectNotification": true,
-        "allowInstall": false
-    },
-    {
-        "id": "93042030270d6867",
-        "type": "ui-theme",
-        "name": "ui_template.themes.defaultTheme",
-        "colors": {
-            "surface": "#2e2e2e",
-            "primary": "#0094ce",
-            "bgPage": "#2e2e2e",
-            "groupBg": "#2e2e2e",
-            "groupOutline": "#2e2e2e"
-        },
-        "sizes": {
-            "density": "default",
-            "pagePadding": "12px",
-            "groupGap": "12px",
-            "groupBorderRadius": "4px",
-            "widgetGap": "12px"
-        }
-    },
-    {
-        "id": "78457dab5d6c0503",
-        "type": "subflow",
-        "name": "Device Log",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 60,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "18936721347779ca"
-                    },
-                    {
-                        "id": "5bd37418f0f1f7c3"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#a1a5ff",
-        "icon": "node-red/alert.svg",
-        "status": {
-            "x": 360,
-            "y": 180,
-            "wires": [
-                {
-                    "id": "656d5fdf90f37195",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
         "id": "5bd37418f0f1f7c3",
         "type": "function",
         "z": "78457dab5d6c0503",
@@ -2460,39 +2942,6 @@ cat << 'EOF' > $flows
         "l": false
     },
     {
-        "id": "7a70a201eaa0a148",
-        "type": "subflow",
-        "name": "Count",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "329b2dc06d31e4a6"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#fca903",
-        "icon": "font-awesome/fa-plus-circle",
-        "status": {
-            "x": 420,
-            "y": 80,
-            "wires": [
-                {
-                    "id": "6bf085a9f0b65ea1",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
         "id": "329b2dc06d31e4a6",
         "type": "file",
         "z": "7a70a201eaa0a148",
@@ -2601,50 +3050,6 @@ cat << 'EOF' > $flows
             []
         ],
         "l": false
-    },
-    {
-        "id": "f1016d6dfc436da7",
-        "type": "subflow",
-        "name": "Power.csv",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 50,
-                "y": 30,
-                "wires": [
-                    {
-                        "id": "ef469af3a6dd75f8"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 380,
-                "y": 40,
-                "wires": [
-                    {
-                        "id": "562f9af20391c406",
-                        "port": 0
-                    }
-                ]
-            },
-            {
-                "x": 380,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "580c9972ff966756",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#f3dd00",
-        "icon": "font-awesome/fa-inbox"
     },
     {
         "id": "ef469af3a6dd75f8",
@@ -2763,48 +3168,6 @@ cat << 'EOF' > $flows
             []
         ],
         "l": false
-    },
-    {
-        "id": "341bdc3e7e68ae46",
-        "type": "subflow",
-        "name": "conf.Get",
-        "info": "input\r\n - msg.\r\noutput\r\n - msg.payload (config.txt)",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 50,
-                "y": 130,
-                "wires": [
-                    {
-                        "id": "7dcb29351996d6be"
-                    },
-                    {
-                        "id": "258890b7306744af"
-                    },
-                    {
-                        "id": "8e7c7d80304fe097"
-                    },
-                    {
-                        "id": "d6c523303ab0a091"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ff834a",
-        "icon": "node-red/cog.svg",
-        "status": {
-            "x": 640,
-            "y": 80,
-            "wires": [
-                {
-                    "id": "24e85514de7978d5",
-                    "port": 0
-                }
-            ]
-        }
     },
     {
         "id": "581e4659c476b910",
@@ -3126,40 +3489,6 @@ cat << 'EOF' > $flows
         "l": false
     },
     {
-        "id": "1406c468fdce7358",
-        "type": "subflow",
-        "name": "Telegram http",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "62597ed5138d084d"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 480,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "fbda616582fab4cb",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#03befc",
-        "icon": "font-awesome/fa-send"
-    },
-    {
         "id": "fbda616582fab4cb",
         "type": "http request",
         "z": "1406c468fdce7358",
@@ -3200,29 +3529,6 @@ cat << 'EOF' > $flows
                 "fbda616582fab4cb"
             ]
         ]
-    },
-    {
-        "id": "e226ede58ea4b202",
-        "type": "subflow",
-        "name": "Modbus & Alarm",
-        "info": "",
-        "category": "Special Node",
-        "in": [],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#6229ff",
-        "icon": "node-red/alert.svg",
-        "status": {
-            "x": 380,
-            "y": 220,
-            "wires": [
-                {
-                    "id": "c5418b2844d316d7",
-                    "port": 0
-                }
-            ]
-        }
     },
     {
         "id": "698cc965e4a64996",
@@ -3396,50 +3702,6 @@ cat << 'EOF' > $flows
         "l": false
     },
     {
-        "id": "13f006802899e0be",
-        "type": "subflow",
-        "name": "Ping",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "633e9c4b40e42584"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 560,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "c7fcb9a183a78340",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#ffb900",
-        "icon": "font-awesome/fa-chain",
-        "status": {
-            "x": 560,
-            "y": 140,
-            "wires": [
-                {
-                    "id": "346948538b2e924a",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
         "id": "633e9c4b40e42584",
         "type": "ping",
         "z": "13f006802899e0be",
@@ -3516,29 +3778,6 @@ cat << 'EOF' > $flows
         ]
     },
     {
-        "id": "31057fe0b0d4c1ec",
-        "type": "subflow",
-        "name": "Blink",
-        "info": "input\r\n - msg.",
-        "category": "Lamp",
-        "in": [
-            {
-                "x": 40,
-                "y": 40,
-                "wires": [
-                    {
-                        "id": "db6fc316f972fc7a"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ef42f5",
-        "icon": "font-awesome/fa-lightbulb-o"
-    },
-    {
         "id": "db6fc316f972fc7a",
         "type": "exec",
         "z": "31057fe0b0d4c1ec",
@@ -3559,39 +3798,6 @@ cat << 'EOF' > $flows
         ],
         "icon": "node-red/light.svg",
         "l": false
-    },
-    {
-        "id": "a67f25631bef1988",
-        "type": "subflow",
-        "name": "Global",
-        "info": "",
-        "category": "Special node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "59eb51568d8158c9"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#046a3b",
-        "icon": "font-awesome/fa-globe",
-        "status": {
-            "x": 360,
-            "y": 80,
-            "wires": [
-                {
-                    "id": "23bad38c2d77961c",
-                    "port": 0
-                }
-            ]
-        }
     },
     {
         "id": "59eb51568d8158c9",
@@ -3636,39 +3842,6 @@ cat << 'EOF' > $flows
         "wires": [
             []
         ]
-    },
-    {
-        "id": "df4a94479416f0c4",
-        "type": "subflow",
-        "name": "Get IP",
-        "info": "",
-        "category": "Special node",
-        "in": [
-            {
-                "x": 80,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "5198508231fcf8a8"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ff6100",
-        "icon": "node-red/white-globe.svg",
-        "status": {
-            "x": 480,
-            "y": 60,
-            "wires": [
-                {
-                    "id": "f3b472b4726bfeec",
-                    "port": 0
-                }
-            ]
-        }
     },
     {
         "id": "5198508231fcf8a8",
@@ -3804,150 +3977,6 @@ cat << 'EOF' > $flows
             ]
         ],
         "l": false
-    },
-    {
-        "id": "777823ab3e1fee97",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "451150a92cfdb00f",
-        "type": "group",
-        "z": "777823ab3e1fee97",
-        "name": "System",
-        "style": {
-            "stroke": "#ff0000",
-            "fill": "#000000",
-            "fill-opacity": "0.89",
-            "label": true,
-            "label-position": "n",
-            "color": "#ffC000"
-        },
-        "nodes": [
-            "9827f5270df78aba",
-            "8d2314a673078d68",
-            "cb4e9770746b4c2d",
-            "641e370bc218b3e1",
-            "54b953cb7c4b2af9",
-            "e6290a07b12de109",
-            "b0abde57f8695277",
-            "a241e24d2a8bd154",
-            "bc26e53c6604a53c",
-            "2e091e726e419728",
-            "7d876bfc55befcf6",
-            "fe159939e00a876e",
-            "c974acb909bd6616",
-            "8f882b3c1846c4d2",
-            "b57537dcf374507c",
-            "09e65fc5a9cf3984",
-            "b64538e02f4df6e9"
-        ],
-        "x": 774,
-        "y": 39,
-        "w": 412,
-        "h": 402
-    },
-    {
-        "id": "9036c777fe360381",
-        "type": "group",
-        "z": "777823ab3e1fee97",
-        "name": "Server Log",
-        "style": {
-            "label": true,
-            "label-position": "n",
-            "color": "#92d04f",
-            "stroke": "#ffff3f",
-            "fill": "#000000",
-            "fill-opacity": "1"
-        },
-        "nodes": [
-            "65638a0971dafdf2",
-            "bca7972e18afe768",
-            "e814c362277b941f",
-            "f5baaac8574c3c63",
-            "e02e37f582fc0ef1",
-            "7051805b6fc3e4c5",
-            "a68e65d6bd73a95c",
-            "54d61fbff53a0240"
-        ],
-        "x": 774,
-        "y": 459,
-        "w": 412,
-        "h": 122
-    },
-    {
-        "id": "6be6c492a2953951",
-        "type": "group",
-        "z": "777823ab3e1fee97",
-        "name": "Modbus",
-        "style": {
-            "stroke": "#ff0000",
-            "fill": "#000000",
-            "fill-opacity": "0.86",
-            "label": true,
-            "label-position": "n",
-            "color": "#ffC000"
-        },
-        "nodes": [
-            "165854dba9786ef4",
-            "8cb095c264d1728b",
-            "d53e6b2f26983416",
-            "020abe7539ad09c4",
-            "0a51b58526c3eac5",
-            "1a7e9f67f1527628",
-            "87858dfa873e16c3",
-            "2b0bc6d5e24e124c",
-            "0eb02406f8dff0ba",
-            "8f9c36612b955b2f",
-            "ed51c14eaa7633a7",
-            "51f8481c029f9f8d",
-            "4a4b0af55f35b68b",
-            "6640ba01536a2946",
-            "d1b4a59f01f7a3ac",
-            "2eb5bec75f01e20f",
-            "f6a699b11f2d2677",
-            "d233508a056c55a0",
-            "f4bb43f8de8fb162",
-            "3e759bafa1177ed1",
-            "195dabaf8bf83f47",
-            "2b24aa05aa5379ed",
-            "f2925150b152ddfd",
-            "a31df86427795839",
-            "72694dc1ac5df943",
-            "707e34c1a544e5d1",
-            "b83a6608cf3531d8",
-            "792452b6dfad242c",
-            "72949a75b63686fd",
-            "ac29116d0411fcab",
-            "fd6dded7e0aa82a2"
-        ],
-        "x": 44,
-        "y": 39,
-        "w": 702,
-        "h": 542
-    },
-    {
-        "id": "2e091e726e419728",
-        "type": "group",
-        "z": "777823ab3e1fee97",
-        "g": "451150a92cfdb00f",
-        "name": "API",
-        "style": {
-            "label": true,
-            "label-position": "n",
-            "color": "#0070c0",
-            "stroke": "#ff0000",
-            "fill": "#000000",
-            "fill-opacity": "1"
-        },
-        "nodes": [],
-        "x": 1050,
-        "y": 270,
-        "w": 40,
-        "h": 40
     },
     {
         "id": "9827f5270df78aba",
@@ -5060,35 +5089,6 @@ cat << 'EOF' > $flows
         "x": 150,
         "y": 460,
         "wires": []
-    },
-    {
-        "id": "291667434678740d",
-        "type": "modbus-client",
-        "name": "",
-        "clienttype": "serial",
-        "bufferCommands": true,
-        "stateLogEnabled": false,
-        "queueLogEnabled": false,
-        "failureLogEnabled": true,
-        "tcpHost": "127.0.0.1",
-        "tcpPort": "502",
-        "tcpType": "DEFAULT",
-        "serialPort": "/dev/ttyUSB0",
-        "serialType": "RTU-BUFFERD",
-        "serialBaudrate": "9600",
-        "serialDatabits": "8",
-        "serialStopbits": "1",
-        "serialParity": "none",
-        "serialConnectionDelay": "100",
-        "serialAsciiResponseStartDelimiter": "0x3A",
-        "unit_id": 1,
-        "commandDelay": 1,
-        "clientTimeout": 1000,
-        "reconnectOnTimeout": true,
-        "reconnectTimeout": 2000,
-        "parallelUnitIdsAllowed": true,
-        "showWarnings": true,
-        "showLogs": true
     }
 ]
 'EOF'
