@@ -107,6 +107,28 @@ else
 echo "System has check-update.sh"
 fi
 
+#---creat script telegram
+if [ ! -f $setting/telegramSendUpdate.sh ]; then
+cat << 'EOF' > $setting/telegramSendUpdate.sh
+#!/bin/bash
+ipAddr=$(ifconfig wlan0 | grep 'inet ' | awk '{print $2}')
+vs=$(jq '.version' "$HOME/setting/update.json")
+BOT_TOKEN="8181762860:AAEDyLgCoHmRrZ4nrSxUPYfe2Xsov_mvH3g"
+CHAT_ID="-4940675177"
+DATE=$(date +%Y/%m/%d)
+MESSAGE="[$DATE] $ipAddr: Update Software To Version >> $vs"
+
+curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
+     -d chat_id=$CHAT_ID \
+     -d text="$MESSAGE"
+
+EOF
+chmod +x $setting/telegramSendUpdate.sh
+echo "System create telegramSendUpdate.sh"
+else
+echo "System has telegramSendUpdate.sh"
+fi
+
 #---edit flows.json
 cat << 'EOF' > "$flows"
 [
