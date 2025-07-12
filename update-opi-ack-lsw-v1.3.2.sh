@@ -12,7 +12,7 @@ flows=$user/.node-red/flows.json
 setting=$user/setting
 
 #---edit sudoers.d for restart nodered on passwd
-if [ -f /etc/sudoers.d/nodered-nopasswd ]; then
+if [ ! -f /etc/sudoers.d/nodered-nopasswd ]; then
 echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nodered.service' | sudo tee /etc/sudoers.d/nodered-nopasswd
 sudo chmod 440 /etc/sudoers.d/nodered-nopasswd
 echo "System create nodered-nopasswd"
@@ -20,7 +20,7 @@ else
 echo "System has nodered-nopasswd"
 fi
 #---edit sudoers.d for restart apt on passwd
-if [ -f /etc/sudoers.d/apt-nopasswd ]; then
+if [ ! -f /etc/sudoers.d/apt-nopasswd ]; then
 echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt' | sudo tee /etc/sudoers.d/apt-nopasswd
 sudo chmod 440 /etc/sudoers.d/apt-nopasswd
 echo "System create apt-nopasswd"
