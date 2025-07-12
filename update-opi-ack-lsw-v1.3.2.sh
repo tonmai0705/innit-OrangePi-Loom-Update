@@ -1,13 +1,32 @@
 #!/bin/bash
-mkdir $HOME/setting
 user=$HOME
-flows=$HOME/.node-red/flows.json
-setting=$HOME/setting
+#---create setting folder
+if [ ! -d "$user/setting"]; then
+mkdir $HOME/setting
+echo "System Create Folder setting"
+else
+echo "System has Setting Folder"
+fi
+
+flows=$user/.node-red/flows.json
+setting=$user/setting
 
 #---edit sudoers.d for restart nodered on passwd
+if [ -f /etc/sudoers.d/nodered-nopasswd ]; then
 echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nodered.service' | sudo tee /etc/sudoers.d/nodered-nopasswd
 sudo chmod 440 /etc/sudoers.d/nodered-nopasswd
-
+echo "System create nodered-nopasswd"
+else
+echo "System has nodered-nopasswd"
+fi
+#---edit sudoers.d for restart apt on passwd
+if [ -f /etc/sudoers.d/apt-nopasswd ]; then
+echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt' | sudo tee /etc/sudoers.d/apt-nopasswd
+sudo chmod 440 /etc/sudoers.d/apt-nopasswd
+echo "System create apt-nopasswd"
+else
+echo "System has apt-nopasswd"
+fi
 #---edit cron job for check update version when orange pi reboot
 if echo $(corntab -l 2>/dev/null) | grep -Fxq '@reboot /home/orangepi/check-update.sh'; then
 echo "System has @reboot /home/orangepi/check-update.sh in crontab"
@@ -15,6 +34,8 @@ else
 (echo crontab -l 2>/dev/null; echo "@reboot /home/orangepi/setting/check-update.sh") | crontab -
 echo "add cmd @reboot /home/orangepi/check-update.sh in crontab"
 fi
+
+sudo apt-get install jq
 
 #---create script for check update
 if [ ! -f "$setting/check-update.sh"]; then
