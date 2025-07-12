@@ -95,7 +95,7 @@ else
 fi
 sleep 3
 done
-EOF
+'EOF'
 chmod +x $setting/check-update.sh
 cat << EOF > $setting/update.json
 {
@@ -122,7 +122,7 @@ curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
      -d chat_id=$CHAT_ID \
      -d text="$MESSAGE"
 
-EOF
+'EOF'
 echo "System create telegramSendUpdate.sh"
 chmod +x $setting/telegramSendUpdate.sh
 else
@@ -5091,6 +5091,6 @@ cat << 'EOF' > $flows
         "showLogs": true
     }
 ]
-EOF
+'EOF'
 node-red-restart
 echo "ACK-IoT-SYSTEM Already..."
