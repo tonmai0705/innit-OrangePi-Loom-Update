@@ -96,7 +96,7 @@ fi
 sleep 3
 done
 EOF
-chomd +x "$setting/check-update.sh"
+chmod +x "$setting/check-update.sh"
 cat << 'EOF' > "$setting/update.json"
 {
   "version": "$(curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/Develop/version.txt)",
