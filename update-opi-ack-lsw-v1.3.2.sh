@@ -28,7 +28,7 @@ else
 echo "System has apt-nopasswd"
 fi
 #---edit cron job for check update version when orange pi reboot
-if echo $(corntab -l 2>/dev/null) | grep -Fxq '@reboot /home/orangepi/check-update.sh'; then
+if echo $(crontab -l 2>/dev/null) | grep -Fxq '@reboot /home/orangepi/check-update.sh'; then
 echo "System has @reboot /home/orangepi/check-update.sh in crontab"
 else
 (echo crontab -l 2>/dev/null; echo "@reboot /home/orangepi/setting/check-update.sh") | crontab -
