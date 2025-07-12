@@ -31,7 +31,7 @@ fi
 if echo $(crontab -l 2>/dev/null) | grep -Fxq '@reboot /home/orangepi/check-update.sh'; then
 echo "System has @reboot /home/orangepi/check-update.sh in crontab"
 else
-(echo crontab -l 2>/dev/null; echo "@reboot /home/orangepi/setting/check-update.sh") | crontab -
+(crontab -l 2>/dev/null; echo "@reboot /home/orangepi/setting/check-update.sh") | crontab -
 echo "add cmd @reboot /home/orangepi/check-update.sh in crontab"
 fi
 
@@ -96,7 +96,7 @@ fi
 sleep 3
 done
 EOF
-chmod +x "$setting/check-update.sh"
+chmod +x $setting/check-update.sh
 cat << 'EOF' > "$setting/update.json"
 {
   "version": "$(curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/Develop/version.txt)",
