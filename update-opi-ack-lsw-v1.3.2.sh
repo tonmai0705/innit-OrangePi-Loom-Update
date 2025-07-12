@@ -122,7 +122,7 @@ curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
      -d chat_id=$CHAT_ID \
      -d text="$MESSAGE"
 
-'EOF'
+EOF
 echo "System create telegramSendUpdate.sh"
 chmod +x $setting/telegramSendUpdate.sh
 else
