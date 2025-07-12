@@ -1,45 +1,48 @@
 #!/bin/bash
 user=$HOME
-#---create setting folder
+#---create setting folder-----------------------------------------------------------
 if [ ! -d "$user/setting" ]; then
-mkdir $HOME/setting
-echo "System Create Folder setting"
+    mkdir $HOME/setting
+    echo "System Create Folder setting"
 else
-echo "System has Setting Folder"
+    echo "System has Setting Folder"
 fi
 
 flows=$user/.node-red/flows.json
 setting=$user/setting
 
-#---edit sudoers.d for restart nodered on passwd
+#---edit sudoers.d for restart nodered on passwd------------------------------------
 if [ ! -f /etc/sudoers.d/nodered-nopasswd ]; then
-echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nodered.service' | sudo tee /etc/sudoers.d/nodered-nopasswd
-sudo chmod 440 /etc/sudoers.d/nodered-nopasswd
-echo "System create nodered-nopasswd"
+    echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nodered.service' | sudo tee /etc/sudoers.d/nodered-nopasswd
+    sudo chmod 440 /etc/sudoers.d/nodered-nopasswd
+    echo "System create nodered-nopasswd"
 else
-echo "System has nodered-nopasswd"
+    echo "System has nodered-nopasswd"
 fi
-#---edit sudoers.d for restart apt on passwd
+#---edit sudoers.d for restart apt on passwd----------------------------------------
 if [ ! -f /etc/sudoers.d/apt-nopasswd ]; then
-echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt' | sudo tee /etc/sudoers.d/apt-nopasswd
-sudo chmod 440 /etc/sudoers.d/apt-nopasswd
-echo "System create apt-nopasswd"
+    echo 'orangepi ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt' | sudo tee /etc/sudoers.d/apt-nopasswd
+    sudo chmod 440 /etc/sudoers.d/apt-nopasswd
+    echo "System create apt-nopasswd"
 else
-echo "System has apt-nopasswd"
+    echo "System has apt-nopasswd"
 fi
-#---edit cron job for check update version when orange pi reboot
+#---edit cron job for check update version when orange pi reboot---------------------
 if echo $(crontab -l 2>/dev/null) | grep -Fxq '@reboot /home/orangepi/check-update.sh'; then
-echo "System has @reboot /home/orangepi/check-update.sh in crontab"
+    echo "System has @reboot /home/orangepi/check-update.sh in crontab"
 else
-(crontab -l 2>/dev/null; echo "@reboot /home/orangepi/setting/check-update.sh") | crontab -
-echo "add cmd @reboot /home/orangepi/check-update.sh in crontab"
+    (
+        crontab -l 2>/dev/null
+        echo "@reboot /home/orangepi/setting/check-update.sh"
+    ) | crontab -
+    echo "add cmd @reboot /home/orangepi/check-update.sh in crontab"
 fi
 
 sudo apt-get install jq
 
-#---create script for check update
+#---create script for check update---------------------------------------------------
 if [ ! -f "$setting/check-update.sh" ]; then
-cat << 'EOF' > $setting/check-update.sh
+    cat <<'EOF' >$setting/check-update.sh
 #!/bin/bash
 vs=$(jq -r '.version' "$HOME/setting/update.json")
 updJson=$HOME/setting/update.json
@@ -99,20 +102,165 @@ sleep 3
 done
 EOF
 
-chmod +x $setting/check-update.sh
-cat << EOF > $setting/update.json
+    chmod +x $setting/check-update.sh
+    cat <<EOF >$setting/update.json
 {
   "version": "$(curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/Develop/version.txt)",
   "date": "$(date +%Y%m%d)"
 }
 EOF
 else
-echo "System has check-update.sh"
+    echo "System has check-update.sh"
 fi
 
-#---creat script telegram
+#---text file -----------------------------------------------------------------------
+rm $user/loom/data/log.csv
+
+if [ ! -f "$user/loom/source.txt" ]; then
+    source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
+    cat <<EOF >$user/loom/source.txt
+$source
+EOF
+    echo "Log Source: $source"
+fi
+if [ ! -f "$user/loom/config.txt" ]; then
+    cat <<'EOF' >$user/loom/config.txt
+{"state":{"datestamp":"-","changehour":-,"upt":{"nla":0,"ota":0,"totalA":0,"nlb":0,"otb":0,"totalB":0,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
+EOF
+fi
+
+#---shell script --------------------------------------------------------------------
+
+if [ ! -d "$user/stat_led" ]; then
+    mkdir $user/stat_led
+fi
+
+if [ ! -f $user/stat_led/blink.sh ]; then
+    cat <<'EOF' >$user/stat_led/blink.sh
+                #!/bin/bash
+                gpio_pin=12
+                # ตั้ง GPIO เป็นโหมด Output
+                gpio mode $gpio_pin out
+                # หยุด process ไฟกระพริบก่อน (ถ้ามี)
+                for pid in $(pgrep -f "blink.sh"); do
+                    if [ "$pid" != "$$" ]; then  # หลีกเลี่ยงการ kill ตัวเอง
+                        kill "$pid"
+                    fi
+                done
+                case "$1" in
+                    0)
+                        gpio write $gpio_pin 0  # ปิดไฟ
+                        ;;
+                    1)
+                        while true; do
+                            gpio write $gpio_pin 1
+                            sleep 1
+                            gpio write $gpio_pin 0
+                            sleep 1
+                        done &
+                        ;;
+                    2)
+                        while true; do
+                            gpio write $gpio_pin 1
+                            sleep 0.1
+                            gpio write $gpio_pin 0
+                            sleep 0.1
+                            gpio write $gpio_pin 1
+                            sleep 0.1
+                            gpio write $gpio_pin 0
+                            sleep 5
+                        done &
+                        ;;
+                    3)
+                        gpio write $gpio_pin 1  # ไฟติดค้าง
+                        ;;
+                    *)
+                        echo "Invalid input. Use 0, 1, 2, or 3."
+                        exit 1
+                        ;;
+                esac
+EOF
+    chmod +x $user/stat_led/blink.sh
+else
+    echo "System has Blink.sh"
+fi
+
+if [ ! -f "$user/stat_led/blink11.sh" ]; then
+    cat <<'EOF' >$user/stat_led/blink11.sh
+                
+                #!/bin/bash
+                # กำหนดหมายเลข GPIO pin
+                LED_PIN=11
+                # ตรวจสอบว่ามีพารามิเตอร์ถูกส่งเข้ามาหรือไม่
+                if [ $# -ne 1 ]; then
+                    echo "Usage: $0 <0|1>"
+                    exit 1
+                fi
+                # ตั้งค่า GPIO pin เป็น output
+                gpio mode $LED_PIN out
+                # ฟังก์ชันเพื่อกระพริบไฟ LED
+                blink_led() {
+                    trap "exit 0" SIGTERM  # จัดการกับสัญญาณ SIGTERM เพื่อหยุดการกระพริบ
+                        gpio write $LED_PIN 1
+                }
+                # รับพารามิเตอร์เพื่อควบคุมการกระพริบของไฟ LED
+                if [ $1 -eq 1 ]; then
+                    blink_led &  # เรียกฟังก์ชัน blink_led ใน background
+                    echo $! > /tmp/blink_led_pid  # บันทึก PID ของกระบวนการ blink_led
+                    echo "LED is blinking."
+                    sleep 1
+                    if [ -f /tmp/blink_led_pid ]; then
+                        kill -SIGTERM $(cat /tmp/blink_led_pid)  # ส่งสัญญาณ SIGTERM ไปที่กระบวนการ>
+                        rm /tmp/blink_led_pid  # ลบไฟล์ที่เก็บ PID
+                        echo "LED blinking stopped."
+                        gpio write $LED_PIN 0
+                    else
+                        echo "Blinking process not found."
+                    fi
+                else
+                    echo "Invalid parameter. Use 0 to stop blinking or 1 to start blinking."
+                    exit 1
+                fi
+EOF
+fi
+chmod +x $user/stat_led/blink11.sh
+
+if [ ! -f "$user/stat_led/modbus_err.sh" ]; then
+    cat <<'EOF' >$user/stat_led/modbus_err.sh
+                #!/bin/bash
+                gpio_pin=11
+                # ตั้ง GPIO เป็นโหมด Output
+                gpio mode $gpio_pin out
+                
+                # หยุด process ไฟกระพริบก่อน (ถ้ามี)
+                for pid in $(pgrep -f "modbus_err.sh"); do
+                    if [ "$pid" != "$$" ]; then  # หลีกเลี่ยงการ kill ตัวเอง
+                        kill "$pid"
+                    fi
+                done
+                
+                # ทำงานกระพริบไฟเพียงครั้งเดียว
+                gpio write $gpio_pin 1
+                sleep 0.1
+                gpio write $gpio_pin 0
+                sleep 0.1
+                gpio write $gpio_pin 1
+                sleep 0.1
+                gpio write $gpio_pin 0
+                
+                # หยุดกระบวนการที่เกี่ยวข้อง
+                for pid in $(pgrep -f "modbus_err.sh"); do
+                    if [ "$pid" != "$$" ]; then
+                        kill "$pid"
+                    fi
+                done
+EOF
+    chmod +x $user/stat_led/modbus_err.sh
+fi
+
+#---creat script telegram------------------------------------------------------------
 if [ ! -f $setting/telegramSendUpdate.sh ]; then
-cat << 'EOF' > $setting/telegramSendUpdate.sh
+    cat <<'EOF' >$setting/telegramSendUpdate.sh
 #!/bin/bash
 ipAddr=$(ifconfig wlan0 | grep 'inet ' | awk '{print $2}')
 vs=$(jq '.version' "$HOME/setting/update.json")
@@ -126,14 +274,14 @@ curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
      -d text="$MESSAGE"
 
 EOF
-echo "System create telegramSendUpdate.sh"
-chmod +x $setting/telegramSendUpdate.sh
+    echo "System create telegramSendUpdate.sh"
+    chmod +x $setting/telegramSendUpdate.sh
 else
-echo "System has telegramSendUpdate.sh"
+    echo "System has telegramSendUpdate.sh"
 fi
 
-#---edit flows.json
-cat << 'EOF' > $flows
+#---edit flows.json------------------------------------------------------------------
+cat <<'EOF' >$flows
 [
     {
         "id": "777823ab3e1fee97",
