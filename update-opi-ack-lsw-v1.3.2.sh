@@ -78,6 +78,7 @@ elif((opiMinor != gitMinor)); then
                         newDate=$(date +%Y%m%d)
                         jq --arg val1 "$newDate" --arg val2 "$vsGit" '.date = $val1 | .version = $val2' "$updJson" > "$updJsontmp"
                         mv "$updJsontmp" "$updJson"
+                        . $HOME/setting/telegramSendUpdate.sh
                         exit 0
                 fi
         fi
@@ -87,6 +88,7 @@ elif((opiPatch != gitPatch)); then
                         newDate=$(date +%Y%m%d)
                         jq --arg val1 "$newDate" --arg val2 "$vsGit" '.date = $val1 | .version = $val2' "$updJson" > "$updJsontmp"
                         mv "$updJsontmp" "$updJson"
+                        . $HOME/setting/telegramSendUpdate.sh
                         exit 0
 else
   echo "current version"
