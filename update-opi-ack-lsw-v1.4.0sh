@@ -2,7 +2,7 @@
 user=$HOME
 #---create setting folder-----------------------------------------------------------
 if [ ! -d "$user/setting" ]; then
-    mkdir $HOME/setting
+    mkdir "$HOME/setting"
     echo "System Create Folder setting"
 else
     echo "System has Setting Folder"
@@ -40,7 +40,7 @@ sudo apt-get install jq
 
 #---create script for check update---------------------------------------------------
 if [ ! -f "$setting/check-update.sh" ]; then
-    cat <<'EOF' >$setting/check-update.sh
+    cat <<'EOF' >"$setting/check-update.sh"
 #!/bin/bash
 vs=$(jq -r '.version' "$HOME/setting/update.json")
 updJson=$HOME/setting/update.json
@@ -100,8 +100,8 @@ sleep 3
 done
 EOF
 
-    chmod +x $setting/check-update.sh
-    cat <<EOF >$setting/update.json
+    chmod +x "$setting/check-update.sh"
+    cat <<EOF >"$setting/update.json"
 {
   "version": "$(curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/Develop/version.txt)",
   "date": "$(date +%Y%m%d)"
@@ -112,17 +112,17 @@ else
 fi
 
 #---text file -----------------------------------------------------------------------
-rm $user/loom/data/log.csv
+rm "$user/loom/data/log.csv"
 
 if [ ! -f "$user/loom/source.txt" ]; then
-    source=$(grep -o -E 'source-[0-9]+' $user/.node-red/flows.json | sed 's/source-//' | sort -u)
-    cat <<EOF >$user/loom/source.txt
+    source=$(grep -o -E 'source-[0-9]+' "$user/.node-red/flows.json" | sed 's/source-//' | sort -u)
+    cat <<EOF >"$user/loom/source.txt"
 $source
 EOF
     echo "Log Source: $source"
 fi
 if [ ! -f "$user/loom/config.txt" ]; then
-    cat <<'EOF' >$user/loom/config.txt
+    cat <<'EOF' >"$user/loom/config.txt"
 {"state":{"datestamp":"-","changehour":-,"upt":{"nla":0,"ota":0,"totalA":0,"nlb":0,"otb":0,"totalB":0,"index":0,"ip":"-","version":"-"},"values":{"maintake":{"main":{"min":0,"max":0},"take":{"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"working":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
 EOF
 fi
@@ -130,11 +130,11 @@ fi
 #---shell script --------------------------------------------------------------------
 
 if [ ! -d "$user/stat_led" ]; then
-    mkdir $user/stat_led
+    mkdir "$user/stat_led"
 fi
 
-if [ ! -f $user/stat_led/blink.sh ]; then
-    cat <<'EOF' >$user/stat_led/blink.sh
+if [ ! -f "$user/stat_led/blink.sh" ]; then
+    cat <<'EOF' >"$user/stat_led/blink.sh"
                 #!/bin/bash
                 gpio_pin=12
                 # ตั้ง GPIO เป็นโหมด Output
@@ -178,13 +178,13 @@ if [ ! -f $user/stat_led/blink.sh ]; then
                         ;;
                 esac
 EOF
-    chmod +x $user/stat_led/blink.sh
+    chmod +x "$user/stat_led/blink.sh"
 else
     echo "System has Blink.sh"
 fi
 
 if [ ! -f "$user/stat_led/blink11.sh" ]; then
-    cat <<'EOF' >$user/stat_led/blink11.sh
+    cat <<'EOF' >"$user/stat_led/blink11.sh"
                 
                 #!/bin/bash
                 # กำหนดหมายเลข GPIO pin
@@ -221,10 +221,10 @@ if [ ! -f "$user/stat_led/blink11.sh" ]; then
                 fi
 EOF
 fi
-chmod +x $user/stat_led/blink11.sh
+chmod +x "$user/stat_led/blink11.sh"
 
 if [ ! -f "$user/stat_led/modbus_err.sh" ]; then
-    cat <<'EOF' >$user/stat_led/modbus_err.sh
+    cat <<'EOF' >"$user/stat_led/modbus_err.sh"
                 #!/bin/bash
                 gpio_pin=11
                 # ตั้ง GPIO เป็นโหมด Output
@@ -253,12 +253,12 @@ if [ ! -f "$user/stat_led/modbus_err.sh" ]; then
                     fi
                 done
 EOF
-    chmod +x $user/stat_led/modbus_err.sh
+    chmod +x "$user/stat_led/modbus_err.sh"
 fi
 
 #---creat script telegram------------------------------------------------------------
-if [ ! -f $setting/telegramSendUpdate.sh ]; then
-    cat <<'EOF' >$setting/telegramSendUpdate.sh
+if [ ! -f "$setting/telegramSendUpdate.sh" ]; then
+    cat <<'EOF' >"$setting/telegramSendUpdate.sh"
 #!/bin/bash
 ipAddr=$(ifconfig wlan0 | grep 'inet ' | awk '{print $2}')
 vs=$(jq '.version' "$HOME/setting/update.json")
@@ -273,13 +273,13 @@ curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
 
 EOF
     echo "System create telegramSendUpdate.sh"
-    chmod +x $setting/telegramSendUpdate.sh
+    chmod +x "$setting/telegramSendUpdate.sh"
 else
     echo "System has telegramSendUpdate.sh"
 fi
 
 #---edit flows.json------------------------------------------------------------------
-cat <<'EOF' >$flows
+cat <<'EOF' >"$flows"
 [
     {
         "id": "777823ab3e1fee97",
