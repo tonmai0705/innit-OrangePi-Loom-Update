@@ -2,7 +2,7 @@
 flows=$HOME/.node-red/flows.json
 rm $flows
 
-cat << 'EOF' > $flows
+cat <<'EOF' > $flows
 [
     {
         "id": "777823ab3e1fee97",
@@ -4964,4 +4964,5 @@ cat << 'EOF' > $flows
     }
 ]
 EOF
+
 node-red-restart
