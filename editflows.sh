@@ -2,7 +2,7 @@
 user=$HOME
 rm $user/.node-red/flows.json
 
-cat << 'EOF > "$user/.node-red/flows.json"
+cat << 'EOF' > "$user/.node-red/flows.json"
 [
     {
         "id": "777823ab3e1fee97",
