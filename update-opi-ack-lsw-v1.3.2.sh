@@ -39,7 +39,7 @@ sudo apt-get install jq
 
 #---create script for check update
 if [ ! -f "$setting/check-update.sh" ]; then
-cat << 'EOF' > "$setting/check-update.sh"
+cat << 'EOF' > $setting/check-update.sh
 #!/bin/bash
 vs=$(jq -r '.version' "$HOME/setting/update.json")
 updJson=$HOME/setting/update.json
@@ -97,7 +97,7 @@ sleep 3
 done
 EOF
 chmod +x $setting/check-update.sh
-cat << EOF > "$setting/update.json"
+cat << EOF > $setting/update.json
 {
   "version": "$(curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/Develop/version.txt)",
   "date": "$(date +%Y%m%d)"
@@ -123,14 +123,14 @@ curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
      -d text="$MESSAGE"
 
 EOF
-chmod +x $setting/telegramSendUpdate.sh
 echo "System create telegramSendUpdate.sh"
+chmod +x $setting/telegramSendUpdate.sh
 else
 echo "System has telegramSendUpdate.sh"
 fi
 
 #---edit flows.json
-cat << 'EOF' > "$flows"
+cat << 'EOF' > $flows
 [
     {
         "id": "062d9ee6cb5e367f",
