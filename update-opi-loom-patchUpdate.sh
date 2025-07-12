@@ -2,15 +2,12 @@
 user=$HOME
 # update&upgrade
 sudo apt update -y && sudo apt upgrade -y
-# create setting folder
-cat << 'EOF' > $user/setting/update.json
+# stamp datetime update
+cat << EOF > $setting/update.json
 {
-"version":"1.3.1",
-"majorUpd":20250710,
-"minorUpd":20250710
+  "version": "$(curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/Develop/version.txt)",
+  "date": "$(date +%Y%m%d)"
 }
-EOF
-
 
 #---edit-flows---
 rm $user/.node-red/flows.json
