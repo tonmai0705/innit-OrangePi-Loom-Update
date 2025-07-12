@@ -5092,6 +5092,7 @@ cat << 'EOF' > $flows
     }
 ]
 
-'EOF'
+EOF
+
 echo "ACK-IoT-SYSTEM Already..."
 node-red-restart
