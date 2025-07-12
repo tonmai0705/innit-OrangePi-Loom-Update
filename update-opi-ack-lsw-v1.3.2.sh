@@ -95,7 +95,8 @@ else
 fi
 sleep 3
 done
-'EOF'
+EOF
+
 chmod +x $setting/check-update.sh
 cat << EOF > $setting/update.json
 {
