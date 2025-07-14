@@ -91,7 +91,7 @@ elif((opiPatch != gitPatch)); then
                         . $HOME/setting/telegramSendUpdate.sh
                         exit 0
 else
-  echo "current version"
+  echo "version $vs is current version [$opiDate]"
   exit 0
  fi
 fi
