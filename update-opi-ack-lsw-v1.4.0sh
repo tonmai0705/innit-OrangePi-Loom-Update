@@ -47,7 +47,7 @@ updJsontmp=$HOME/setting/updatetmp.json
 opiMajor=$(echo "$vs" | cut -d'.' -f1)
 opiMinor=$(echo "$vs" | cut -d'.' -f2)
 opiPatch=$(echo "$vs" | cut -d'.' -f3)
-opiDate=$(jq '.date' "$updJson")
+opiDate=$(jq -r '.date' "$updJson")
 month=${opiDate:4:2}
 day=${opiDate:6:2}
 
