@@ -22,156 +22,45 @@ cat << 'EOF' > $user/.node-red/flows.json
         "env": []
     },
     {
-        "id": "df4a94479416f0c4",
+        "id": "062d9ee6cb5e367f",
         "type": "subflow",
-        "name": "Get IP",
-        "info": "",
-        "category": "Special node",
-        "in": [
-            {
-                "x": 80,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "5198508231fcf8a8"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ff6100",
-        "icon": "node-red/white-globe.svg",
-        "status": {
-            "x": 480,
-            "y": 60,
-            "wires": [
-                {
-                    "id": "f3b472b4726bfeec",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
-        "id": "a67f25631bef1988",
-        "type": "subflow",
-        "name": "Global",
-        "info": "",
-        "category": "Special node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "59eb51568d8158c9"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#046a3b",
-        "icon": "font-awesome/fa-globe",
-        "status": {
-            "x": 360,
-            "y": 80,
-            "wires": [
-                {
-                    "id": "23bad38c2d77961c",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
-        "id": "13f006802899e0be",
-        "type": "subflow",
-        "name": "Ping",
-        "info": "",
-        "category": "Special Node",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "633e9c4b40e42584"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 560,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "c7fcb9a183a78340",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#ffb900",
-        "icon": "font-awesome/fa-chain",
-        "status": {
-            "x": 560,
-            "y": 140,
-            "wires": [
-                {
-                    "id": "346948538b2e924a",
-                    "port": 0
-                }
-            ]
-        }
-    },
-    {
-        "id": "31057fe0b0d4c1ec",
-        "type": "subflow",
-        "name": "Blink",
-        "info": "input\r\n - msg.",
-        "category": "Lamp",
-        "in": [
-            {
-                "x": 40,
-                "y": 40,
-                "wires": [
-                    {
-                        "id": "db6fc316f972fc7a"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ef42f5",
-        "icon": "font-awesome/fa-lightbulb-o"
-    },
-    {
-        "id": "e226ede58ea4b202",
-        "type": "subflow",
-        "name": "Modbus & Alarm",
+        "name": "Sensor Check",
         "info": "",
         "category": "Special Node",
         "in": [],
         "out": [],
         "env": [],
         "meta": {},
-        "color": "#6229ff",
-        "icon": "node-red/alert.svg",
+        "color": "#87A980",
         "status": {
-            "x": 380,
-            "y": 220,
+            "x": 370,
+            "y": 160,
             "wires": [
                 {
-                    "id": "c5418b2844d316d7",
+                    "id": "2a334b79d30a7edf",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "c9bf91fd5c385f43",
+        "type": "subflow",
+        "name": "state upTime",
+        "info": "",
+        "category": "Special Node",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#fcba03",
+        "icon": "font-awesome/fa-clock-o",
+        "status": {
+            "x": 380,
+            "y": 80,
+            "wires": [
+                {
+                    "id": "d6a67c89385322a2",
                     "port": 0
                 }
             ]
@@ -255,46 +144,17 @@ cat << 'EOF' > $user/.node-red/flows.json
         }
     },
     {
-        "id": "341bdc3e7e68ae46",
+        "id": "9f979da7e8a5400d",
         "type": "subflow",
-        "name": "conf.Get",
-        "info": "input\r\n - msg.\r\noutput\r\n - msg.payload (config.txt)",
+        "name": "Dashboard",
+        "info": "",
         "category": "Special Node",
-        "in": [
-            {
-                "x": 50,
-                "y": 130,
-                "wires": [
-                    {
-                        "id": "7dcb29351996d6be"
-                    },
-                    {
-                        "id": "258890b7306744af"
-                    },
-                    {
-                        "id": "8e7c7d80304fe097"
-                    },
-                    {
-                        "id": "d6c523303ab0a091"
-                    }
-                ]
-            }
-        ],
+        "in": [],
         "out": [],
         "env": [],
         "meta": {},
-        "color": "#ff834a",
-        "icon": "node-red/cog.svg",
-        "status": {
-            "x": 640,
-            "y": 80,
-            "wires": [
-                {
-                    "id": "24e85514de7978d5",
-                    "port": 0
-                }
-            ]
-        }
+        "color": "#ff3636",
+        "icon": "node-red-contrib-chartjs/pie_chart.png"
     },
     {
         "id": "424004941bcb3307",
@@ -400,6 +260,42 @@ cat << 'EOF' > $user/.node-red/flows.json
         }
     },
     {
+        "id": "78457dab5d6c0503",
+        "type": "subflow",
+        "name": "Device Log",
+        "info": "",
+        "category": "Special Node",
+        "in": [
+            {
+                "x": 60,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "18936721347779ca"
+                    },
+                    {
+                        "id": "5bd37418f0f1f7c3"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#a1a5ff",
+        "icon": "node-red/alert.svg",
+        "status": {
+            "x": 360,
+            "y": 180,
+            "wires": [
+                {
+                    "id": "656d5fdf90f37195",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
         "id": "7a70a201eaa0a148",
         "type": "subflow",
         "name": "Count",
@@ -477,21 +373,27 @@ cat << 'EOF' > $user/.node-red/flows.json
         "icon": "font-awesome/fa-inbox"
     },
     {
-        "id": "78457dab5d6c0503",
+        "id": "341bdc3e7e68ae46",
         "type": "subflow",
-        "name": "Device Log",
-        "info": "",
+        "name": "conf.Get",
+        "info": "input\r\n - msg.\r\noutput\r\n - msg.payload (config.txt)",
         "category": "Special Node",
         "in": [
             {
-                "x": 60,
-                "y": 120,
+                "x": 50,
+                "y": 130,
                 "wires": [
                     {
-                        "id": "18936721347779ca"
+                        "id": "7dcb29351996d6be"
                     },
                     {
-                        "id": "5bd37418f0f1f7c3"
+                        "id": "258890b7306744af"
+                    },
+                    {
+                        "id": "8e7c7d80304fe097"
+                    },
+                    {
+                        "id": "d6c523303ab0a091"
                     }
                 ]
             }
@@ -499,31 +401,18 @@ cat << 'EOF' > $user/.node-red/flows.json
         "out": [],
         "env": [],
         "meta": {},
-        "color": "#a1a5ff",
-        "icon": "node-red/alert.svg",
+        "color": "#ff834a",
+        "icon": "node-red/cog.svg",
         "status": {
-            "x": 360,
-            "y": 180,
+            "x": 640,
+            "y": 80,
             "wires": [
                 {
-                    "id": "656d5fdf90f37195",
+                    "id": "24e85514de7978d5",
                     "port": 0
                 }
             ]
         }
-    },
-    {
-        "id": "9f979da7e8a5400d",
-        "type": "subflow",
-        "name": "Dashboard",
-        "info": "",
-        "category": "Special Node",
-        "in": [],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#ff3636",
-        "icon": "node-red-contrib-chartjs/pie_chart.png"
     },
     {
         "id": "1406c468fdce7358",
@@ -560,45 +449,156 @@ cat << 'EOF' > $user/.node-red/flows.json
         "icon": "font-awesome/fa-send"
     },
     {
-        "id": "c9bf91fd5c385f43",
+        "id": "e226ede58ea4b202",
         "type": "subflow",
-        "name": "state upTime",
+        "name": "Modbus & Alarm",
         "info": "",
         "category": "Special Node",
         "in": [],
         "out": [],
         "env": [],
         "meta": {},
-        "color": "#fcba03",
-        "icon": "font-awesome/fa-clock-o",
+        "color": "#6229ff",
+        "icon": "node-red/alert.svg",
         "status": {
             "x": 380,
-            "y": 80,
+            "y": 220,
             "wires": [
                 {
-                    "id": "d6a67c89385322a2",
+                    "id": "c5418b2844d316d7",
                     "port": 0
                 }
             ]
         }
     },
     {
-        "id": "062d9ee6cb5e367f",
+        "id": "13f006802899e0be",
         "type": "subflow",
-        "name": "Sensor Check",
+        "name": "Ping",
         "info": "",
         "category": "Special Node",
-        "in": [],
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "633e9c4b40e42584"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 560,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "c7fcb9a183a78340",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#ffb900",
+        "icon": "font-awesome/fa-chain",
+        "status": {
+            "x": 560,
+            "y": 140,
+            "wires": [
+                {
+                    "id": "346948538b2e924a",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "31057fe0b0d4c1ec",
+        "type": "subflow",
+        "name": "Blink",
+        "info": "input\r\n - msg.",
+        "category": "Lamp",
+        "in": [
+            {
+                "x": 40,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "db6fc316f972fc7a"
+                    }
+                ]
+            }
+        ],
         "out": [],
         "env": [],
         "meta": {},
-        "color": "#87A980",
+        "color": "#ef42f5",
+        "icon": "font-awesome/fa-lightbulb-o"
+    },
+    {
+        "id": "a67f25631bef1988",
+        "type": "subflow",
+        "name": "Global",
+        "info": "",
+        "category": "Special node",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "59eb51568d8158c9"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#046a3b",
+        "icon": "font-awesome/fa-globe",
         "status": {
-            "x": 370,
-            "y": 160,
+            "x": 360,
+            "y": 80,
             "wires": [
                 {
-                    "id": "2a334b79d30a7edf",
+                    "id": "23bad38c2d77961c",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "df4a94479416f0c4",
+        "type": "subflow",
+        "name": "Get IP",
+        "info": "",
+        "category": "Special node",
+        "in": [
+            {
+                "x": 80,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "5198508231fcf8a8"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#ff6100",
+        "icon": "node-red/white-globe.svg",
+        "status": {
+            "x": 480,
+            "y": 60,
+            "wires": [
+                {
+                    "id": "f3b472b4726bfeec",
                     "port": 0
                 }
             ]
@@ -741,72 +741,46 @@ cat << 'EOF' > $user/.node-red/flows.json
         "h": 40
     },
     {
-        "id": "291667434678740d",
-        "type": "modbus-client",
-        "name": "",
-        "clienttype": "serial",
-        "bufferCommands": true,
-        "stateLogEnabled": false,
-        "queueLogEnabled": false,
-        "failureLogEnabled": true,
-        "tcpHost": "127.0.0.1",
-        "tcpPort": "502",
-        "tcpType": "DEFAULT",
-        "serialPort": "/dev/ttyUSB0",
-        "serialType": "RTU-BUFFERD",
-        "serialBaudrate": "9600",
-        "serialDatabits": "8",
-        "serialStopbits": "1",
-        "serialParity": "none",
-        "serialConnectionDelay": "100",
-        "serialAsciiResponseStartDelimiter": "0x3A",
-        "unit_id": 1,
-        "commandDelay": 1,
-        "clientTimeout": 1000,
-        "reconnectOnTimeout": true,
-        "reconnectTimeout": 2000,
-        "parallelUnitIdsAllowed": true,
-        "showWarnings": true,
-        "showLogs": true
+        "id": "c8b6450989c369f5",
+        "type": "ui-group",
+        "name": "DateSelect",
+        "page": "20308079d89423ea",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
     },
     {
-        "id": "d6f3a7fd07525d85",
-        "type": "ui-base",
-        "name": "myDashboard",
-        "path": "/dashboard",
-        "appIcon": "",
-        "includeClientData": true,
-        "acceptsClientConfig": [
-            "ui-notification",
-            "ui-control"
-        ],
-        "showPathInSidebar": false,
-        "headerContent": "page",
-        "navigationStyle": "default",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": 1,
-        "showDisconnectNotification": true,
-        "allowInstall": false
+        "id": "6da9956de8144acb",
+        "type": "ui-group",
+        "name": "Homepage",
+        "page": "20308079d89423ea",
+        "width": "12",
+        "height": 1,
+        "order": 3,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
     },
     {
-        "id": "93042030270d6867",
-        "type": "ui-theme",
-        "name": "ui_template.themes.defaultTheme",
-        "colors": {
-            "surface": "#2e2e2e",
-            "primary": "#0094ce",
-            "bgPage": "#2e2e2e",
-            "groupBg": "#2e2e2e",
-            "groupOutline": "#2e2e2e"
-        },
-        "sizes": {
-            "density": "default",
-            "pagePadding": "12px",
-            "groupGap": "12px",
-            "groupBorderRadius": "4px",
-            "widgetGap": "12px"
-        }
+        "id": "72adefdf7b5e4ced",
+        "type": "ui-group",
+        "name": "Cmd Update",
+        "page": "20308079d89423ea",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
     },
     {
         "id": "20308079d89423ea",
@@ -845,42 +819,14 @@ cat << 'EOF' > $user/.node-red/flows.json
         "disabled": false
     },
     {
-        "id": "6da9956de8144acb",
+        "id": "4d19f97e8673be96",
         "type": "ui-group",
-        "name": "Homepage",
-        "page": "20308079d89423ea",
-        "width": "12",
-        "height": 1,
-        "order": 3,
-        "showTitle": false,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "c8b6450989c369f5",
-        "type": "ui-group",
-        "name": "DateSelect",
-        "page": "20308079d89423ea",
+        "name": "1",
+        "page": "93ca67d43751815a",
         "width": 6,
         "height": 1,
         "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "72adefdf7b5e4ced",
-        "type": "ui-group",
-        "name": "Cmd Update",
-        "page": "20308079d89423ea",
-        "width": 6,
-        "height": 1,
-        "order": 2,
-        "showTitle": true,
+        "showTitle": false,
         "className": "",
         "visible": "true",
         "disabled": "false",
@@ -923,300 +869,77 @@ cat << 'EOF' > $user/.node-red/flows.json
         "disabled": "false"
     },
     {
-        "id": "4d19f97e8673be96",
-        "type": "ui-group",
-        "name": "1",
-        "page": "93ca67d43751815a",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": false,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
+        "id": "d6f3a7fd07525d85",
+        "type": "ui-base",
+        "name": "myDashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
     },
     {
-        "id": "5198508231fcf8a8",
-        "type": "exec",
-        "z": "df4a94479416f0c4",
-        "command": "hostname -I",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "name": "Fetch IP",
-        "x": 200,
-        "y": 80,
-        "wires": [
-            [
-                "f3b472b4726bfeec"
-            ],
-            [],
-            []
-        ]
+        "id": "93042030270d6867",
+        "type": "ui-theme",
+        "name": "ui_template.themes.defaultTheme",
+        "colors": {
+            "surface": "#2e2e2e",
+            "primary": "#0094ce",
+            "bgPage": "#2e2e2e",
+            "groupBg": "#2e2e2e",
+            "groupOutline": "#2e2e2e"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
     },
     {
-        "id": "f3b472b4726bfeec",
-        "type": "function",
-        "z": "df4a94479416f0c4",
-        "name": "function 2",
-        "func": "let ip = msg.payload.replace(/[\\r\\n\\t ]/g, \"\");\nlet get_ip = global.get(\"config.state.ip\");\n    if((get_ip === undefined && ip) || ip){\n        global.set(\"config.state.ip\", ip);\n    };\nmsg.payload = {\n    fill: \"yellow\",\n    shape: \"ring\",\n    text: `IP:${ip}`\n};\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 60,
-        "wires": [
-            []
-        ]
+        "id": "291667434678740d",
+        "type": "modbus-client",
+        "name": "",
+        "clienttype": "serial",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
     },
     {
-        "id": "6b6cdff899b96d18",
+        "id": "b876448f3a68636e",
         "type": "inject",
-        "z": "df4a94479416f0c4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            },
-            {
-                "p": "path",
-                "v": "/home/orangepi/loom/data/log.csv",
-                "vt": "str"
-            }
-        ],
-        "repeat": "3",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 95,
-        "y": 200,
-        "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "1ab2c4d09e12f25f",
-        "type": "function",
-        "z": "df4a94479416f0c4",
-        "name": "function 13",
-        "func": "const index = global.get(\"config.state.index\");\nconst ip = msg.payload[index - 1].ip;\n if(!ip){\n    global.set(\"config.state.index\", index + 1);\n }",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 375,
-        "y": 200,
-        "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "3b8945c733c04fba",
-        "type": "file in",
-        "z": "df4a94479416f0c4",
-        "name": "",
-        "filename": "path",
-        "filenameType": "msg",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "none",
-        "allProps": false,
-        "x": 200,
-        "y": 200,
-        "wires": [
-            [
-                "a703196f82a9e5ef"
-            ]
-        ]
-    },
-    {
-        "id": "a703196f82a9e5ef",
-        "type": "csv",
-        "z": "df4a94479416f0c4",
-        "name": "",
-        "sep": ",",
-        "hdrin": true,
-        "hdrout": "",
-        "multi": "mult",
-        "ret": "\\r\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": false,
-        "include_null_values": false,
-        "x": 315,
-        "y": 200,
-        "wires": [
-            [
-                "1ab2c4d09e12f25f"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "59eb51568d8158c9",
-        "type": "moment",
-        "z": "a67f25631bef1988",
-        "name": "",
-        "topic": "",
-        "input": "",
-        "inputType": "date",
-        "inTz": "Asia/Bangkok",
-        "adjAmount": 0,
-        "adjType": "days",
-        "adjDir": "add",
-        "format": "",
-        "locale": "en-US",
-        "output": "payload",
-        "outputType": "msg",
-        "outTz": "Asia/Bangkok",
-        "x": 125,
-        "y": 80,
-        "wires": [
-            [
-                "23bad38c2d77961c"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "23bad38c2d77961c",
-        "type": "function",
-        "z": "a67f25631bef1988",
-        "name": "function 1",
-        "func": "var date = new Date(msg.payload);\nlet previousDate = new Date(date); \n    previousDate.setDate(previousDate.getDate() - 1).toString().padStart(2, 0);\nvar year = date.getFullYear(); \nvar month = (date.getMonth() + 1).toString().padStart(2, '0');\nvar day = date.getDate().toString().padStart(2, '0');\nvar hours = date.getHours().toString().padStart(2, '0');\nvar minutes = date.getMinutes().toString().padStart(2, '0');\nvar seconds = date.getSeconds().toString().padStart(2, '0');\nvar dateMian = `${year}/${month}/${day}`;\nvar time = `${hours}:${minutes}:${seconds}`;\nvar datestamp = global.get(\"config.state.datestamp\");\nlet hoursNum = Number(hours);\n    globalSet();\n////////////////////////////// end function set date ///////////////////////////////////////\nif (hoursNum >= 8 && hoursNum <= 23) {\n    let dateset = filename(date);\n    var datenow = dateNow(date);\n    global.set(\"config.state.date_data\", dateset);\n} else {\n    let dateset = filename(previousDate);\n    var datenow = dateNow(previousDate);\n    global.set(\"config.state.date_data\", dateset);\n}\n\nif (datestamp) {\n    if (datenow != datestamp) {\n        resetValues();\n        // global.set(\"report\", true);\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    } else {\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    }\n} else {\n    global.set(\"config.state.datestamp\", datenow);\n}\n    global.set(\"config.state.datenow\", datenow);\n    msg.payload = {\n        fill: \"green\",\n        shape: \"ring\",\n        text: `DATESTAMP:${datestamp} DATE${day}/${month}/${year} TIME:${time}`\n    };\n    return msg;\n\nfunction filename(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}\n\nfunction resetValues(){\n    var meter = new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    var working = new Array(24).fill(0);\n    global.set(\"values.working\", working);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.take.min\", 0);\n    global.set(\"values.maintake.take.max\", 0);\n    global.set(\"config.state.upt.nla\", 0);\n    global.set(\"config.state.upt.ota\", 0);\n    global.set(\"config.state.upt.totalA\", 0);\n    global.set(\"config.state.upt.nlb\", 0);\n    global.set(\"config.state.upt.otb\", 0);\n    global.set(\"config.state.upt.totalB\", 0);\n}\n\nfunction globalSet(){\n    global.set(\"config.datetime.date\", dateMian);\n    global.set(\"config.datetime.day\", day);\n    global.set(\"config.datetime.month\", month);\n    global.set(\"config.datetime.year\", year);\n    global.set(\"config.datetime.time\", time);\n    global.set(\"config.datetime.hour\", hours);\n    global.set(\"config.datetime.minute\", minutes);\n    global.set(\"config.datetime.second\", seconds);\n}\n\nfunction dateNow(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 240,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "633e9c4b40e42584",
-        "type": "ping",
-        "z": "13f006802899e0be",
-        "protocol": "IPv4",
-        "mode": "triggered",
-        "name": "",
-        "host": "",
-        "timer": "10",
-        "inputs": 1,
-        "x": 135,
-        "y": 80,
-        "wires": [
-            [
-                "5805fc6c631c073d"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "5805fc6c631c073d",
-        "type": "function",
-        "z": "13f006802899e0be",
-        "name": "function 684",
-        "func": "global.set(\"config.state.connected\", (msg.payload) ? true : false);\nmsg.payload = global.get(\"config.state.connected\");\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 250,
-        "y": 80,
-        "wires": [
-            [
-                "c7fcb9a183a78340",
-                "346948538b2e924a"
-            ]
-        ]
-    },
-    {
-        "id": "346948538b2e924a",
-        "type": "function",
-        "z": "13f006802899e0be",
-        "name": "function 686",
-        "func": "var sho2 = `[${global.get(\"config.datetime.time\")}] Connected:${global.get(\"config.state.connected\")}`;\nmsg.payload = {\n    \"fill\": \"blue\",\n    \"shape\": \"dot\",\n    \"text\": sho2\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c7fcb9a183a78340",
-        "type": "function",
-        "z": "13f006802899e0be",
-        "name": "function 687",
-        "func": "let c1 = global.get(\"config.state.connected\");\nlet stat = flow.get(\"stat\"); // ใช้ตัวแปรใน flow เพื่อเก็บสถานะ\n// ตรวจสอบว่า payload เปลี่ยนแปลงหรือยัง\nif (stat === undefined) {\n    // ถ้ายังไม่มีสถานะเก็บไว้ (สถานะเริ่มต้น)\n    stat = {\n        payload: 1, // ค่าพื้นฐานของ payload\n        isProcessed: false // กำหนดสถานะให้ทำงานได้ครั้งแรก\n    };\n    flow.set(\"stat\", stat); // เก็บสถานะใน flow\n}\n// ตรวจสอบเงื่อนไขที่กำหนด\nif (c1) {\n    if (stat.payload !== 3) { // ตรวจสอบว่า payload มีการเปลี่ยนแปลงหรือไม่\n        msg.payload = 3;\n        stat.payload = 3; // อัปเดตสถานะ payload\n        stat.isProcessed = true; // ตั้งค่าสถานะว่าได้ทำการประมวลผลแล้ว\n        return msg;\n    }\n} else {\n    if (stat.payload !== 2) { // ตรวจสอบว่า payload มีการเปลี่ยนแปลงหรือไม่\n        msg.payload = 2;\n        stat.payload = 2; // อัปเดตสถานะ payload\n        stat.isProcessed = true; // ตั้งค่าสถานะว่าได้ทำการประมวลผลแล้ว\n        return msg;\n    }\n}\nflow.set(\"stat\", stat); // อัปเดตสถานะใน flow",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "db6fc316f972fc7a",
-        "type": "exec",
-        "z": "31057fe0b0d4c1ec",
-        "command": "./stat_led/blink.sh",
-        "addpay": "payload",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "WeightScale Ready",
-        "x": 115,
-        "y": 40,
-        "wires": [
-            [],
-            [],
-            []
-        ],
-        "icon": "node-red/light.svg",
-        "l": false
-    },
-    {
-        "id": "698cc965e4a64996",
-        "type": "inject",
-        "z": "e226ede58ea4b202",
+        "z": "062d9ee6cb5e367f",
         "name": "",
         "props": [
             {
@@ -1230,27 +953,27 @@ cat << 'EOF' > $user/.node-red/flows.json
         "repeat": "1",
         "crontab": "",
         "once": true,
-        "onceDelay": "35",
+        "onceDelay": "40",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 135,
-        "y": 160,
+        "x": 145,
+        "y": 100,
         "wires": [
             [
-                "d1e4489c3e8ca995",
-                "c5418b2844d316d7"
+                "d254c4f3ec67d313",
+                "fa505a146959395d",
+                "2a334b79d30a7edf"
             ]
         ],
-        "icon": "font-awesome/fa-info-circle",
         "l": false
     },
     {
-        "id": "d1e4489c3e8ca995",
+        "id": "d254c4f3ec67d313",
         "type": "function",
-        "z": "e226ede58ea4b202",
-        "name": "function 6",
-        "func": "let time_cal = msg.payload - global.get(\"config.datetime.timestamp\");\nlet count = flow.get(\"count\") || 0;\ntime_cal > 10000 || !global.get(\"config.datetime.timestamp\") ? flow.set(\"count\", count + 1) : flow.set(\"count\", 0); // 3000 millisec\nreturn count > 300 ? msg : undefined;",
+        "z": "062d9ee6cb5e367f",
+        "name": "take up check",
+        "func": "const main = global.get(\"values.maintake.main.now\");\nlet alarmMain = flow.get(\"alarmMain\") || false;\nconst hour = global.get(\"config.datetime.hour\");\nconst otw = context.get(\"otw\") || \"-\" // otw: one time working\nalarmMain = hour == otw ? true : false;\nif(main > 0 && !alarmMain){\n    context.set(\"otw\", hour);\n    return msg; \n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1258,131 +981,254 @@ cat << 'EOF' > $user/.node-red/flows.json
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 160,
+        "y": 80,
         "wires": [
             [
-                "ce2564d1100f0cb3"
+                "cafeef43fd6b7fd0"
             ]
         ]
     },
     {
-        "id": "c5418b2844d316d7",
+        "id": "938ff7e5f30f5df6",
         "type": "function",
-        "z": "e226ede58ea4b202",
-        "name": "function 7",
-        "func": "let count = flow.get(\"count\")\nmsg.count = count\nmsg.payload = {\n    fill: count < 1? \"green\" : \"red\",\n    shape: count < 1? \"dot\" : \"ring\",\n    text: count\n}\nreturn msg;",
+        "z": "062d9ee6cb5e367f",
+        "name": "function 23",
+        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nconst main = global.get(\"values.maintake.main.now\");\nif (main > 0 && takeUp == 0) {\n    msg.payload = `${global.get(\"config.state.ip\")} 🔩 > [takeUp: ${takeUp} main: ${main}] เซ็นเซอร์ Take up อาจมีปัญหา...`;\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 220,
+        "x": 490,
+        "y": 80,
         "wires": [
             [
-                "b20e01c67a28eeb6"
+                "3a4ac4dbcb8962f9"
             ]
         ]
     },
     {
-        "id": "9eb83d2ca8ce536d",
-        "type": "exec",
-        "z": "e226ede58ea4b202",
-        "command": "reboot",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
+        "id": "cafeef43fd6b7fd0",
+        "type": "delay",
+        "z": "062d9ee6cb5e367f",
         "name": "",
-        "x": 650,
-        "y": 160,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "09af4c1ad37430eb",
-        "type": "exec",
-        "z": "e226ede58ea4b202",
-        "command": "./stat_led/modbus_err.sh",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "blink err",
-        "x": 560,
-        "y": 280,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "b20e01c67a28eeb6",
-        "type": "switch",
-        "z": "e226ede58ea4b202",
-        "name": "",
-        "property": "count",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gt",
-                "v": "0",
-                "vt": "num"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
         "outputs": 1,
-        "x": 410,
-        "y": 280,
-        "wires": [
-            [
-                "09af4c1ad37430eb"
-            ]
-        ]
-    },
-    {
-        "id": "4bcac64d1b91385f",
-        "type": "subflow:1406c468fdce7358",
-        "z": "e226ede58ea4b202",
-        "name": "",
-        "x": 500,
-        "y": 160,
-        "wires": [
-            [
-                "9eb83d2ca8ce536d"
-            ]
-        ]
-    },
-    {
-        "id": "ce2564d1100f0cb3",
-        "type": "function",
-        "z": "e226ede58ea4b202",
-        "name": "function 11",
-        "func": "let wot = flow.get(\"wot\");\nif (!wot) {\n    msg.payload = `❗⛓️‍💥 ${global.get(\"config.state.ip\")} > การส่งข้อมูลของ Converter RS485 อาจมีปัญหา...`;\n    node.status({ fill: \"green\", shape: \"ring\", text: global.get(\"time\") });\n    flow.set(\"wot\", true);\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
         "x": 375,
-        "y": 160,
+        "y": 80,
         "wires": [
             [
-                "4bcac64d1b91385f"
+                "938ff7e5f30f5df6"
             ]
         ],
         "l": false
+    },
+    {
+        "id": "fa505a146959395d",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "main check",
+        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nlet alarmTake = flow.get(\"alarmTake\") || false;\nconst hour = global.get(\"config.datetime.hour\");\nconst otw = context.get(\"otw\") || \"-\" // otw: one time working\nalarmTake = hour == otw ? true : false;\nif(takeUp > 0 && !alarmTake){\n    context.set(\"otw\", hour);\n    return msg; \n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "2cf3a1fca4c05388"
+            ]
+        ]
+    },
+    {
+        "id": "c69c76cd5d3d874f",
+        "type": "subflow:1406c468fdce7358",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "x": 680,
+        "y": 120,
+        "wires": [
+            [
+                "1eec8d095382c328"
+            ]
+        ]
+    },
+    {
+        "id": "1eec8d095382c328",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "function 25",
+        "func": "const httpCode = msg.statusCode;\n\nif(httpCode == 200){\n    flow.set(\"alarmTake\", true);    \n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 805,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "3a4ac4dbcb8962f9",
+        "type": "subflow:1406c468fdce7358",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "029c5ec1b4cd0fb6"
+            ]
+        ]
+    },
+    {
+        "id": "029c5ec1b4cd0fb6",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "function 27",
+        "func": "const httpCode = msg.statusCode;\n\nif(httpCode == 200){\n    flow.set(\"alarmMain\", true);    \n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 805,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "2a334b79d30a7edf",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "Status",
+        "func": "msg.payload ={\n    'fill': 'green',\n    'shape': 'dot',\n    'text': `${global.get(\"config.datetime.time\")}: Last Time Check`\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2cf3a1fca4c05388",
+        "type": "delay",
+        "z": "062d9ee6cb5e367f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 375,
+        "y": 120,
+        "wires": [
+            [
+                "20ce10615defa2e5"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "20ce10615defa2e5",
+        "type": "function",
+        "z": "062d9ee6cb5e367f",
+        "name": "main check",
+        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nconst main = global.get(\"values.maintake.main.now\");\n\nif(takeUp > 0 && main == 0){\n    msg.payload = `${global.get(\"config.state.ip\")} 🔩 > [takeUp: ${takeUp} main: ${main}] เซ็นเซอร์ Main อาจมีปัญหา...`;\n    return msg; \n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "c69c76cd5d3d874f"
+            ]
+        ]
+    },
+    {
+        "id": "4d414fcfa4d1f563",
+        "type": "inject",
+        "z": "c9bf91fd5c385f43",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "6",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "d6a67c89385322a2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d6a67c89385322a2",
+        "type": "function",
+        "z": "c9bf91fd5c385f43",
+        "name": "UPTIME",
+        "func": "let upTimenla = global.get(\"config.state.upt.nla\") || 0;\nlet upTimeota = global.get(\"config.state.upt.ota\") || 0;\nlet upTimetotalA = global.get(\"config.state.upt.totalA\") || 0;\nlet upTimenlb = global.get(\"config.state.upt.nlb\") || 0;\nlet upTimeotb = global.get(\"config.state.upt.otb\") || 0;\nlet upTimetotalB = global.get(\"config.state.upt.totalB\") || 0;\n\nlet upTimetotal = global.get(\"config.state.upt.total\") || 0;\nconst sec = 1;\nvar secNow;\nlet hour = global.get(\"config.datetime.hour\");\n    hour = Number(hour);\n    if(hour >= 8 && hour <= 17){\n        global.set(\"config.state.upt.nla\", upTimenla + sec);\n        secNow = upTimenla;\n    }else if(hour >= 18 && hour <= 19){\n        global.set(\"config.state.upt.ota\", upTimeota + sec);\n        secNow = upTimeota;\n    }else if((hour >= 20 && hour <= 23) || ( hour >= 0 && hour <= 5)){\n        global.set(\"config.state.upt.nlb\", upTimenlb + sec); \n        secNow = upTimenlb;\n    }else if(hour >= 6 && hour <= 7){\n        global.set(\"config.state.upt.otb\", upTimeotb + sec);\n        secNow = upTimeotb;\n    }\n    upTimetotalA = upTimenla + upTimeota;\n        global.set(\"config.state.upt.totalA\", upTimetotalA);\n    upTimetotalB = upTimenlb + upTimeotb;\n        global.set(\"config.state.upt.totalB\", upTimetotalB);\n    upTimetotal = upTimetotalA + upTimetotalB;\n        global.set(\"config.state.upt.total\", upTimetotal);\nmsg.payload = {\n    'fill': 'yellow',\n    'shape': 'dot',\n    'text': `Second: ${secNow} | nla: ${setTime(upTimenla)} | ota: ${setTime(upTimeota)} | nlb: ${setTime(upTimenlb)} | otb: ${setTime(upTimeotb)} | total: ${setTime(upTimetotal)}`\n};\nreturn msg;\n\nfunction setTime(second){\n    let hours = Math.floor(second / 3600)\n    let minutes = Math.floor((second % 3600) / 60)\n    let seconds = Math.floor((second % 60) / 1)\n    let format = hours + ':' + minutes + ':' + seconds\n    return format;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 80,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "861f956f24a820d1",
@@ -1527,323 +1373,473 @@ cat << 'EOF' > $user/.node-red/flows.json
         ]
     },
     {
-        "id": "581e4659c476b910",
-        "type": "file in",
-        "z": "341bdc3e7e68ae46",
-        "name": "Read",
-        "filename": "/home/orangepi/loom/config.txt",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 310,
-        "y": 140,
+        "id": "ae3d5428e72f795e",
+        "type": "ui-form",
+        "z": "9f979da7e8a5400d",
+        "name": "Date Set",
+        "group": "c8b6450989c369f5",
+        "label": "Date Set",
+        "order": 1,
+        "width": "2",
+        "height": "6",
+        "options": [
+            {
+                "label": "Date",
+                "key": "date",
+                "type": "date",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Time",
+                "key": "time",
+                "type": "time",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "range",
+                "key": "range",
+                "type": "dropdown",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "date": "",
+            "time": "",
+            "range": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "",
+        "resetOnSubmit": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": false,
+        "className": "",
+        "passthru": false,
+        "dropdownOptions": [
+            {
+                "dropdown": "range",
+                "value": "f",
+                "label": "< 00:30"
+            },
+            {
+                "dropdown": "range",
+                "value": "s",
+                "label": "> 00:30"
+            }
+        ],
+        "x": 200,
+        "y": 80,
         "wires": [
             [
-                "1af31287089bf3ac",
-                "24e85514de7978d5"
-            ]
-        ],
-        "icon": "node-red/sort.svg"
-    },
-    {
-        "id": "1af31287089bf3ac",
-        "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "Set value",
-        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour);\n    global.set(\"config.state.upt.total\", payload.state.upt.total);\n    global.set(\"config.state.upt.nla\", payload.state.upt.nla);\n    global.set(\"config.state.upt.ota\", payload.state.upt.ota);\n    global.set(\"config.state.upt.totalA\", payload.state.upt.totalA);\n    global.set(\"config.state.upt.nlb\", payload.state.upt.nlb);\n    global.set(\"config.state.upt.otb\", payload.state.upt.otb);\n    global.set(\"config.state.upt.totalB\", payload.state.upt.totalB);\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n    const arr1 = new Array(24).fill(0);\n    const arr2 = new Array(24).fill(0);\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter || arr1);\n    let working = payload.values.working;\n    global.set(\"values.working\", working || arr2);\n    ",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 415,
-        "y": 140,
-        "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "0010ce9b239656e0",
-        "type": "catch",
-        "z": "341bdc3e7e68ae46",
-        "name": "",
-        "scope": [
-            "581e4659c476b910",
-            "1af31287089bf3ac"
-        ],
-        "uncaught": false,
-        "x": 310,
-        "y": 180,
-        "wires": [
-            [
-                "4c08362380676e6d"
+                "7bdd2a0ff8b3a124"
             ]
         ]
     },
     {
-        "id": "403b9f45ce07e19d",
-        "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "function 10",
-        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour);\n    global.set(\"config.state.upt.total\", payload.state.upt.total);\n    global.set(\"config.state.upt.nla\", payload.state.upt.nla);\n    global.set(\"config.state.upt.ota\", payload.state.upt.ota);\n    global.set(\"config.state.upt.totalA\", payload.state.upt.totalA);\n    global.set(\"config.state.upt.nlb\", payload.state.upt.nlb);\n    global.set(\"config.state.upt.otb\", payload.state.upt.otb);\n    global.set(\"config.state.upt.totalB\", payload.state.upt.totalB);\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n    const arr1 = new Array(24).fill(0);\n    const arr2 = new Array(24).fill(0);\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter || arr1);  \n    let working = payload.values.working;\n    global.set(\"values.working\", working || arr2);\n    return msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 545,
-        "y": 180,
-        "wires": [
-            [
-                "13e5e83fe8bf9607",
-                "28a9aa3fad6e642c"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "24e85514de7978d5",
-        "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "function 11",
-        "func": "if(msg.payload){\nmsg.payload = {\n    'fill': 'bule',\n    'shape': 'dot',\n    'text': `ts: ${flow.get(\"ts\")}`\n}\nreturn msg;\n}\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
+        "id": "8a5b72bf773262df",
+        "type": "ui-table",
+        "z": "9f979da7e8a5400d",
+        "group": "6da9956de8144acb",
+        "name": "Log",
+        "label": "Log",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": true,
+        "showSearch": true,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 850,
         "y": 80,
         "wires": [
             []
         ]
     },
     {
-        "id": "7dcb29351996d6be",
-        "type": "delay",
-        "z": "341bdc3e7e68ae46",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
+        "id": "7bdd2a0ff8b3a124",
+        "type": "function",
+        "z": "9f979da7e8a5400d",
+        "name": "function 16",
+        "func": "const date = msg.payload.date;\nconst time = msg.payload.time;\nlet arr = date.split(\"-\");\nconst year = arr[0];\nconst month = arr[1];\nconst day = arr[2];\nconst hour = time.substring(0,2);\nconst range = msg.payload.range\nmsg.path = `/home/orangepi/deviceLog/${year}/${month}-${day}/${hour}/${range}.csv`\nmsg.payload = {\n    'year': year,\n    'month': month,\n    'day': day,\n    'hour': hour,\n    'range': range\n}\nreturn msg;",
         "outputs": 1,
-        "x": 160,
-        "y": 140,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 80,
         "wires": [
             [
-                "581e4659c476b910"
+                "fb91dffcd2ba9264"
             ]
         ]
     },
     {
-        "id": "258890b7306744af",
+        "id": "fb91dffcd2ba9264",
         "type": "file in",
-        "z": "341bdc3e7e68ae46",
+        "z": "9f979da7e8a5400d",
         "name": "",
-        "filename": "/home/orangepi/loom/data/log.csv",
-        "filenameType": "str",
+        "filename": "path",
+        "filenameType": "msg",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 115,
-        "y": 100,
+        "x": 540,
+        "y": 80,
         "wires": [
             [
-                "b8503deb0ae9cab9"
+                "d14440ddfc00f24d"
             ]
-        ],
-        "l": false
+        ]
     },
     {
-        "id": "b8503deb0ae9cab9",
+        "id": "d14440ddfc00f24d",
         "type": "csv",
-        "z": "341bdc3e7e68ae46",
+        "z": "9f979da7e8a5400d",
         "name": "",
         "sep": ",",
         "hdrin": "",
         "hdrout": "none",
         "multi": "mult",
-        "ret": "\\n",
+        "ret": "\\r\\n",
         "temp": "",
         "skip": "0",
         "strings": true,
         "include_empty_strings": "",
         "include_null_values": "",
-        "x": 175,
-        "y": 100,
+        "x": 690,
+        "y": 80,
         "wires": [
             [
-                "48a2a0290809c5a0"
+                "8a5b72bf773262df"
+            ]
+        ]
+    },
+    {
+        "id": "4dda3b250a7dd136",
+        "type": "ui-event",
+        "z": "9f979da7e8a5400d",
+        "ui": "d6f3a7fd07525d85",
+        "name": "",
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "7e5c7f382706458d"
+            ]
+        ]
+    },
+    {
+        "id": "7e5c7f382706458d",
+        "type": "function",
+        "z": "9f979da7e8a5400d",
+        "name": "function 17",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 725,
+        "y": 120,
+        "wires": [
+            [
+                "8a5b72bf773262df",
+                "2f132ec082f8504a"
             ]
         ],
         "l": false
     },
     {
-        "id": "48a2a0290809c5a0",
-        "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "le",
-        "func": "var length = msg.payload.length\nlength = length - 1\nglobal.set(\"config.state.row\", length)",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 235,
-        "y": 100,
+        "id": "0bfe4e44d508948c",
+        "type": "exec",
+        "z": "9f979da7e8a5400d",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 830,
+        "y": 300,
         "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "8e7c7d80304fe097",
-        "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "function 12",
-        "func": "const date = new Date(msg.payload);\n\nconst bangkokTime = date.toLocaleString('en-GB', { \n  timeZone: 'Asia/Bangkok',\n  year: 'numeric', month: '2-digit', day: '2-digit',\n  hour: '2-digit', minute: '2-digit', second: '2-digit'\n});\nflow.set(\"ts\", bangkokTime);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 170,
-        "y": 180,
-        "wires": [
+            [
+                "b4c63890a364599b"
+            ],
+            [],
             []
         ]
     },
     {
-        "id": "d6c523303ab0a091",
-        "type": "file in",
-        "z": "341bdc3e7e68ae46",
+        "id": "a5a92509c611eeaa",
+        "type": "ui-text-input",
+        "z": "9f979da7e8a5400d",
+        "group": "72adefdf7b5e4ced",
         "name": "",
-        "filename": "/home/orangepi/loom/source.txt",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "none",
-        "allProps": false,
-        "x": 115,
-        "y": 60,
+        "label": "Version Update",
+        "order": 2,
+        "width": "2",
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "mode": "text",
+        "tooltip": "",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": false,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": true,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 280,
+        "y": 180,
         "wires": [
             [
-                "061df98b883d0c2f"
+                "b6730286a98ef205"
             ]
-        ],
-        "l": false
+        ]
     },
     {
-        "id": "061df98b883d0c2f",
+        "id": "20096dec95d8ca8b",
+        "type": "ui-button",
+        "z": "9f979da7e8a5400d",
+        "group": "72adefdf7b5e4ced",
+        "name": "",
+        "label": "Update",
+        "order": 3,
+        "width": "6",
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "payload",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "d83203e8df4e2258"
+            ]
+        ]
+    },
+    {
+        "id": "b6730286a98ef205",
         "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "le",
-        "func": "var source = Number(msg.payload)\nglobal.set(\"source\", source)",
+        "z": "9f979da7e8a5400d",
+        "name": "function 18",
+        "func": "const version = msg.payload\n    flow.set(\"vs\", version);\nmsg.ui_update = {\n    'label': `Update To Version : ${version}`\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 175,
-        "y": 60,
-        "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "4c08362380676e6d",
-        "type": "file in",
-        "z": "341bdc3e7e68ae46",
-        "name": "Read",
-        "filename": "/home/orangepi/loom/config.txt.bak",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 450,
-        "y": 180,
+        "x": 310,
+        "y": 300,
         "wires": [
             [
-                "403b9f45ce07e19d"
+                "20096dec95d8ca8b"
             ]
-        ],
-        "icon": "node-red/sort.svg"
+        ]
     },
     {
-        "id": "13e5e83fe8bf9607",
+        "id": "d83203e8df4e2258",
+        "type": "function",
+        "z": "9f979da7e8a5400d",
+        "name": "function 19",
+        "func": "const version = flow.get(\"vs\")\nmsg.payload = `curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/main/updaet-opi-loom-source-9-v${version}.sh | bash`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 300,
+        "wires": [
+            [
+                "0bfe4e44d508948c"
+            ]
+        ]
+    },
+    {
+        "id": "b4c63890a364599b",
+        "type": "function",
+        "z": "9f979da7e8a5400d",
+        "name": "function 20",
+        "func": "if(msg.payload){\n    global.set(\"version\", flow.get(\"vs\"));\n    msg.ui_update = {\n    'label': `Software Version :`\n    }\n    msg.payload = `Software Version: ${global.get(\"version\")}`\n    return msg;\n}else{\n    msg.ui_update = {\n    'label': `Software Version :`\n    }\n    msg.payload = `Version Not Found`\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 280,
+        "wires": [
+            [
+                "e7bae9c9943d4e7f",
+                "c540559361daad49"
+            ]
+        ]
+    },
+    {
+        "id": "e7bae9c9943d4e7f",
+        "type": "ui-text",
+        "z": "9f979da7e8a5400d",
+        "group": "72adefdf7b5e4ced",
+        "order": 1,
+        "width": "3",
+        "height": 0,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1170,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2f132ec082f8504a",
+        "type": "function",
+        "z": "9f979da7e8a5400d",
+        "name": "function 21",
+        "func": "msg.ui_update = {\n    'label': `Software Version :`\n}\nmsg.payload = `${global.get(\"version\")}`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 220,
+        "wires": [
+            [
+                "e7bae9c9943d4e7f"
+            ]
+        ]
+    },
+    {
+        "id": "2f95bf4b23247bd3",
+        "type": "file",
+        "z": "9f979da7e8a5400d",
+        "name": "config",
+        "filename": "/home/orangepi/loom/config.txt.tmp",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 1310,
+        "y": 320,
+        "wires": [
+            [
+                "eefc3029131a18d7"
+            ]
+        ],
+        "icon": "node-red/redis.svg"
+    },
+    {
+        "id": "c540559361daad49",
+        "type": "function",
+        "z": "9f979da7e8a5400d",
+        "name": "fig value",
+        "func": "msg.payload = {\n    \"state\": {\n        \"datestamp\": global.get(\"config.state.datestamp\"),\n        \"hourstamp\": global.get(\"config.state.hourstamp\"),\n        \"changehour\": global.get(\"config.state.changehour\"),\n        \"index\": global.get(\"config.state.index\"),\n        \"ip\": global.get(\"config.state.ip\"),\n        \"version\": global.get(\"version\") || \"-\"\n    },\n    \"values\": {\n        \"maintake\": {\n            \"main\": {\n                \"min\": global.get(\"values.maintake.main.min\"),\n                \"max\": global.get(\"values.maintake.main.max\")\n            },\n            \"take\": {\n                \"min\": global.get(\"values.maintake.take.min\"),\n                \"max\": global.get(\"values.maintake.take.max\")\n            }\n        },\n        \"meter\": global.get(\"values.meter\"),\n        \"working\": global.get(\"values.working\")\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 320,
+        "wires": [
+            [
+                "2f95bf4b23247bd3"
+            ]
+        ]
+    },
+    {
+        "id": "eefc3029131a18d7",
         "type": "exec",
-        "z": "341bdc3e7e68ae46",
-        "command": "cp $HOME/loom/config.txt.bak $HOME/loom/config.txt",
+        "z": "9f979da7e8a5400d",
+        "command": "mv /home/orangepi/loom/config.txt.tmp /home/orangepi/loom/config.txt",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "winHide": false,
         "oldrc": false,
-        "name": "repiar config",
-        "x": 650,
-        "y": 200,
+        "name": "move .tmp",
+        "x": 1450,
+        "y": 340,
         "wires": [
-            [],
+            [
+                "1d920d649052d9ea"
+            ],
             [],
             []
         ]
     },
     {
-        "id": "133f022c804089c9",
-        "type": "subflow:1406c468fdce7358",
-        "z": "341bdc3e7e68ae46",
-        "name": "",
-        "x": 740,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "28a9aa3fad6e642c",
+        "id": "1d920d649052d9ea",
         "type": "function",
-        "z": "341bdc3e7e68ae46",
-        "name": "function 690",
-        "func": "\nif (1) {\n    msg.payload = `🗂️ ${global.get(\"config.state.ip\")} > Orange Pi เกิดปัญหาในการอ่านไฟล์ Config... Overwrite > config.txt`;\n    node.status({ fill: \"green\", shape: \"ring\", text: global.get(\"time\") });\n    flow.set(\"wot\", true);\n    return msg;\n}",
+        "z": "9f979da7e8a5400d",
+        "name": "function 22",
+        "func": "msg.payload = {\n    'fill': 'blue',\n    'shape': 'dot',\n    'text': msg.filename \n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 615,
-        "y": 140,
+        "x": 1630,
+        "y": 340,
         "wires": [
-            [
-                "133f022c804089c9"
-            ]
-        ],
-        "l": false
+            []
+        ]
     },
     {
         "id": "3925be8bad2bdf74",
@@ -2616,6 +2612,217 @@ cat << 'EOF' > $user/.node-red/flows.json
         "l": false
     },
     {
+        "id": "5bd37418f0f1f7c3",
+        "type": "function",
+        "z": "78457dab5d6c0503",
+        "name": "meter",
+        "func": "var date = new Date(msg.payload);\nlet previousDate = new Date(date); \n    previousDate.setDate(previousDate.getDate() - 1).toString().padStart(2, 0);\nvar year = date.getFullYear(); \nvar month = (date.getMonth() + 1).toString().padStart(2, '0');\nvar day = date.getDate().toString().padStart(2, '0');\nvar hour = date.getHours().toString().padStart(2, '0');\nlet fs_c = flow.get(\"fs\");\nlet fs = (Number(global.get(\"config.datetime.minute\"))) <= 30 ? \"f\" : \"s\";\nmsg.path = `/home/orangepi/deviceLog/${year}/${month}-${day}/${hour}/${fs}.csv`;\nlet path = `/home/orangepi/deviceLog/${year}/`;\nflow.set(\"path\", path);\nif(fs != fs_c){\n    flow.set(\"fs\", fs);\n    msg.reset = \" \";\n}\nmsg.payload = {\n    'ts': flow.get(\"ts\"),\n    'date': global.get(\"config.datetime.date\"),\n    'time': global.get(\"config.datetime.time\"),\n    'ip': global.get(\"config.state.ip\"),\n    'index': global.get(\"config.state.index\"),\n    'datestamp': global.get(\"config.state.datestamp\"),\n    'datenow': global.get(\"config.state.datenow\"),\n    'main': global.get(\"values.maintake.main.now\"),\n    'm_min': global.get(\"values.maintake.main.min\"),\n    'm_max': global.get(\"values.maintake.main.max\"),\n    'take': global.get(\"values.maintake.take.now\"),\n    't_min': global.get(\"values.maintake.take.min\"),\n    't_max': global.get(\"values.maintake.take.max\"),\n    'take_cal': Number(parseFloat(((global.get(\"values.maintake.main.now\") * 8) / 39.37) / 7.7).toFixed(2)) || 0,\n    'count': global.get(\"hex32\"),\n    'total_m': global.get(\"values.total.meter.total\"),\n};\nnode.status({ fill: \"blue\", shape: \"dot\", text:\"count: \" + global.get(\"hex32\")});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "656d5fdf90f37195",
+                "11d7e025f0296cd9"
+            ]
+        ]
+    },
+    {
+        "id": "656d5fdf90f37195",
+        "type": "function",
+        "z": "78457dab5d6c0503",
+        "name": "function 3",
+        "func": "msg.payload = {\n    'fill': 'blue',\n    'shape': 'dot',\n    'text': `[C]: ${global.get(\"hex32\")}`\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 285,
+        "y": 180,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "11d7e025f0296cd9",
+        "type": "csv",
+        "z": "78457dab5d6c0503",
+        "name": "",
+        "sep": ",",
+        "hdrin": false,
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "5971486c721e0300"
+            ]
+        ]
+    },
+    {
+        "id": "5971486c721e0300",
+        "type": "file",
+        "z": "78457dab5d6c0503",
+        "name": "",
+        "filename": "path",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d1c1aa82c8b72a93",
+        "type": "function",
+        "z": "78457dab5d6c0503",
+        "name": "function 4",
+        "func": "let path = flow.get(\"path\");\nmsg.payload = { 'start': path}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 300,
+        "wires": [
+            [
+                "d9db9591a4d3b731"
+            ]
+        ]
+    },
+    {
+        "id": "d9db9591a4d3b731",
+        "type": "fs-file-lister",
+        "z": "78457dab5d6c0503",
+        "name": "",
+        "start": "/",
+        "pattern": "*.*",
+        "folders": "*",
+        "hidden": true,
+        "lstype": "directories",
+        "path": true,
+        "single": true,
+        "depth": "0",
+        "stat": true,
+        "showWarnings": false,
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "c1dfe81f680e6f01"
+            ]
+        ]
+    },
+    {
+        "id": "18936721347779ca",
+        "type": "function",
+        "z": "78457dab5d6c0503",
+        "name": "function 7",
+        "func": "flow.set(\"speed_main_motor\", msg.main);\nflow.set(\"speed_take_up\", msg.take);\nflow.set(\"take_cal\", msg.take_cal);\nflow.set(\"ts\", msg.payload);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1dfe81f680e6f01",
+        "type": "function",
+        "z": "78457dab5d6c0503",
+        "name": "function 5",
+        "func": "let length = msg.payload.length;\nlet delete_file = msg.payload[0].name;\n    if(length > 30){\n        msg.payload = `rm -rf ${delete_file}`\n        return msg;\n    }",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 300,
+        "wires": [
+            [
+                "d376633b3de3778a"
+            ]
+        ]
+    },
+    {
+        "id": "d376633b3de3778a",
+        "type": "exec",
+        "z": "78457dab5d6c0503",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 730,
+        "y": 300,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "22b7ddd5b8f324e8",
+        "type": "inject",
+        "z": "78457dab5d6c0503",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 85,
+        "y": 300,
+        "wires": [
+            [
+                "d1c1aa82c8b72a93"
+            ]
+        ],
+        "l": false
+    },
+    {
         "id": "329b2dc06d31e4a6",
         "type": "file",
         "z": "7a70a201eaa0a148",
@@ -2844,684 +3051,323 @@ cat << 'EOF' > $user/.node-red/flows.json
         "l": false
     },
     {
-        "id": "5bd37418f0f1f7c3",
-        "type": "function",
-        "z": "78457dab5d6c0503",
-        "name": "meter",
-        "func": "var date = new Date(msg.payload);\nlet previousDate = new Date(date); \n    previousDate.setDate(previousDate.getDate() - 1).toString().padStart(2, 0);\nvar year = date.getFullYear(); \nvar month = (date.getMonth() + 1).toString().padStart(2, '0');\nvar day = date.getDate().toString().padStart(2, '0');\nvar hour = date.getHours().toString().padStart(2, '0');\nlet fs_c = flow.get(\"fs\");\nlet fs = (Number(global.get(\"config.datetime.minute\"))) <= 30 ? \"f\" : \"s\";\nmsg.path = `/home/orangepi/deviceLog/${year}/${month}-${day}/${hour}/${fs}.csv`;\nlet path = `/home/orangepi/deviceLog/${year}/`;\nflow.set(\"path\", path);\nif(fs != fs_c){\n    flow.set(\"fs\", fs);\n    msg.reset = \" \";\n}\nmsg.payload = {\n    'ts': flow.get(\"ts\"),\n    'date': global.get(\"config.datetime.date\"),\n    'time': global.get(\"config.datetime.time\"),\n    'ip': global.get(\"config.state.ip\"),\n    'index': global.get(\"config.state.index\"),\n    'datestamp': global.get(\"config.state.datestamp\"),\n    'datenow': global.get(\"config.state.datenow\"),\n    'main': global.get(\"values.maintake.main.now\"),\n    'm_min': global.get(\"values.maintake.main.min\"),\n    'm_max': global.get(\"values.maintake.main.max\"),\n    'take': global.get(\"values.maintake.take.now\"),\n    't_min': global.get(\"values.maintake.take.min\"),\n    't_max': global.get(\"values.maintake.take.max\"),\n    'take_cal': Number(parseFloat(((global.get(\"values.maintake.main.now\") * 8) / 39.37) / 7.7).toFixed(2)) || 0,\n    'count': global.get(\"hex32\"),\n    'total_m': global.get(\"values.total.meter.total\"),\n};\nnode.status({ fill: \"blue\", shape: \"dot\", text:\"count: \" + global.get(\"hex32\")});\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 190,
+        "id": "581e4659c476b910",
+        "type": "file in",
+        "z": "341bdc3e7e68ae46",
+        "name": "Read",
+        "filename": "/home/orangepi/loom/config.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 310,
         "y": 140,
         "wires": [
             [
-                "656d5fdf90f37195",
-                "11d7e025f0296cd9"
+                "1af31287089bf3ac",
+                "24e85514de7978d5"
             ]
-        ]
+        ],
+        "icon": "node-red/sort.svg"
     },
     {
-        "id": "656d5fdf90f37195",
+        "id": "1af31287089bf3ac",
         "type": "function",
-        "z": "78457dab5d6c0503",
-        "name": "function 3",
-        "func": "msg.payload = {\n    'fill': 'blue',\n    'shape': 'dot',\n    'text': `[C]: ${global.get(\"hex32\")}`\n}\nreturn msg;",
+        "z": "341bdc3e7e68ae46",
+        "name": "Set value",
+        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour);\n    global.set(\"config.state.upt.total\", payload.state.upt.total);\n    global.set(\"config.state.upt.nla\", payload.state.upt.nla);\n    global.set(\"config.state.upt.ota\", payload.state.upt.ota);\n    global.set(\"config.state.upt.totalA\", payload.state.upt.totalA);\n    global.set(\"config.state.upt.nlb\", payload.state.upt.nlb);\n    global.set(\"config.state.upt.otb\", payload.state.upt.otb);\n    global.set(\"config.state.upt.totalB\", payload.state.upt.totalB);\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n    const arr1 = new Array(24).fill(0);\n    const arr2 = new Array(24).fill(0);\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter || arr1);\n    let working = payload.values.working;\n    global.set(\"values.working\", working || arr2);\n    ",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 285,
+        "x": 415,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "0010ce9b239656e0",
+        "type": "catch",
+        "z": "341bdc3e7e68ae46",
+        "name": "",
+        "scope": [
+            "581e4659c476b910",
+            "1af31287089bf3ac"
+        ],
+        "uncaught": false,
+        "x": 310,
         "y": 180,
         "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "11d7e025f0296cd9",
-        "type": "csv",
-        "z": "78457dab5d6c0503",
-        "name": "",
-        "sep": ",",
-        "hdrin": false,
-        "hdrout": "once",
-        "multi": "one",
-        "ret": "\\r\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": "",
-        "include_null_values": "",
-        "x": 340,
-        "y": 140,
-        "wires": [
             [
-                "5971486c721e0300"
+                "4c08362380676e6d"
             ]
         ]
     },
     {
-        "id": "5971486c721e0300",
-        "type": "file",
-        "z": "78457dab5d6c0503",
-        "name": "",
-        "filename": "path",
-        "filenameType": "msg",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "false",
-        "encoding": "utf8",
-        "x": 500,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d1c1aa82c8b72a93",
+        "id": "403b9f45ce07e19d",
         "type": "function",
-        "z": "78457dab5d6c0503",
-        "name": "function 4",
-        "func": "let path = flow.get(\"path\");\nmsg.payload = { 'start': path}\nreturn msg;",
+        "z": "341bdc3e7e68ae46",
+        "name": "function 10",
+        "func": "const payload = JSON.parse(msg.payload);\n    global.set(\"config.state.ip\", payload.state.ip);\n    global.set(\"config.state.datestamp\", payload.state.datestamp);\n    global.set(\"config.state.index\", payload.state.index);\n    global.set(\"config.state.changehour\", payload.state.changehour);\n    global.set(\"config.state.upt.total\", payload.state.upt.total);\n    global.set(\"config.state.upt.nla\", payload.state.upt.nla);\n    global.set(\"config.state.upt.ota\", payload.state.upt.ota);\n    global.set(\"config.state.upt.totalA\", payload.state.upt.totalA);\n    global.set(\"config.state.upt.nlb\", payload.state.upt.nlb);\n    global.set(\"config.state.upt.otb\", payload.state.upt.otb);\n    global.set(\"config.state.upt.totalB\", payload.state.upt.totalB);\n    global.set(\"version\", payload.state.version || \"-\");\n    let main_min = payload.values.maintake.main.min ;\n    global.set(\"values.maintake.main.min\", main_min);\n    let main_max = payload.values.maintake.main.max ;\n    global.set(\"values.maintake.main.max\", main_max);\n    let take_min = payload.values.maintake.take.min ;\n    global.set(\"values.maintake.take.min\", take_min);\n    let take_max = payload.values.maintake.take.max ;\n    global.set(\"values.maintake.take.max\", take_max);\n    const arr1 = new Array(24).fill(0);\n    const arr2 = new Array(24).fill(0);\n    let meter = payload.values.meter;\n    global.set(\"values.meter\", meter || arr1);  \n    let working = payload.values.working;\n    global.set(\"values.working\", working || arr2);\n    return msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 200,
-        "y": 300,
+        "x": 545,
+        "y": 180,
         "wires": [
             [
-                "d9db9591a4d3b731"
-            ]
-        ]
-    },
-    {
-        "id": "d9db9591a4d3b731",
-        "type": "fs-file-lister",
-        "z": "78457dab5d6c0503",
-        "name": "",
-        "start": "/",
-        "pattern": "*.*",
-        "folders": "*",
-        "hidden": true,
-        "lstype": "directories",
-        "path": true,
-        "single": true,
-        "depth": "0",
-        "stat": true,
-        "showWarnings": false,
-        "x": 360,
-        "y": 300,
-        "wires": [
-            [
-                "c1dfe81f680e6f01"
-            ]
-        ]
-    },
-    {
-        "id": "18936721347779ca",
-        "type": "function",
-        "z": "78457dab5d6c0503",
-        "name": "function 7",
-        "func": "flow.set(\"speed_main_motor\", msg.main);\nflow.set(\"speed_take_up\", msg.take);\nflow.set(\"take_cal\", msg.take_cal);\nflow.set(\"ts\", msg.payload);",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 200,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c1dfe81f680e6f01",
-        "type": "function",
-        "z": "78457dab5d6c0503",
-        "name": "function 5",
-        "func": "let length = msg.payload.length;\nlet delete_file = msg.payload[0].name;\n    if(length > 30){\n        msg.payload = `rm -rf ${delete_file}`\n        return msg;\n    }",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 520,
-        "y": 300,
-        "wires": [
-            [
-                "d376633b3de3778a"
-            ]
-        ]
-    },
-    {
-        "id": "d376633b3de3778a",
-        "type": "exec",
-        "z": "78457dab5d6c0503",
-        "command": "",
-        "addpay": "payload",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "",
-        "x": 730,
-        "y": 300,
-        "wires": [
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "22b7ddd5b8f324e8",
-        "type": "inject",
-        "z": "78457dab5d6c0503",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "60",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 85,
-        "y": 300,
-        "wires": [
-            [
-                "d1c1aa82c8b72a93"
+                "13e5e83fe8bf9607",
+                "28a9aa3fad6e642c"
             ]
         ],
         "l": false
     },
     {
-        "id": "ae3d5428e72f795e",
-        "type": "ui-form",
-        "z": "9f979da7e8a5400d",
-        "name": "Date Set",
-        "group": "c8b6450989c369f5",
-        "label": "Date Set",
-        "order": 1,
-        "width": "2",
-        "height": "6",
-        "options": [
-            {
-                "label": "Date",
-                "key": "date",
-                "type": "date",
-                "required": true,
-                "rows": null
-            },
-            {
-                "label": "Time",
-                "key": "time",
-                "type": "time",
-                "required": true,
-                "rows": null
-            },
-            {
-                "label": "range",
-                "key": "range",
-                "type": "dropdown",
-                "required": true,
-                "rows": null
-            }
-        ],
-        "formValue": {
-            "date": "",
-            "time": "",
-            "range": ""
-        },
-        "payload": "",
-        "submit": "submit",
-        "cancel": "",
-        "resetOnSubmit": false,
-        "topic": "topic",
-        "topicType": "msg",
-        "splitLayout": false,
-        "className": "",
-        "passthru": false,
-        "dropdownOptions": [
-            {
-                "dropdown": "range",
-                "value": "f",
-                "label": "< 00:30"
-            },
-            {
-                "dropdown": "range",
-                "value": "s",
-                "label": "> 00:30"
-            }
-        ],
-        "x": 200,
-        "y": 80,
-        "wires": [
-            [
-                "7bdd2a0ff8b3a124"
-            ]
-        ]
-    },
-    {
-        "id": "8a5b72bf773262df",
-        "type": "ui-table",
-        "z": "9f979da7e8a5400d",
-        "group": "6da9956de8144acb",
-        "name": "Log",
-        "label": "Log",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "maxrows": 0,
-        "passthru": false,
-        "autocols": true,
-        "showSearch": true,
-        "deselect": true,
-        "selectionType": "none",
-        "columns": [],
-        "mobileBreakpoint": "sm",
-        "mobileBreakpointType": "defaults",
-        "action": "replace",
-        "x": 850,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7bdd2a0ff8b3a124",
+        "id": "24e85514de7978d5",
         "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 16",
-        "func": "const date = msg.payload.date;\nconst time = msg.payload.time;\nlet arr = date.split(\"-\");\nconst year = arr[0];\nconst month = arr[1];\nconst day = arr[2];\nconst hour = time.substring(0,2);\nconst range = msg.payload.range\nmsg.path = `/home/orangepi/deviceLog/${year}/${month}-${day}/${hour}/${range}.csv`\nmsg.payload = {\n    'year': year,\n    'month': month,\n    'day': day,\n    'hour': hour,\n    'range': range\n}\nreturn msg;",
+        "z": "341bdc3e7e68ae46",
+        "name": "function 11",
+        "func": "if(msg.payload){\nmsg.payload = {\n    'fill': 'bule',\n    'shape': 'dot',\n    'text': `ts: ${flow.get(\"ts\")}`\n}\nreturn msg;\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
+        "x": 490,
         "y": 80,
         "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7dcb29351996d6be",
+        "type": "delay",
+        "z": "341bdc3e7e68ae46",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 160,
+        "y": 140,
+        "wires": [
             [
-                "fb91dffcd2ba9264"
+                "581e4659c476b910"
             ]
         ]
     },
     {
-        "id": "fb91dffcd2ba9264",
+        "id": "258890b7306744af",
         "type": "file in",
-        "z": "9f979da7e8a5400d",
+        "z": "341bdc3e7e68ae46",
         "name": "",
-        "filename": "path",
-        "filenameType": "msg",
+        "filename": "/home/orangepi/loom/data/log.csv",
+        "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 540,
-        "y": 80,
+        "x": 115,
+        "y": 100,
         "wires": [
             [
-                "d14440ddfc00f24d"
-            ]
-        ]
-    },
-    {
-        "id": "d14440ddfc00f24d",
-        "type": "csv",
-        "z": "9f979da7e8a5400d",
-        "name": "",
-        "sep": ",",
-        "hdrin": "",
-        "hdrout": "none",
-        "multi": "mult",
-        "ret": "\\r\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": "",
-        "include_null_values": "",
-        "x": 690,
-        "y": 80,
-        "wires": [
-            [
-                "8a5b72bf773262df"
-            ]
-        ]
-    },
-    {
-        "id": "4dda3b250a7dd136",
-        "type": "ui-event",
-        "z": "9f979da7e8a5400d",
-        "ui": "d6f3a7fd07525d85",
-        "name": "",
-        "x": 630,
-        "y": 120,
-        "wires": [
-            [
-                "7e5c7f382706458d"
-            ]
-        ]
-    },
-    {
-        "id": "7e5c7f382706458d",
-        "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 17",
-        "func": "msg.payload = [];\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 725,
-        "y": 120,
-        "wires": [
-            [
-                "8a5b72bf773262df",
-                "2f132ec082f8504a"
+                "b8503deb0ae9cab9"
             ]
         ],
         "l": false
     },
     {
-        "id": "0bfe4e44d508948c",
-        "type": "exec",
-        "z": "9f979da7e8a5400d",
-        "command": "",
-        "addpay": "payload",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
+        "id": "b8503deb0ae9cab9",
+        "type": "csv",
+        "z": "341bdc3e7e68ae46",
         "name": "",
-        "x": 830,
-        "y": 300,
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 175,
+        "y": 100,
         "wires": [
             [
-                "b4c63890a364599b"
-            ],
-            [],
+                "48a2a0290809c5a0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "48a2a0290809c5a0",
+        "type": "function",
+        "z": "341bdc3e7e68ae46",
+        "name": "le",
+        "func": "var length = msg.payload.length\nlength = length - 1\nglobal.set(\"config.state.row\", length)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 235,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "8e7c7d80304fe097",
+        "type": "function",
+        "z": "341bdc3e7e68ae46",
+        "name": "function 12",
+        "func": "const date = new Date(msg.payload);\n\nconst bangkokTime = date.toLocaleString('en-GB', { \n  timeZone: 'Asia/Bangkok',\n  year: 'numeric', month: '2-digit', day: '2-digit',\n  hour: '2-digit', minute: '2-digit', second: '2-digit'\n});\nflow.set(\"ts\", bangkokTime);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
             []
         ]
     },
     {
-        "id": "a5a92509c611eeaa",
-        "type": "ui-text-input",
-        "z": "9f979da7e8a5400d",
-        "group": "72adefdf7b5e4ced",
+        "id": "d6c523303ab0a091",
+        "type": "file in",
+        "z": "341bdc3e7e68ae46",
         "name": "",
-        "label": "Version Update",
-        "order": 2,
-        "width": "2",
-        "height": 0,
-        "topic": "topic",
-        "topicType": "msg",
-        "mode": "text",
-        "tooltip": "",
-        "delay": 300,
-        "passthru": true,
-        "sendOnDelay": false,
-        "sendOnBlur": false,
-        "sendOnEnter": true,
-        "className": "",
-        "clearable": false,
-        "sendOnClear": true,
-        "icon": "",
-        "iconPosition": "left",
-        "iconInnerPosition": "inside",
-        "x": 280,
+        "filename": "/home/orangepi/loom/source.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 115,
+        "y": 60,
+        "wires": [
+            [
+                "061df98b883d0c2f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "061df98b883d0c2f",
+        "type": "function",
+        "z": "341bdc3e7e68ae46",
+        "name": "le",
+        "func": "var source = Number(msg.payload)\nglobal.set(\"source\", source)",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 175,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "4c08362380676e6d",
+        "type": "file in",
+        "z": "341bdc3e7e68ae46",
+        "name": "Read",
+        "filename": "/home/orangepi/loom/config.txt.bak",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 450,
         "y": 180,
         "wires": [
             [
-                "b6730286a98ef205"
-            ]
-        ]
-    },
-    {
-        "id": "20096dec95d8ca8b",
-        "type": "ui-button",
-        "z": "9f979da7e8a5400d",
-        "group": "72adefdf7b5e4ced",
-        "name": "",
-        "label": "Update",
-        "order": 3,
-        "width": "6",
-        "height": 0,
-        "emulateClick": false,
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "iconPosition": "left",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "payload",
-        "topicType": "msg",
-        "buttonColor": "",
-        "textColor": "",
-        "iconColor": "",
-        "enableClick": true,
-        "enablePointerdown": false,
-        "pointerdownPayload": "",
-        "pointerdownPayloadType": "str",
-        "enablePointerup": false,
-        "pointerupPayload": "",
-        "pointerupPayloadType": "str",
-        "x": 480,
-        "y": 300,
-        "wires": [
-            [
-                "d83203e8df4e2258"
-            ]
-        ]
-    },
-    {
-        "id": "b6730286a98ef205",
-        "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 18",
-        "func": "const version = msg.payload\n    flow.set(\"vs\", version);\nmsg.ui_update = {\n    'label': `Update To Version : ${version}`\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 300,
-        "wires": [
-            [
-                "20096dec95d8ca8b"
-            ]
-        ]
-    },
-    {
-        "id": "d83203e8df4e2258",
-        "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 19",
-        "func": "const version = flow.get(\"vs\")\nmsg.payload = `curl -s https://raw.githubusercontent.com/tonmai0705/innit-OrangePi-Loom-Update/refs/heads/main/updaet-opi-loom-source-9-v${version}.sh | bash`\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 650,
-        "y": 300,
-        "wires": [
-            [
-                "0bfe4e44d508948c"
-            ]
-        ]
-    },
-    {
-        "id": "b4c63890a364599b",
-        "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 20",
-        "func": "if(msg.payload){\n    global.set(\"version\", flow.get(\"vs\"));\n    msg.ui_update = {\n    'label': `Software Version :`\n    }\n    msg.payload = `Software Version: ${global.get(\"version\")}`\n    return msg;\n}else{\n    msg.ui_update = {\n    'label': `Software Version :`\n    }\n    msg.payload = `Version Not Found`\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 280,
-        "wires": [
-            [
-                "e7bae9c9943d4e7f",
-                "c540559361daad49"
-            ]
-        ]
-    },
-    {
-        "id": "e7bae9c9943d4e7f",
-        "type": "ui-text",
-        "z": "9f979da7e8a5400d",
-        "group": "72adefdf7b5e4ced",
-        "order": 1,
-        "width": "3",
-        "height": 0,
-        "name": "",
-        "label": "",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 1170,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "2f132ec082f8504a",
-        "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 21",
-        "func": "msg.ui_update = {\n    'label': `Software Version :`\n}\nmsg.payload = `${global.get(\"version\")}`\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 220,
-        "wires": [
-            [
-                "e7bae9c9943d4e7f"
-            ]
-        ]
-    },
-    {
-        "id": "2f95bf4b23247bd3",
-        "type": "file",
-        "z": "9f979da7e8a5400d",
-        "name": "config",
-        "filename": "/home/orangepi/loom/config.txt.tmp",
-        "filenameType": "str",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 1310,
-        "y": 320,
-        "wires": [
-            [
-                "eefc3029131a18d7"
+                "403b9f45ce07e19d"
             ]
         ],
-        "icon": "node-red/redis.svg"
+        "icon": "node-red/sort.svg"
     },
     {
-        "id": "c540559361daad49",
-        "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "fig value",
-        "func": "msg.payload = {\n    \"state\": {\n        \"datestamp\": global.get(\"config.state.datestamp\"),\n        \"hourstamp\": global.get(\"config.state.hourstamp\"),\n        \"changehour\": global.get(\"config.state.changehour\"),\n        \"index\": global.get(\"config.state.index\"),\n        \"ip\": global.get(\"config.state.ip\"),\n        \"version\": global.get(\"version\") || \"-\"\n    },\n    \"values\": {\n        \"maintake\": {\n            \"main\": {\n                \"min\": global.get(\"values.maintake.main.min\"),\n                \"max\": global.get(\"values.maintake.main.max\")\n            },\n            \"take\": {\n                \"min\": global.get(\"values.maintake.take.min\"),\n                \"max\": global.get(\"values.maintake.take.max\")\n            }\n        },\n        \"meter\": global.get(\"values.meter\"),\n        \"working\": global.get(\"values.working\")\n    }\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1160,
-        "y": 320,
-        "wires": [
-            [
-                "2f95bf4b23247bd3"
-            ]
-        ]
-    },
-    {
-        "id": "eefc3029131a18d7",
+        "id": "13e5e83fe8bf9607",
         "type": "exec",
-        "z": "9f979da7e8a5400d",
-        "command": "mv /home/orangepi/loom/config.txt.tmp /home/orangepi/loom/config.txt",
+        "z": "341bdc3e7e68ae46",
+        "command": "cp $HOME/loom/config.txt.bak $HOME/loom/config.txt",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
         "timer": "",
         "winHide": false,
         "oldrc": false,
-        "name": "move .tmp",
-        "x": 1450,
-        "y": 340,
+        "name": "repiar config",
+        "x": 650,
+        "y": 200,
         "wires": [
-            [
-                "1d920d649052d9ea"
-            ],
+            [],
             [],
             []
         ]
     },
     {
-        "id": "1d920d649052d9ea",
+        "id": "133f022c804089c9",
+        "type": "subflow:1406c468fdce7358",
+        "z": "341bdc3e7e68ae46",
+        "name": "",
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28a9aa3fad6e642c",
         "type": "function",
-        "z": "9f979da7e8a5400d",
-        "name": "function 22",
-        "func": "msg.payload = {\n    'fill': 'blue',\n    'shape': 'dot',\n    'text': msg.filename \n}\nreturn msg;",
+        "z": "341bdc3e7e68ae46",
+        "name": "function 690",
+        "func": "\nif (1) {\n    msg.payload = `🗂️ ${global.get(\"config.state.ip\")} > Orange Pi เกิดปัญหาในการอ่านไฟล์ Config... Overwrite > config.txt`;\n    node.status({ fill: \"green\", shape: \"ring\", text: global.get(\"time\") });\n    flow.set(\"wot\", true);\n    return msg;\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1630,
-        "y": 340,
+        "x": 615,
+        "y": 140,
         "wires": [
-            []
-        ]
+            [
+                "133f022c804089c9"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "fbda616582fab4cb",
@@ -3566,9 +3412,9 @@ cat << 'EOF' > $user/.node-red/flows.json
         ]
     },
     {
-        "id": "4d414fcfa4d1f563",
+        "id": "698cc965e4a64996",
         "type": "inject",
-        "z": "c9bf91fd5c385f43",
+        "z": "e226ede58ea4b202",
         "name": "",
         "props": [
             {
@@ -3582,25 +3428,27 @@ cat << 'EOF' > $user/.node-red/flows.json
         "repeat": "1",
         "crontab": "",
         "once": true,
-        "onceDelay": "6",
+        "onceDelay": "35",
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 145,
-        "y": 80,
+        "x": 135,
+        "y": 160,
         "wires": [
             [
-                "d6a67c89385322a2"
+                "d1e4489c3e8ca995",
+                "c5418b2844d316d7"
             ]
         ],
+        "icon": "font-awesome/fa-info-circle",
         "l": false
     },
     {
-        "id": "d6a67c89385322a2",
+        "id": "d1e4489c3e8ca995",
         "type": "function",
-        "z": "c9bf91fd5c385f43",
-        "name": "UPTIME",
-        "func": "let upTimenla = global.get(\"config.state.upt.nla\") || 0;\nlet upTimeota = global.get(\"config.state.upt.ota\") || 0;\nlet upTimetotalA = global.get(\"config.state.upt.totalA\") || 0;\nlet upTimenlb = global.get(\"config.state.upt.nlb\") || 0;\nlet upTimeotb = global.get(\"config.state.upt.otb\") || 0;\nlet upTimetotalB = global.get(\"config.state.upt.totalB\") || 0;\n\nlet upTimetotal = global.get(\"config.state.upt.total\") || 0;\nconst sec = 1;\nvar secNow;\nlet hour = global.get(\"config.datetime.hour\");\n    hour = Number(hour);\n    if(hour >= 8 && hour <= 17){\n        global.set(\"config.state.upt.nla\", upTimenla + sec);\n        secNow = upTimenla;\n    }else if(hour >= 18 && hour <= 19){\n        global.set(\"config.state.upt.ota\", upTimeota + sec);\n        secNow = upTimeota;\n    }else if((hour >= 20 && hour <= 23) || ( hour >= 0 && hour <= 5)){\n        global.set(\"config.state.upt.nlb\", upTimenlb + sec); \n        secNow = upTimenlb;\n    }else if(hour >= 6 && hour <= 7){\n        global.set(\"config.state.upt.otb\", upTimeotb + sec);\n        secNow = upTimeotb;\n    }\n    upTimetotalA = upTimenla + upTimeota;\n        global.set(\"config.state.upt.totalA\", upTimetotalA);\n    upTimetotalB = upTimenlb + upTimeotb;\n        global.set(\"config.state.upt.totalB\", upTimetotalB);\n    upTimetotal = upTimetotalA + upTimetotalB;\n        global.set(\"config.state.upt.total\", upTimetotal);\nmsg.payload = {\n    'fill': 'yellow',\n    'shape': 'dot',\n    'text': `Second: ${secNow} | nla: ${setTime(upTimenla)} | ota: ${setTime(upTimeota)} | nlb: ${setTime(upTimenlb)} | otb: ${setTime(upTimeotb)} | total: ${setTime(upTimetotal)}`\n};\nreturn msg;\n\nfunction setTime(second){\n    let hours = Math.floor(second / 3600)\n    let minutes = Math.floor((second % 3600) / 60)\n    let seconds = Math.floor((second % 60) / 1)\n    let format = hours + ':' + minutes + ':' + seconds\n    return format;\n}",
+        "z": "e226ede58ea4b202",
+        "name": "function 6",
+        "func": "let time_cal = msg.payload - global.get(\"config.datetime.timestamp\");\nlet count = flow.get(\"count\") || 0;\ntime_cal > 10000 || !global.get(\"config.datetime.timestamp\") ? flow.set(\"count\", count + 1) : flow.set(\"count\", 0); // 3000 millisec\nreturn count > 300 ? msg : undefined;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3608,115 +3456,157 @@ cat << 'EOF' > $user/.node-red/flows.json
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 80,
+        "y": 160,
         "wires": [
+            [
+                "ce2564d1100f0cb3"
+            ]
+        ]
+    },
+    {
+        "id": "c5418b2844d316d7",
+        "type": "function",
+        "z": "e226ede58ea4b202",
+        "name": "function 7",
+        "func": "let count = flow.get(\"count\")\nmsg.count = count\nmsg.payload = {\n    fill: count < 1? \"green\" : \"red\",\n    shape: count < 1? \"dot\" : \"ring\",\n    text: count\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "b20e01c67a28eeb6"
+            ]
+        ]
+    },
+    {
+        "id": "9eb83d2ca8ce536d",
+        "type": "exec",
+        "z": "e226ede58ea4b202",
+        "command": "reboot",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [],
+            [],
             []
         ]
     },
     {
-        "id": "b876448f3a68636e",
-        "type": "inject",
-        "z": "062d9ee6cb5e367f",
+        "id": "09af4c1ad37430eb",
+        "type": "exec",
+        "z": "e226ede58ea4b202",
+        "command": "./stat_led/modbus_err.sh",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "blink err",
+        "x": 560,
+        "y": 280,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b20e01c67a28eeb6",
+        "type": "switch",
+        "z": "e226ede58ea4b202",
         "name": "",
-        "props": [
+        "property": "count",
+        "propertyType": "msg",
+        "rules": [
             {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
             }
         ],
-        "repeat": "1",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "40",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 145,
-        "y": 100,
-        "wires": [
-            [
-                "d254c4f3ec67d313",
-                "fa505a146959395d",
-                "2a334b79d30a7edf"
-            ]
-        ],
-        "l": false
-    },
-    {
-        "id": "d254c4f3ec67d313",
-        "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "take up check",
-        "func": "const main = global.get(\"values.maintake.main.now\");\nlet alarmMain = flow.get(\"alarmMain\") || false;\nconst hour = global.get(\"config.datetime.hour\");\nconst otw = context.get(\"otw\") || \"-\" // otw: one time working\nalarmMain = hour == otw ? true : false;\nif(main > 0 && !alarmMain){\n    context.set(\"otw\", hour);\n    return msg; \n}",
+        "checkall": "true",
+        "repair": false,
         "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 80,
+        "x": 410,
+        "y": 280,
         "wires": [
             [
-                "cafeef43fd6b7fd0"
+                "09af4c1ad37430eb"
             ]
         ]
     },
     {
-        "id": "938ff7e5f30f5df6",
-        "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "function 23",
-        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nconst main = global.get(\"values.maintake.main.now\");\nif (main > 0 && takeUp == 0) {\n    msg.payload = `${global.get(\"config.state.ip\")} 🔩 > [takeUp: ${takeUp} main: ${main}] เซ็นเซอร์ Take up อาจมีปัญหา...`;\n    return msg;\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 80,
-        "wires": [
-            [
-                "3a4ac4dbcb8962f9"
-            ]
-        ]
-    },
-    {
-        "id": "cafeef43fd6b7fd0",
-        "type": "delay",
-        "z": "062d9ee6cb5e367f",
+        "id": "4bcac64d1b91385f",
+        "type": "subflow:1406c468fdce7358",
+        "z": "e226ede58ea4b202",
         "name": "",
-        "pauseType": "delay",
-        "timeout": "10",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "10",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 375,
-        "y": 80,
+        "x": 500,
+        "y": 160,
         "wires": [
             [
-                "938ff7e5f30f5df6"
+                "9eb83d2ca8ce536d"
+            ]
+        ]
+    },
+    {
+        "id": "ce2564d1100f0cb3",
+        "type": "function",
+        "z": "e226ede58ea4b202",
+        "name": "function 11",
+        "func": "let wot = flow.get(\"wot\");\nif (!wot) {\n    msg.payload = `❗⛓️‍💥 ${global.get(\"config.state.ip\")} > การส่งข้อมูลของ Converter RS485 อาจมีปัญหา...`;\n    node.status({ fill: \"green\", shape: \"ring\", text: global.get(\"time\") });\n    flow.set(\"wot\", true);\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 375,
+        "y": 160,
+        "wires": [
+            [
+                "4bcac64d1b91385f"
             ]
         ],
         "l": false
     },
     {
-        "id": "fa505a146959395d",
+        "id": "633e9c4b40e42584",
+        "type": "ping",
+        "z": "13f006802899e0be",
+        "protocol": "IPv4",
+        "mode": "triggered",
+        "name": "",
+        "host": "",
+        "timer": "10",
+        "inputs": 1,
+        "x": 135,
+        "y": 80,
+        "wires": [
+            [
+                "5805fc6c631c073d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "5805fc6c631c073d",
         "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "main check",
-        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nlet alarmTake = flow.get(\"alarmTake\") || false;\nconst hour = global.get(\"config.datetime.hour\");\nconst otw = context.get(\"otw\") || \"-\" // otw: one time working\nalarmTake = hour == otw ? true : false;\nif(takeUp > 0 && !alarmTake){\n    context.set(\"otw\", hour);\n    return msg; \n}",
+        "z": "13f006802899e0be",
+        "name": "function 684",
+        "func": "global.set(\"config.state.connected\", (msg.payload) ? true : false);\nmsg.payload = global.get(\"config.state.connected\");\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3724,140 +3614,250 @@ cat << 'EOF' > $user/.node-red/flows.json
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 120,
+        "y": 80,
         "wires": [
             [
-                "2cf3a1fca4c05388"
+                "c7fcb9a183a78340",
+                "346948538b2e924a"
             ]
         ]
     },
     {
-        "id": "c69c76cd5d3d874f",
-        "type": "subflow:1406c468fdce7358",
-        "z": "062d9ee6cb5e367f",
-        "name": "",
-        "x": 680,
-        "y": 120,
-        "wires": [
-            [
-                "1eec8d095382c328"
-            ]
-        ]
-    },
-    {
-        "id": "1eec8d095382c328",
+        "id": "346948538b2e924a",
         "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "function 25",
-        "func": "const httpCode = msg.statusCode;\n\nif(httpCode == 200){\n    flow.set(\"alarmTake\", true);    \n}\nreturn msg;",
+        "z": "13f006802899e0be",
+        "name": "function 686",
+        "func": "var sho2 = `[${global.get(\"config.datetime.time\")}] Connected:${global.get(\"config.state.connected\")}`;\nmsg.payload = {\n    \"fill\": \"blue\",\n    \"shape\": \"dot\",\n    \"text\": sho2\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 805,
-        "y": 120,
+        "x": 430,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c7fcb9a183a78340",
+        "type": "function",
+        "z": "13f006802899e0be",
+        "name": "function 687",
+        "func": "let c1 = global.get(\"config.state.connected\");\nlet stat = flow.get(\"stat\"); // ใช้ตัวแปรใน flow เพื่อเก็บสถานะ\n// ตรวจสอบว่า payload เปลี่ยนแปลงหรือยัง\nif (stat === undefined) {\n    // ถ้ายังไม่มีสถานะเก็บไว้ (สถานะเริ่มต้น)\n    stat = {\n        payload: 1, // ค่าพื้นฐานของ payload\n        isProcessed: false // กำหนดสถานะให้ทำงานได้ครั้งแรก\n    };\n    flow.set(\"stat\", stat); // เก็บสถานะใน flow\n}\n// ตรวจสอบเงื่อนไขที่กำหนด\nif (c1) {\n    if (stat.payload !== 3) { // ตรวจสอบว่า payload มีการเปลี่ยนแปลงหรือไม่\n        msg.payload = 3;\n        stat.payload = 3; // อัปเดตสถานะ payload\n        stat.isProcessed = true; // ตั้งค่าสถานะว่าได้ทำการประมวลผลแล้ว\n        return msg;\n    }\n} else {\n    if (stat.payload !== 2) { // ตรวจสอบว่า payload มีการเปลี่ยนแปลงหรือไม่\n        msg.payload = 2;\n        stat.payload = 2; // อัปเดตสถานะ payload\n        stat.isProcessed = true; // ตั้งค่าสถานะว่าได้ทำการประมวลผลแล้ว\n        return msg;\n    }\n}\nflow.set(\"stat\", stat); // อัปเดตสถานะใน flow",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "db6fc316f972fc7a",
+        "type": "exec",
+        "z": "31057fe0b0d4c1ec",
+        "command": "./stat_led/blink.sh",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "WeightScale Ready",
+        "x": 115,
+        "y": 40,
+        "wires": [
+            [],
+            [],
+            []
+        ],
+        "icon": "node-red/light.svg",
+        "l": false
+    },
+    {
+        "id": "59eb51568d8158c9",
+        "type": "moment",
+        "z": "a67f25631bef1988",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Asia/Bangkok",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "payload",
+        "outputType": "msg",
+        "outTz": "Asia/Bangkok",
+        "x": 125,
+        "y": 80,
+        "wires": [
+            [
+                "23bad38c2d77961c"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "23bad38c2d77961c",
+        "type": "function",
+        "z": "a67f25631bef1988",
+        "name": "function 1",
+        "func": "var date = new Date(msg.payload);\nlet previousDate = new Date(date); \n    previousDate.setDate(previousDate.getDate() - 1).toString().padStart(2, 0);\nvar year = date.getFullYear(); \nvar month = (date.getMonth() + 1).toString().padStart(2, '0');\nvar day = date.getDate().toString().padStart(2, '0');\nvar hours = date.getHours().toString().padStart(2, '0');\nvar minutes = date.getMinutes().toString().padStart(2, '0');\nvar seconds = date.getSeconds().toString().padStart(2, '0');\nvar dateMian = `${year}/${month}/${day}`;\nvar time = `${hours}:${minutes}:${seconds}`;\nvar datestamp = global.get(\"config.state.datestamp\");\nlet hoursNum = Number(hours);\n    globalSet();\n////////////////////////////// end function set date ///////////////////////////////////////\nif (hoursNum >= 8 && hoursNum <= 23) {\n    let dateset = filename(date);\n    var datenow = dateNow(date);\n    global.set(\"config.state.date_data\", dateset);\n} else {\n    let dateset = filename(previousDate);\n    var datenow = dateNow(previousDate);\n    global.set(\"config.state.date_data\", dateset);\n}\n\nif (datestamp) {\n    if (datenow != datestamp) {\n        resetValues();\n        // global.set(\"report\", true);\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    } else {\n        // stamp date\n        global.set(\"config.state.datestamp\", datenow);\n    }\n} else {\n    global.set(\"config.state.datestamp\", datenow);\n}\n    global.set(\"config.state.datenow\", datenow);\n    msg.payload = {\n        fill: \"green\",\n        shape: \"ring\",\n        text: `DATESTAMP:${datestamp} DATE${day}/${month}/${year} TIME:${time}`\n    };\n    return msg;\n\nfunction filename(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}\n\nfunction resetValues(){\n    var meter = new Array(24).fill(0);\n    global.set(\"values.meter\", meter);\n    var working = new Array(24).fill(0);\n    global.set(\"values.working\", working);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.main.min\", 0);\n    global.set(\"values.maintake.take.min\", 0);\n    global.set(\"values.maintake.take.max\", 0);\n    global.set(\"config.state.upt.nla\", 0);\n    global.set(\"config.state.upt.ota\", 0);\n    global.set(\"config.state.upt.totalA\", 0);\n    global.set(\"config.state.upt.nlb\", 0);\n    global.set(\"config.state.upt.otb\", 0);\n    global.set(\"config.state.upt.totalB\", 0);\n}\n\nfunction globalSet(){\n    global.set(\"config.datetime.date\", dateMian);\n    global.set(\"config.datetime.day\", day);\n    global.set(\"config.datetime.month\", month);\n    global.set(\"config.datetime.year\", year);\n    global.set(\"config.datetime.time\", time);\n    global.set(\"config.datetime.hour\", hours);\n    global.set(\"config.datetime.minute\", minutes);\n    global.set(\"config.datetime.second\", seconds);\n}\n\nfunction dateNow(date){\n    let year = date.getFullYear();\n    let month = (date.getMonth() + 1).toString().padStart(2, '0');\n    let day = date.getDate().toString().padStart(2, '0');\n    return `${year}${month}${day}`;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5198508231fcf8a8",
+        "type": "exec",
+        "z": "df4a94479416f0c4",
+        "command": "hostname -I",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "name": "Fetch IP",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "f3b472b4726bfeec"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f3b472b4726bfeec",
+        "type": "function",
+        "z": "df4a94479416f0c4",
+        "name": "function 2",
+        "func": "let ip = msg.payload.replace(/[\\r\\n\\t ]/g, \"\");\nlet get_ip = global.get(\"config.state.ip\");\n    if((get_ip === undefined && ip) || ip){\n        global.set(\"config.state.ip\", ip);\n    };\nmsg.payload = {\n    fill: \"yellow\",\n    shape: \"ring\",\n    text: `IP:${ip}`\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6b6cdff899b96d18",
+        "type": "inject",
+        "z": "df4a94479416f0c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "path",
+                "v": "/home/orangepi/loom/data/log.csv",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 95,
+        "y": 200,
         "wires": [
             []
         ],
         "l": false
     },
     {
-        "id": "3a4ac4dbcb8962f9",
-        "type": "subflow:1406c468fdce7358",
-        "z": "062d9ee6cb5e367f",
-        "name": "",
-        "x": 680,
-        "y": 80,
-        "wires": [
-            [
-                "029c5ec1b4cd0fb6"
-            ]
-        ]
-    },
-    {
-        "id": "029c5ec1b4cd0fb6",
+        "id": "1ab2c4d09e12f25f",
         "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "function 27",
-        "func": "const httpCode = msg.statusCode;\n\nif(httpCode == 200){\n    flow.set(\"alarmMain\", true);    \n}\nreturn msg;",
+        "z": "df4a94479416f0c4",
+        "name": "function 13",
+        "func": "const index = global.get(\"config.state.index\");\nconst ip = msg.payload[index - 1].ip;\n if(!ip){\n    global.set(\"config.state.index\", index + 1);\n }",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 805,
-        "y": 80,
-        "wires": [
-            []
-        ],
-        "l": false
-    },
-    {
-        "id": "2a334b79d30a7edf",
-        "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "Status",
-        "func": "msg.payload ={\n    'fill': 'green',\n    'shape': 'dot',\n    'text': `${global.get(\"config.datetime.time\")}: Last Time Check`\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 230,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2cf3a1fca4c05388",
-        "type": "delay",
-        "z": "062d9ee6cb5e367f",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "10",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "10",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
         "x": 375,
-        "y": 120,
+        "y": 200,
         "wires": [
-            [
-                "20ce10615defa2e5"
-            ]
+            []
         ],
         "l": false
     },
     {
-        "id": "20ce10615defa2e5",
-        "type": "function",
-        "z": "062d9ee6cb5e367f",
-        "name": "main check",
-        "func": "const takeUp = global.get(\"values.maintake.take.now\");\nconst main = global.get(\"values.maintake.main.now\");\n\nif(takeUp > 0 && main == 0){\n    msg.payload = `${global.get(\"config.state.ip\")} 🔩 > [takeUp: ${takeUp} main: ${main}] เซ็นเซอร์ Main อาจมีปัญหา...`;\n    return msg; \n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 120,
+        "id": "3b8945c733c04fba",
+        "type": "file in",
+        "z": "df4a94479416f0c4",
+        "name": "",
+        "filename": "path",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 200,
+        "y": 200,
         "wires": [
             [
-                "c69c76cd5d3d874f"
+                "a703196f82a9e5ef"
             ]
         ]
+    },
+    {
+        "id": "a703196f82a9e5ef",
+        "type": "csv",
+        "z": "df4a94479416f0c4",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": false,
+        "include_null_values": false,
+        "x": 315,
+        "y": 200,
+        "wires": [
+            [
+                "1ab2c4d09e12f25f"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "9827f5270df78aba",
@@ -4039,7 +4039,7 @@ cat << 'EOF' > $user/.node-red/flows.json
         "z": "777823ab3e1fee97",
         "g": "9036c777fe360381",
         "name": "Values",
-        "func": "msg.path = `/home/orangepi/loom/data/log.csv`;\nmsg.file = global.get(\"config.state.file\");\nconst meter = global.get(\"values.meter\");\nconst working = global.get(\"values.working\");\n\nconst positionNLA = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];\nconst positionOTA = [18, 19];\nconst positionNLB = [20, 21, 22, 23, 0, 1, 2, 3, 4, 5];\nconst positionOTB = [6, 7];\n\n\nlet meterNLA = positionNLA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.nla\", meterNLA);\nlet meterOTA = positionOTA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.ota\", meterOTA);\nlet totalA = meterNLA + meterOTA;\nglobal.set(\"values.total.meter.totalA\", totalA);\n\nlet meterNLB = positionNLB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.nlb\", meterNLB);\nlet meterOTB = positionOTB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.otb\", meterOTB);\nlet totalB = meterNLB + meterOTB;\nglobal.set(\"values.total.meter.totalB\", totalB);\n\nlet total_meter = totalA + totalB || 0;\nglobal.set(\"values.total.meter.total\", total_meter);\n\nlet workingNLA = positionNLA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.nla\", workingNLA);\nlet workingOTA = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.ota\", workingOTA);\nlet totalwA = workingNLA + workingOTA;\nglobal.set(\"values.total.working.totalA\", totalwA);\n\nlet workingNLB = positionNLB.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.nlb\", workingNLB);\nlet workingOTB = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.otb\", workingOTB);\nlet totalwB = workingNLB + workingOTB;\nglobal.set(\"values.total.working.totalB\", totalwB);\n\nlet total_working = totalwA + totalwB || 0;\nglobal.set(\"values.total.working.total\", total_working);\n\nmsg.payload = {\n    'date': global.get(\"config.datetime.date\") || 0,\n    'time': global.get(\"config.datetime.time\") || 0,\n    'timestamp': global.get(\"config.datetime.timestamp\") || 0,\n    'ip': global.get(\"config.state.ip\"),\n    'date_data': global.get(\"config.state.date_data\") || 0,\n    'upt': {\n        'total': global.get(\"config.state.upt.total\")|| 0,\n        'totalA': global.get(\"config.state.upt.totalA\")|| 0,\n        'totalB': global.get(\"config.state.upt.totalB\")|| 0,\n        'nla': global.get(\"config.state.upt.nla\")|| 0,\n        'ota': global.get(\"config.state.upt.ota\")|| 0,\n        'nlb': global.get(\"config.state.upt.nlb\")|| 0,\n        'otb': global.get(\"config.state.upt.otb\")|| 0,\n    },\n    \"values\":{\n        \"maintake\":{\n            \"main\": global.get(\"values.maintake.main\") ,\n            \"take\": global.get(\"values.maintake.take\") ,\n        },\n        \"meter\": meter  || 0,\n        \"working\": working || 0,\n        \"total\":{\n            \"meter\":{\n                \"nla\": global.get(\"values.total.meter.nla\") || 0,\n                \"nlb\": global.get(\"values.total.meter.nlb\") || 0,\n                \"ota\": global.get(\"values.total.meter.ota\") || 0,\n                \"otb\": global.get(\"values.total.meter.otb\") || 0,\n                \"totala\": global.get(\"values.total.meter.totalA\") || 0,\n                \"totalb\": global.get(\"values.total.meter.totalB\") || 0,\n                \"total\": global.get(\"values.total.meter.total\") || 0,\n            },\n            \"working\":{\n                \"nla\": global.get(\"values.total.working.nla\") || 0,\n                \"nlb\": global.get(\"values.total.working.nlb\") || 0,\n                \"ota\": global.get(\"values.total.working.ota\") || 0,\n                \"otb\": global.get(\"values.total.working.otb\") || 0,\n                \"totala\": global.get(\"values.total.working.totalA\") || 0,\n                \"totalb\": global.get(\"values.total.working.totalB\") || 0,\n                \"total\": global.get(\"values.total.working.total\") || 0,\n            }\n        }\n    }\n}\nnode.status({fill:\"blue\",shape:\"dot\",text: global.get(\"config.datetime.time\")});\nreturn msg;",
+        "func": "msg.path = `/home/orangepi/loom/data/log.csv`;\nmsg.file = global.get(\"config.state.file\");\nconst meter = global.get(\"values.meter\");\nconst working = global.get(\"values.working\");\n\nconst positionNLA = [8, 9, 10, 11, 12, 13, 14, 15, 16];\nconst positionOTA = [17, 18, 19];\nconst positionNLB = [20, 21, 22, 23, 0, 1, 2, 3, 4];\nconst positionOTB = [4, 6, 7];\n\n\nlet meterNLA = positionNLA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.nla\", meterNLA);\nlet meterOTA = positionOTA.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.ota\", meterOTA);\nlet totalA = meterNLA + meterOTA;\nglobal.set(\"values.total.meter.totalA\", totalA);\n\nlet meterNLB = positionNLB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.nlb\", meterNLB);\nlet meterOTB = positionOTB.reduce((acc, pos) => acc + (meter[pos] || 0), 0);\nglobal.set(\"values.total.meter.otb\", meterOTB);\nlet totalB = meterNLB + meterOTB;\nglobal.set(\"values.total.meter.totalB\", totalB);\n\nlet total_meter = totalA + totalB || 0;\nglobal.set(\"values.total.meter.total\", total_meter);\n\nlet workingNLA = positionNLA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.nla\", workingNLA);\nlet workingOTA = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.ota\", workingOTA);\nlet totalwA = workingNLA + workingOTA;\nglobal.set(\"values.total.working.totalA\", totalwA);\n\nlet workingNLB = positionNLB.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.nlb\", workingNLB);\nlet workingOTB = positionOTA.reduce((acc, pos) => acc + (working[pos] || 0), 0);\nglobal.set(\"values.total.working.otb\", workingOTB);\nlet totalwB = workingNLB + workingOTB;\nglobal.set(\"values.total.working.totalB\", totalwB);\n\nlet total_working = totalwA + totalwB || 0;\nglobal.set(\"values.total.working.total\", total_working);\n\nmsg.payload = {\n    'date': global.get(\"config.datetime.date\") || 0,\n    'time': global.get(\"config.datetime.time\") || 0,\n    'timestamp': global.get(\"config.datetime.timestamp\") || 0,\n    'ip': global.get(\"config.state.ip\"),\n    'date_data': global.get(\"config.state.date_data\") || 0,\n    'upt': {\n        'total': global.get(\"config.state.upt.total\")|| 0,\n        'totalA': global.get(\"config.state.upt.totalA\")|| 0,\n        'totalB': global.get(\"config.state.upt.totalB\")|| 0,\n        'nla': global.get(\"config.state.upt.nla\")|| 0,\n        'ota': global.get(\"config.state.upt.ota\")|| 0,\n        'nlb': global.get(\"config.state.upt.nlb\")|| 0,\n        'otb': global.get(\"config.state.upt.otb\")|| 0,\n    },\n    \"values\":{\n        \"maintake\":{\n            \"main\": global.get(\"values.maintake.main\") ,\n            \"take\": global.get(\"values.maintake.take\") ,\n        },\n        \"meter\": meter  || 0,\n        \"working\": working || 0,\n        \"total\":{\n            \"meter\":{\n                \"nla\": global.get(\"values.total.meter.nla\") || 0,\n                \"nlb\": global.get(\"values.total.meter.nlb\") || 0,\n                \"ota\": global.get(\"values.total.meter.ota\") || 0,\n                \"otb\": global.get(\"values.total.meter.otb\") || 0,\n                \"totala\": global.get(\"values.total.meter.totalA\") || 0,\n                \"totalb\": global.get(\"values.total.meter.totalB\") || 0,\n                \"total\": global.get(\"values.total.meter.total\") || 0,\n            },\n            \"working\":{\n                \"nla\": global.get(\"values.total.working.nla\") || 0,\n                \"nlb\": global.get(\"values.total.working.nlb\") || 0,\n                \"ota\": global.get(\"values.total.working.ota\") || 0,\n                \"otb\": global.get(\"values.total.working.otb\") || 0,\n                \"totala\": global.get(\"values.total.working.totalA\") || 0,\n                \"totalb\": global.get(\"values.total.working.totalB\") || 0,\n                \"total\": global.get(\"values.total.working.total\") || 0,\n            }\n        }\n    }\n}\nnode.status({fill:\"blue\",shape:\"dot\",text: global.get(\"config.datetime.time\")});\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
