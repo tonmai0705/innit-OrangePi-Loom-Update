@@ -8,7 +8,7 @@ mkdir ext
 mkdir $user/data
 
 #create scriptConfig.sh
-cat << 'EOF' > "$user/ext/scriptConfig.sh"
+cat << 'EOF' > $user/ext/scriptConfig.sh
 #!/bin/bash
 user="$HOME"
 tmpFile="$user/ext/config.txt.tmp"
@@ -28,7 +28,7 @@ EOF
 chmod +x $user/scriptConfig.sh
 
 #create config file
-cat << 'EOF' > "$user/ext/config.txt"
+cat << 'EOF' > $user/ext/config.txt
 {"date":"2025/07/21","datestamp":"20250721","time":"08:43:51","ip":"192.168.1.111","hourstamp":"00","changehour":0,"bot_token":"0","chat_id":"0","local":{"ip":"192.168.0.9","index":{"pro":0,"pow":0}},"things":{"broker":0,"port":0,"username":0,"topic":0,"index":{"pro":0,"pow":0}},"temp":{"mt_in":{"now":0,"min":0,"max":0},"mt_out":{"now":0,"min":0,"max":0},"cl_in":{"now":0,"min":0,"max":0},"cl_out":{"now":0,"min":0,"max":0}},"speed":{"scr":{"now":0,"min":0,"max":0},"hol":{"now":0,"min":0,"max":0},"ann":{"now":0,"min":0,"max":0},"str":{"now":0,"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"energy":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
 EOF
 fi
@@ -36,7 +36,7 @@ fi
 #check led state
 if [ ! -d "$user/stat_led"]; then
 mkdir stat_led
-cat << 'EOF' > "$user/stat_led/blink11.sh"
+cat << 'EOF' > $user/stat_led/blink11.sh
 #!/bin/bash
 
 # กำหนดหมายเลข GPIO pin
@@ -78,7 +78,7 @@ fi
 EOF
 chmod +x $user/stat_led/blink11.sh
 
-cat << 'EOF' > "$user/stat_led/blink.sh"
+cat << 'EOF' > $user/stat_led/blink.sh
 #!/bin/bash
 
 gpio_pin=12
@@ -128,7 +128,7 @@ esac
 EOF
 chmod +x $user/stat_led/blink.sh
 
-cat << 'EOF' > "$user/stat_led/modbus_err.sh.sh"
+cat << 'EOF' > $user/stat_led/modbus_err.sh.sh
 #!/bin/bash
 
 gpio_pin=11
@@ -163,7 +163,7 @@ chmod +x $user/stat_led/modbus_err.sh.sh
 fi
 
 #node-red flows
-cat << 'EOF' > "$user/.node-red/flows.json"
+cat << 'EOF' > $user/.node-red/flows.json
 [
     {
         "id": "a4638d4e8237493c",
