@@ -31,8 +31,6 @@ chmod +x $user/scriptConfig.sh
 cat << 'EOF' > "$user/ext/config.txt"
 {"date":"2025/07/21","datestamp":"20250721","time":"08:43:51","ip":"192.168.1.111","hourstamp":"00","changehour":0,"bot_token":"0","chat_id":"0","local":{"ip":"192.168.0.9","index":{"pro":0,"pow":0}},"things":{"broker":0,"port":0,"username":0,"topic":0,"index":{"pro":0,"pow":0}},"temp":{"mt_in":{"now":0,"min":0,"max":0},"mt_out":{"now":0,"min":0,"max":0},"cl_in":{"now":0,"min":0,"max":0},"cl_out":{"now":0,"min":0,"max":0}},"speed":{"scr":{"now":0,"min":0,"max":0},"hol":{"now":0,"min":0,"max":0},"ann":{"now":0,"min":0,"max":0},"str":{"now":0,"min":0,"max":0}},"meter":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"energy":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
 EOF
-else
-
 fi
 
 #check led state
