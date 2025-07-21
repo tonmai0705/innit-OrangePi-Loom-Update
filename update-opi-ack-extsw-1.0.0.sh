@@ -163,7 +163,7 @@ chmod +x $user/stat_led/modbus_err.sh.sh
 fi
 
 #node-red flows
-cat << "EOF' > "$user/.node-red/flows.json"
+cat << 'EOF' > "$user/.node-red/flows.json"
 [
     {
         "id": "a4638d4e8237493c",
