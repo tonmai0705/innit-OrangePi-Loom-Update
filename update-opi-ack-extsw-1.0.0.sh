@@ -3,7 +3,7 @@ sudo apt update && sudo apt -y upgrade
 user=$HOME
 
 #check Diractory and create
-if [ ! -d "$user/ext"]; then
+if [ ! -d "$user/ext" ]; then
 mkdir ext
 mkdir $user/data
 
@@ -34,7 +34,7 @@ EOF
 fi
 
 #check led state
-if [ ! -d "$user/stat_led"]; then
+if [ ! -d "$user/stat_led" ]; then
 mkdir stat_led
 cat << 'EOF' > $user/stat_led/blink11.sh
 #!/bin/bash
