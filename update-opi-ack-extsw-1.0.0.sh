@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt update && sudo apt -y upgrade
-sudo install @flowfuse/node-red-dashboard --prefix 
+npm install @flowfuse/node-red-dashboard --prefix ~/.node-red 
 user=$HOME
 
 #check Diractory and create
