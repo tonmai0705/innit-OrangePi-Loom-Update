@@ -10218,3 +10218,4 @@ cat << 'EOF' > $user/.node-red/flows.json
     }
 ]
 EOF
+node-red-restart
