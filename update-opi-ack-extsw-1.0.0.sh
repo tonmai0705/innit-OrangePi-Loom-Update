@@ -25,7 +25,7 @@ else
 echo "Not Found"
 fi
 EOF
-chmod +x $user/scriptConfig.sh
+chmod +x $user/ext/scriptConfig.sh
 
 #create config file
 cat << 'EOF' > $user/ext/config.txt
